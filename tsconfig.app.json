@@ -18,7 +18,10 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+
+    /* emotion */
+    "types": ["@emotion/react/types/css-prop"]
   },
   "include": ["src", ".eslintrc.cjs"]
 }

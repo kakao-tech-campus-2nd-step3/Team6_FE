@@ -22,6 +22,7 @@ module.exports = {
       },
     },
   ],
+  ignorePatterns: ['vite.config.ts'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 'latest',
@@ -29,5 +30,7 @@ module.exports = {
     project: ['./tsconfig.app.json'],
   },
   plugins: ['react', '@typescript-eslint', 'prettier'],
-  rules: {},
+  rules: {
+    'react/react-in-jsx-scope': 'off',
+  },
 }
