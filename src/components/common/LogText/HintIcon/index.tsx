@@ -1,0 +1,21 @@
+import { BiLockAlt, BiLockOpenAlt } from 'react-icons/bi'
+
+import { Flex } from '@chakra-ui/react'
+
+type HintIconProps = {
+  hintCount: 0 | 1 | 2 | 3
+}
+
+export const HintIcon = ({ hintCount }: HintIconProps) => {
+  return (
+    <Flex>
+      {Array.from({ length: 3 }, (_, index) =>
+        index < hintCount ? (
+          <BiLockOpenAlt key={index} color="orange" />
+        ) : (
+          <BiLockAlt key={index} color="gray" />
+        )
+      )}
+    </Flex>
+  )
+}
