@@ -1,10 +1,6 @@
 import { Box, Text, VStack, HStack, Image, Center } from '@chakra-ui/react';
 import { GiRank1, GiRank2, GiRank3 } from 'react-icons/gi';
 import { IconType } from 'react-icons';
-// import { FaMedal } from 'react-icons/fa';
-// import { FaMedal } from 'react-icons/fa';
-// import { GiPodiumSecond } from 'react-icons/gi';
-// import { GiPodiumThird } from 'react-icons/gi';
 
 type RankItem = {
     imageSrc?: string;
@@ -61,7 +57,6 @@ export const RankingGraph = ({ rank }: RankingGraphProps) => {
                                             transform="translateX(-50%)"
                                         />
                                     )}
-                                    {/* GiRank 아이콘: Top +27px */}
                                     <Box
                                         as={rankIcons[item.ranking]}
                                         width="40px"
