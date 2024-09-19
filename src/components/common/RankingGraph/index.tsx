@@ -39,7 +39,7 @@ export const RankingGraph = ({ rank }: RankingGraphProps) => {
                             <Box
                                 width="54px"
                                 height={`${percentage}%`}
-                                bg="#FFCB7C"
+                                bg='orange.400'
                                 transition="height 0.3s ease-in-out"
                                 borderRadius="md"
                                 position="relative"
@@ -88,7 +88,7 @@ export const RankingGraph = ({ rank }: RankingGraphProps) => {
                         {!item.imageSrc && (<div style={{ width: "60px" }}></div>)}
                         <VStack align="flex-start" spacing={0} height="60px" width="360px"> {/* 이미지 높이에 맞춰 텍스트 위아래 정렬 */}
                             <Text fontWeight="bold" isTruncated width="100%">{item.title}</Text>
-                            <Text fontSize="sm" color="gray.500" isTruncated width="100%">{item.subtitle}</Text>
+                            <Text fontSize="sm" color="text_detail" isTruncated width="100%">{item.subtitle}</Text>
                         </VStack>
                     </HStack>
                 ))}
