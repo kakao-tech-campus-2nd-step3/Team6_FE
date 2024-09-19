@@ -35,16 +35,16 @@ const CustomButton: React.FC<CustomButtonProps> = ({
   }
 
   const orangeStyle: ButtonProps = {
-    bg: '#FECC88',
+    bg: 'orange.400',
     color: 'black',
-    _hover: { bg: '#FFBB55' },
+    _hover: { bg: 'orange.500' },
   }
 
   const whiteStyle: ButtonProps = {
     bg: 'white',
     color: 'black',
-    border: '2px solid #E2E8F0',
-    _hover: { bg: '#F5F5F5' },
+    border: '2px solid black.300',
+    _hover: { bg: 'black.100' },
   }
 
   const styles = variant === 'orange' ? orangeStyle : whiteStyle
@@ -63,11 +63,11 @@ const CustomButton: React.FC<CustomButtonProps> = ({
           <BiCog
             style={{
               position: 'absolute',
-              color: '#FFAA21',
+              color: 'orange.600',
               top: '20px',
               left: '10px',
               fontSize: '40px',
-              backgroundColor: '#FFF7ED',
+              backgroundColor: 'orange.50',
               borderRadius: '8px',
               padding: '6px',
             }}
@@ -84,8 +84,8 @@ const CustomButton: React.FC<CustomButtonProps> = ({
         <HStack spacing={3} justify="center" align="center" h="full">
           <BiLink
             style={{
-              color: '#FFAA21',
-              backgroundColor: '#FFF7ED',
+              color: 'primary.500',
+              backgroundColor: 'primary.50',
               borderRadius: '8px',
               padding: '4px',
               fontSize: '30px',
