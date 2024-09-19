@@ -34,12 +34,12 @@ export const ConfirmModal = ({
       <ModalContent>
         <ModalHeader>
           <Box
-            background="ivory"
+            background="primary_background"
+            color="primary"
             width="fit-content"
             padding="0.5rem"
             rounded="full"
             marginBottom="0.5rem"
-            color="orange"
           >
             {icon}
           </Box>
@@ -51,7 +51,7 @@ export const ConfirmModal = ({
             fontWeight="medium"
             paddingTop="0.3rem"
             marginLeft="0.5rem"
-            color="gray"
+            color="text_detail"
           >
             {description}
           </Text>
@@ -60,8 +60,7 @@ export const ConfirmModal = ({
           <Button
             onClick={onClose}
             variant="outline"
-            color="orange"
-            borderColor="orange"
+            colorScheme="primary"
             fontSize="small"
             height="fit-content"
             paddingY="0.5rem"
@@ -85,8 +84,7 @@ export const ConfirmModalButton = ({
 }: ConfirmModalButtonProps) => {
   return (
     <Button
-      backgroundColor="orange"
-      color="white"
+      colorScheme="primary"
       fontSize="small"
       height="fit-content"
       paddingY="0.5rem"
