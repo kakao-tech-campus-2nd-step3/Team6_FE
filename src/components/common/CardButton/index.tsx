@@ -72,10 +72,10 @@ const CustomButton: React.FC<CustomButtonProps> = ({
               padding: '6px',
             }}
           />
-          <Text fontSize="20px" fontWeight="bold" color="black">
+          <Text fontSize="20px" fontWeight="bold" color="text">
             {label}
           </Text>
-          <Text fontSize="14px" fontWeight="light" color="gray.600">
+          <Text fontSize="14px" fontWeight="light" color="text_detail">
             {description}
           </Text>
         </VStack>
@@ -91,10 +91,10 @@ const CustomButton: React.FC<CustomButtonProps> = ({
               fontSize: '30px',
             }}
           />
-          <Text fontSize="20px" fontWeight="bold" color="black">
+          <Text fontSize="20px" fontWeight="bold" color="text">
             {label}
           </Text>
-          <Text fontSize="14px" fontWeight="light" color="gray.600">
+          <Text fontSize="14px" fontWeight="light" color="text_detail">
             {description}
           </Text>
         </HStack>
