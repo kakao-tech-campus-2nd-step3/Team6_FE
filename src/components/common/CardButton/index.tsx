@@ -1,4 +1,4 @@
-import { BiCog, BiLink } from 'react-icons/bi'
+import { IconType } from 'react-icons'
 
 import { Button, ButtonProps, HStack, Text, VStack } from '@chakra-ui/react'
 
@@ -7,6 +7,7 @@ type CustomButtonProps = {
   orientation: 'vertical' | 'horizontal'
   label: string
   description: string
+  Icon: IconType
 } & ButtonProps
 
 const CustomButton: React.FC<CustomButtonProps> = ({
@@ -14,6 +15,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({
   orientation,
   label,
   description,
+  Icon,
   ...props
 }) => {
   const borderRadius = orientation === 'vertical' ? '20px' : '8px' // 가로, 세로 버튼에 따라 다른 borderRadius 설정
@@ -60,7 +62,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({
           h="full"
           paddingBottom="20px"
         >
-          <BiCog
+          <Icon
             style={{
               position: 'absolute',
               color: 'orange.600',
@@ -82,7 +84,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({
       ) : (
         // 가로 버튼
         <HStack spacing={3} justify="center" align="center" h="full">
-          <BiLink
+          <Icon
             style={{
               color: 'primary.500',
               backgroundColor: 'primary.50',
