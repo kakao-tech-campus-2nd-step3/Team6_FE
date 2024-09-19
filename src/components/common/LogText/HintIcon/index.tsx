@@ -11,9 +11,9 @@ export const HintIcon = ({ hintCount }: HintIconProps) => {
     <Flex>
       {Array.from({ length: 3 }, (_, index) =>
         index < hintCount ? (
-          <BiLockOpenAlt key={index} color="orange" />
+          <BiLockOpenAlt key={index} color="primary" />
         ) : (
-          <BiLockAlt key={index} color="gray" />
+          <BiLockAlt key={index} color="black.400" />
         )
       )}
     </Flex>
