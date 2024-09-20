@@ -3,7 +3,6 @@ import { IconType } from 'react-icons'
 import { Button, ButtonProps, HStack, Text, VStack } from '@chakra-ui/react'
 
 type CustomButtonProps = {
-  variant: 'orange' | 'white'
   orientation: 'vertical' | 'horizontal'
   label: string
   description: string
@@ -11,7 +10,6 @@ type CustomButtonProps = {
 } & ButtonProps
 
 const CustomButton: React.FC<CustomButtonProps> = ({
-  variant,
   orientation,
   label,
   description,
@@ -36,23 +34,8 @@ const CustomButton: React.FC<CustomButtonProps> = ({
     position: 'relative',
   }
 
-  const orangeStyle: ButtonProps = {
-    bg: 'orange.400',
-    color: 'black',
-    _hover: { bg: 'orange.500' },
-  }
-
-  const whiteStyle: ButtonProps = {
-    bg: 'white',
-    color: 'black',
-    border: '2px solid black.300',
-    _hover: { bg: 'black.100' },
-  }
-
-  const styles = variant === 'orange' ? orangeStyle : whiteStyle
-
   return (
-    <Button {...commonStyles} {...styles} {...props}>
+    <Button {...commonStyles} {...props}>
       {orientation === 'vertical' ? (
         // 세로 버튼
         <VStack
