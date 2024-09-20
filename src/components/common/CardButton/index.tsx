@@ -9,6 +9,63 @@ type CustomButtonProps = {
   Icon: IconType
 } & ButtonProps
 
+// 스타일 분리
+const orientationStyles = {
+  vertical: {
+    container: {
+      height: '200px',
+      width: '190px',
+      flexDirection: 'column' as const,
+      justifyContent: 'flex-start',
+      alignItems: 'flex-start',
+    },
+    icon: {
+      position: 'absolute' as const,
+      color: 'orange.600',
+      top: '20px',
+      left: '10px',
+      fontSize: '40px',
+      backgroundColor: 'orange.50',
+      borderRadius: '8px',
+      padding: '6px',
+    },
+    labelStyle: {
+      fontSize: '20px',
+      fontWeight: 'bold',
+    },
+    descriptionStyle: {
+      fontSize: '14px',
+      fontWeight: 'light',
+    },
+    textAlign: 'left',
+  },
+  horizontal: {
+    container: {
+      height: '60px',
+      width: '400px',
+      flexDirection: 'row' as const,
+      justifyContent: 'space-between',
+      alignItems: 'center',
+    },
+    icon: {
+      color: 'primary.500',
+      backgroundColor: 'primary.50',
+      borderRadius: '8px',
+      padding: '4px',
+      fontSize: '30px',
+    },
+    labelStyle: {
+      fontSize: '20px',
+      fontWeight: 'bold',
+    },
+    descriptionStyle: {
+      fontSize: '14px',
+      fontWeight: 'light',
+    },
+    textAlign: 'center',
+  },
+}
+
 const CustomButton: React.FC<CustomButtonProps> = ({
   orientation,
   label,
@@ -20,68 +77,40 @@ const CustomButton: React.FC<CustomButtonProps> = ({
 
   const commonStyles: ButtonProps = {
     borderRadius,
-    height: orientation === 'vertical' ? '200px' : '60px',
-    width: orientation === 'vertical' ? '190px' : '400px',
-    fontSize: '16px',
-    fontWeight: 'bold',
     display: 'flex',
-    justifyContent: orientation === 'vertical' ? 'flex-start' : 'space-between',
-    alignItems: orientation === 'vertical' ? 'flex-start' : 'center',
-    padding: '10px',
     boxShadow: 'md',
-    flexDirection: orientation === 'vertical' ? 'column' : 'row',
-    textAlign: orientation === 'vertical' ? 'left' : 'center',
+    padding: '10px',
     position: 'relative',
   }
 
+  const styles = orientationStyles[orientation]
+
   return (
-    <Button {...commonStyles} {...props}>
+    <Button {...commonStyles} {...styles.container} {...props}>
       {orientation === 'vertical' ? (
-        // 세로 버튼
         <VStack
           spacing={2}
           align="flex-start"
           justify="flex-end"
           h="full"
           paddingBottom="20px"
+          sx={{ textAlign: styles.textAlign }}
         >
-          <Icon
-            style={{
-              position: 'absolute',
-              color: 'orange.600',
-              top: '20px',
-              left: '10px',
-              fontSize: '40px',
-              backgroundColor: 'orange.50',
-              borderRadius: '8px',
-              padding: '6px',
-            }}
-          />
-          <Text fontSize="20px" fontWeight="bold" color="text">
-            {label}
-          </Text>
-          <Text fontSize="14px" fontWeight="light" color="text_detail">
-            {description}
-          </Text>
+          <Icon style={styles.icon} />
+          <Text {...styles.labelStyle}>{label}</Text>
+          <Text {...styles.descriptionStyle}>{description}</Text>
         </VStack>
       ) : (
-        // 가로 버튼
-        <HStack spacing={3} justify="center" align="center" h="full">
-          <Icon
-            style={{
-              color: 'primary.500',
-              backgroundColor: 'primary.50',
-              borderRadius: '8px',
-              padding: '4px',
-              fontSize: '30px',
-            }}
-          />
-          <Text fontSize="20px" fontWeight="bold" color="text">
-            {label}
-          </Text>
-          <Text fontSize="14px" fontWeight="light" color="text_detail">
-            {description}
-          </Text>
+        <HStack
+          spacing={3}
+          justify="center"
+          align="center"
+          h="full"
+          sx={{ textAlign: styles.textAlign }}
+        >
+          <Icon style={styles.icon} />
+          <Text {...styles.labelStyle}>{label}</Text>
+          <Text {...styles.descriptionStyle}>{description}</Text>
         </HStack>
       )}
     </Button>
