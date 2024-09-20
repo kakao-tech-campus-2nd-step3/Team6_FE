@@ -54,6 +54,7 @@ export const RankingGraph = ({ rank }: RankingGraphProps) => {
               <Box
                 width="54px"
                 height={`${percentage}%`}
+                minHeight="75px"
                 bg="orange.400"
                 transition="height 0.3s ease-in-out"
                 borderRadius="md"
