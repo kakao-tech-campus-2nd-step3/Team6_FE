@@ -2,7 +2,7 @@ import { IconType } from 'react-icons'
 
 import { Button, ButtonProps, HStack, Text, VStack } from '@chakra-ui/react'
 
-type CustomButtonProps = {
+type CardButtonProps = {
   orientation: 'vertical' | 'horizontal'
   label: string
   description: string
@@ -66,7 +66,7 @@ const orientationStyles = {
   },
 }
 
-const CustomButton: React.FC<CustomButtonProps> = ({
+const CardButton: React.FC<CardButtonProps> = ({
   orientation,
   label,
   description,
@@ -117,4 +117,4 @@ const CustomButton: React.FC<CustomButtonProps> = ({
   )
 }
 
-export default CustomButton
+export default CardButton
