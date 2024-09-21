@@ -21,7 +21,12 @@
     "noFallthroughCasesInSwitch": true,
 
     /* emotion */
-    "types": ["@emotion/react/types/css-prop"]
+    "types": ["@emotion/react/types/css-prop"],
+
+    /* Alias */
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   },
   "include": ["src", ".eslintrc.cjs"]
 }

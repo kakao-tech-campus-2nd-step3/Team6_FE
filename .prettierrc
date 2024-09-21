@@ -1,9 +1,10 @@
 {
   "plugins": ["@trivago/prettier-plugin-sort-imports"],
   "importOrder": [
-    "^@emotion/(.*)$",
     "^react(.*)$",
     "<THIRD_PARTY_MODULES>",
+    "^@emotion/(.*)$",
+    "^@/(.*)$",
     "^[./]"
   ],
   "importOrderSeparation": true,
