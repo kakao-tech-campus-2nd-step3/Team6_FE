@@ -1,17 +1,16 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { ChakraProvider } from '@chakra-ui/react'
+import { QueryClientProvider } from '@tanstack/react-query'
 
+import queryClient from '@/api/instance'
 import { Routes } from '@/routes'
-
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: { retry: 0, staleTime: 1000 * 60 },
-  },
-})
+import theme from '@/styles/theme'
 
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <Routes />
+      <ChakraProvider theme={theme}>
+        <Routes />
+      </ChakraProvider>
     </QueryClientProvider>
   )
 }
