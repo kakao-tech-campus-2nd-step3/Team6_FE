@@ -39,15 +39,4 @@ module.exports = {
     'import/prefer-default-export': 'off',
     'react/require-default-props': 'off',
   },
-  settings: {
-    'import/resolver': {
-      node: {
-        paths: ['src'],
-        extensions: ['.js', '.jsx', '.ts', '.d.ts', '.tsx'],
-      },
-      typescript: {
-        project: './tsconfig.json',
-      },
-    },
-  },
 }
