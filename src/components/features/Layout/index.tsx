@@ -2,13 +2,14 @@ import { Outlet } from 'react-router-dom'
 
 import { Box, Flex, HStack } from '@chakra-ui/react'
 
+import { Footer } from './Footer'
 import { FriendSection } from './FriendSection'
 import { GroupSection } from './GroupSection'
 import { SideNavigation } from './SideNavigation'
 
 export const Layout = () => {
   return (
-    <Flex background="brown.600" height="100vh">
+    <Flex background="brown.600" height="100vh" flexDirection="column">
       <Flex flex="1" justifyContent="center" alignItems="center">
         <HStack
           background="brown.50"
@@ -16,6 +17,7 @@ export const Layout = () => {
           height="560px"
           rounded="24px"
           overflow="hidden"
+          marginTop={6}
           gap={0}
           boxShadow="6px 6px 20px rgba(0, 0, 0, 0.25)"
         >
@@ -27,6 +29,7 @@ export const Layout = () => {
           <FriendSection />
         </HStack>
       </Flex>
+      <Footer />
     </Flex>
   )
 }
