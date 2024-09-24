@@ -41,7 +41,13 @@ const MainPage = () => {
             _hover={{ bg: 'brown.50' }}
           >
             <VStack spacing={4}>
-              <Avatar src={profile.img} size="lg" />
+              <Avatar
+                src={profile.img}
+                size="lg"
+                _hover={{
+                  boxShadow: '0 0 0 4px rgba(210, 180, 140, 0.5)',
+                }}
+              />
               {/* 폰트 weight 300으로 수정하기 */}
               <Text fontSize="sm" color="text_secondary" fontWeight="medium">
                 {profile.name}
@@ -61,7 +67,13 @@ const MainPage = () => {
             _hover={{ bg: 'brown.50' }}
           >
             <VStack spacing={4}>
-              <Avatar src={profile.img} size="lg" />
+              <Avatar
+                src={profile.img}
+                size="lg"
+                _hover={{
+                  boxShadow: '0 0 0 4px rgba(210, 180, 140, 0.5)',
+                }}
+              />
               {/* 폰트 weight 300 */}
               <Text fontSize="sm" color="text_secondary" fontWeight="medium">
                 {profile.name}
