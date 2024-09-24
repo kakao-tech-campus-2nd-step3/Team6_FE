@@ -1,4 +1,14 @@
-import { Avatar, Box, Button, SimpleGrid, Text, VStack } from '@chakra-ui/react'
+import { BiChevronsRight, BiGroup } from 'react-icons/bi'
+
+import {
+  Avatar,
+  Box,
+  Button,
+  Flex,
+  SimpleGrid,
+  Text,
+  VStack,
+} from '@chakra-ui/react'
 
 const MainPage = () => {
   const all = [
@@ -50,6 +60,27 @@ const MainPage = () => {
           </Button>
         ))}
       </SimpleGrid>
+
+      <Flex justify="space-between">
+        <Button
+          leftIcon={<BiGroup />}
+          colorScheme="brown"
+          bg="brown.50"
+          color="brown.600"
+          _hover={{ color: 'black.900' }}
+        >
+          Reload
+        </Button>
+        <Button
+          rightIcon={<BiChevronsRight />}
+          colorScheme="brown"
+          bg="brown.50"
+          color="brown.600"
+          _hover={{ color: 'black.900' }}
+        >
+          Skip
+        </Button>
+      </Flex>
     </Box>
   )
 }
