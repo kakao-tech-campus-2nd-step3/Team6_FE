@@ -38,5 +38,16 @@ module.exports = {
     ],
     'import/prefer-default-export': 'off',
     'react/require-default-props': 'off',
+    'import/extensions': [
+      'error',
+      'ignorePackages',
+      {
+        '': 'never',
+        js: 'never',
+        jsx: 'never',
+        ts: 'never',
+        tsx: 'never',
+      },
+    ],
   },
 }
