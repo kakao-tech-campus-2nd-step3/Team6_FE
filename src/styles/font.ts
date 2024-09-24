@@ -4,4 +4,10 @@ const fontWeights = {
   bold: 600,
 }
 
-export default fontWeights
+const fonts = {
+  body: "'IBM Plex Sans KR'",
+  question: "'IBM Plex Sans KR'",
+  chating: "'IBM Plex Sans KR'",
+}
+
+export { fontWeights, fonts }
