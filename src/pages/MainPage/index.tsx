@@ -34,7 +34,12 @@ const MainPage = () => {
       {/* 첫 번째 줄 프로필 3개 */}
       <SimpleGrid columns={3} spacing={16} mb={20}>
         {all.slice(0, 3).map((profile) => (
-          <Button key={profile.name} variant="ghost" textAlign="center">
+          <Button
+            key={profile.name}
+            variant="ghost"
+            textAlign="center"
+            _hover={{ bg: 'brown.50' }}
+          >
             <VStack spacing={4}>
               <Avatar src={profile.img} size="lg" />
               {/* 폰트 weight 300으로 수정하기 */}
@@ -49,7 +54,12 @@ const MainPage = () => {
       {/* 두 번째 줄 프로필 2개 */}
       <SimpleGrid columns={2} mb={16}>
         {all.slice(3, 5).map((profile) => (
-          <Button key={profile.name} variant="ghost" textAlign="center">
+          <Button
+            key={profile.name}
+            variant="ghost"
+            textAlign="center"
+            _hover={{ bg: 'brown.50' }}
+          >
             <VStack spacing={4}>
               <Avatar src={profile.img} size="lg" />
               {/* 폰트 weight 300 */}
@@ -64,19 +74,17 @@ const MainPage = () => {
       <Flex justify="space-between">
         <Button
           leftIcon={<BiGroup />}
-          colorScheme="brown"
           bg="brown.50"
           color="brown.600"
-          _hover={{ color: 'black.900' }}
+          _hover={{ bg: 'brown.50', color: 'black.900' }}
         >
           Reload
         </Button>
         <Button
           rightIcon={<BiChevronsRight />}
-          colorScheme="brown"
           bg="brown.50"
           color="brown.600"
-          _hover={{ color: 'black.900' }}
+          _hover={{ bg: 'brown.50', color: 'black.900' }}
         >
           Skip
         </Button>
