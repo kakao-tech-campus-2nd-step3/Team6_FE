@@ -1,5 +1,7 @@
 import { extendTheme } from '@chakra-ui/react'
 
+import { fontWeights, fonts } from './font'
+
 const theme = extendTheme({
   colors: {
     orange: {
@@ -58,6 +60,8 @@ const theme = extendTheme({
       text_detail: 'black.600',
     },
   },
+  fontWeights,
+  fonts,
 })
 
 export default theme
