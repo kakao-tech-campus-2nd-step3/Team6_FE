@@ -26,8 +26,7 @@ const MainPage = () => {
       borderRadius="20px"
       textAlign="center"
     >
-      {/* font.ts가 머지되면 600으로 weight 변경하기 */}
-      <Text fontWeight="bold" fontSize="4xl" color="text" mb={24}>
+      <Text fontWeight="600" fontSize="4xl" color="text" mb={24}>
         가장 MZ스러운 사람
       </Text>
 
@@ -48,8 +47,7 @@ const MainPage = () => {
                   boxShadow: '0 0 0 4px rgba(210, 180, 140, 0.5)',
                 }}
               />
-              {/* 폰트 weight 300으로 수정하기 */}
-              <Text fontSize="sm" color="text_secondary" fontWeight="medium">
+              <Text fontSize="sm" color="text_secondary" fontWeight="300">
                 {profile.name}
               </Text>
             </VStack>
@@ -74,8 +72,7 @@ const MainPage = () => {
                   boxShadow: '0 0 0 4px rgba(210, 180, 140, 0.5)',
                 }}
               />
-              {/* 폰트 weight 300 */}
-              <Text fontSize="sm" color="text_secondary" fontWeight="medium">
+              <Text fontSize="sm" color="text_secondary" fontWeight="300">
                 {profile.name}
               </Text>
             </VStack>
