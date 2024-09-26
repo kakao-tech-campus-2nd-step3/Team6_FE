@@ -1,9 +1,9 @@
 import { create } from 'zustand'
-import { persist } from 'zustand/middleware'
+import { createJSONStorage, persist } from 'zustand/middleware'
 
 interface MemberTypeProps {
-  memberType: 'FRIEND' | 'ALL' | 'GROUP'
-  setMemberType: (memberType: 'FRIEND' | 'ALL' | 'GROUP') => void
+  memberType: 'FRIEND' | 'KAKAO' | 'GROUP'
+  setMemberType: (memberType: 'FRIEND' | 'KAKAO' | 'GROUP') => void
 }
 
 export const useMemberTypeStore = create(
@@ -16,6 +16,7 @@ export const useMemberTypeStore = create(
     }),
     {
       name: 'member-type',
+      storage: createJSONStorage(() => sessionStorage),
     }
   )
 )
