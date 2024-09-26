@@ -10,6 +10,14 @@ import {
   VStack,
 } from '@chakra-ui/react'
 
+const Question = () => {
+  return (
+    <Text fontWeight="600" fontSize="4xl" color="text" mb={24}>
+      가장 MZ스러운 사람
+    </Text>
+  )
+}
+
 const MainPage = () => {
   const all = [
     { name: '한바름', img: '/image.png' },
@@ -26,9 +34,7 @@ const MainPage = () => {
       borderRadius="20px"
       textAlign="center"
     >
-      <Text fontWeight="600" fontSize="4xl" color="text" mb={24}>
-        가장 MZ스러운 사람
-      </Text>
+      <Question />
 
       {/* 첫 번째 줄 프로필 3개 */}
       <SimpleGrid columns={3} spacing={16} mb={20}>
