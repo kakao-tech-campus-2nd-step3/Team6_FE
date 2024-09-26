@@ -5,11 +5,11 @@ import { css } from '@emotion/react'
 
 import { Friend } from '@/types'
 
-interface FriendListProps {
+interface MemberListProps {
   friends: Friend[]
 }
 
-export const FriendList = ({ friends }: FriendListProps) => {
+export const MemberList = ({ friends }: MemberListProps) => {
   return (
     <Flex
       flexDirection="column"

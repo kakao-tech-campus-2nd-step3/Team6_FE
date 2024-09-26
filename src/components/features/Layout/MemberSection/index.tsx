@@ -1,27 +1,27 @@
 import { Box, Divider, Flex } from '@chakra-ui/react'
 
-import { useFriendStore } from '@/stores/friend'
+import { useMemberTypeStore } from '@/stores/member-type'
 
-import { FriendHeader } from './FriendHero'
 import { FriendList } from './FriendList'
-import { MyFriendList } from './MyFriendList'
+import { MemberHeader } from './MemberHeader'
+import { MemberList } from './MemberList'
 
-export const FriendSection = () => {
-  const friendType = useFriendStore((state) => state.friendType)
+export const MemberSection = () => {
+  const memberType = useMemberTypeStore((state) => state.memberType)
 
   return (
     <Box background="white" width="200px" height="full" color="text">
       <Flex flexDirection="column" gap={1}>
-        <FriendHeader />
+        <MemberHeader />
         <Divider />
-        {friendType === 'FRIEND' && <MyFriendList friends={mockFriendsData} />}
-        {friendType === 'ALL' && <FriendList friends={mockFriendsData} />}
+        {memberType === 'FRIEND' && <FriendList friends={mockMembersData} />}
+        {memberType === 'ALL' && <MemberList friends={mockMembersData} />}
       </Flex>
     </Box>
   )
 }
 
-const mockFriendsData = [
+const mockMembersData = [
   {
     friendId: 1,
     name: '김아진',

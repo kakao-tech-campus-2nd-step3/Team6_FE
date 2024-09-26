@@ -2,11 +2,11 @@ import { BiHeart, BiUser } from 'react-icons/bi'
 
 import { Box, Flex, HStack, Text } from '@chakra-ui/react'
 
-import { useFriendStore } from '@/stores/friend'
+import { useMemberTypeStore } from '@/stores/member-type'
 
-export const FriendHeader = () => {
-  const friendType = useFriendStore((state) => state.friendType)
-  const setFriendType = useFriendStore((state) => state.setFriendType)
+export const MemberHeader = () => {
+  const memberType = useMemberTypeStore((state) => state.memberType)
+  const setMemberType = useMemberTypeStore((state) => state.setMemberType)
 
   return (
     <Flex alignItems="center" justifyContent="space-between" paddingRight={3}>
@@ -14,19 +14,19 @@ export const FriendHeader = () => {
         <BiUser size={20} />
         <Text fontWeight={600}>친구 목록</Text>
       </HStack>
-      {friendType === 'FRIEND' && (
+      {memberType === 'FRIEND' && (
         <Box
           color="black.600"
           _hover={{ color: 'text', cursor: 'pointer' }}
-          onClick={() => setFriendType('ALL')}
+          onClick={() => setMemberType('ALL')}
         >
           <BiHeart size={20} />
         </Box>
       )}
-      {friendType === 'ALL' && (
+      {memberType === 'ALL' && (
         <Box
           _hover={{ color: 'black.800', cursor: 'pointer' }}
-          onClick={() => setFriendType('FRIEND')}
+          onClick={() => setMemberType('FRIEND')}
         >
           <Text fontSize="small" fontWeight="bold">
             설정 완료
