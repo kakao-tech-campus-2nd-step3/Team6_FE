@@ -37,6 +37,8 @@ module.exports = {
         endOfLine: 'auto',
       },
     ],
+    'react/prop-types': 'off',
+    'react/jsx-props-no-spreading': 'off',
     'react/react-in-jsx-scope': 'off',
     'react/function-component-definition': [
       2,
