@@ -1,15 +1,21 @@
 import { Box, Divider, Flex } from '@chakra-ui/react'
 
+import { useFriendStore } from '@/stores/friend'
+
 import { FriendHeader } from './FriendHero'
+import { FriendList } from './FriendList'
 import { MyFriendList } from './MyFriendList'
 
 export const FriendSection = () => {
+  const friendType = useFriendStore((state) => state.friendType)
+
   return (
     <Box background="white" width="200px" height="full" color="text">
       <Flex flexDirection="column" gap={1}>
         <FriendHeader />
         <Divider />
-        <MyFriendList friends={mockFriendsData} />
+        {friendType === 'FRIEND' && <MyFriendList friends={mockFriendsData} />}
+        {friendType === 'ALL' && <FriendList friends={mockFriendsData} />}
       </Flex>
     </Box>
   )
