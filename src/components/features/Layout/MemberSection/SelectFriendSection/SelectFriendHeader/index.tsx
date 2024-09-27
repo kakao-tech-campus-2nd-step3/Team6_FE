@@ -11,7 +11,7 @@ export const SelectFreindHeader = () => {
     <Flex alignItems="center" justifyContent="space-between" paddingRight={3}>
       <HStack padding={2} paddingY={1}>
         <BiUserCheck size={20} />
-        <Text fontWeight={600}>친구 설정</Text>
+        <Text fontWeight="bold">친구 설정</Text>
       </HStack>
       <Box
         _hover={{ color: 'black.800', cursor: 'pointer' }}

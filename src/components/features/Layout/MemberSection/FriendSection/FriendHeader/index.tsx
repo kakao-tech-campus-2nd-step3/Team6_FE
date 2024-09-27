@@ -11,7 +11,7 @@ export const FriendHeader = () => {
     <Flex alignItems="center" justifyContent="space-between" paddingRight={3}>
       <HStack padding={2} paddingY={1}>
         <BiUser size={20} />
-        <Text fontWeight={600}>친구 목록</Text>
+        <Text fontWeight="bold">친구 목록</Text>
       </HStack>
       <Box
         color="black.600"
