@@ -23,7 +23,7 @@ export const Layout = () => {
         >
           <SideNavigation />
           <GroupSection />
-          <Box flex="1" height="full">
+          <Box flex="1" height="full" overflowY="scroll">
             <Outlet />
           </Box>
           <MemberSection />

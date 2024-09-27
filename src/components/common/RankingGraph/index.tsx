@@ -52,7 +52,7 @@ export const RankingGraph = ({ rank }: RankingGraphProps) => {
               position="relative"
             >
               <Box
-                width="54px"
+                width="44px"
                 height={`${percentage}%`}
                 minHeight="75px"
                 bg="orange.400"
@@ -60,11 +60,11 @@ export const RankingGraph = ({ rank }: RankingGraphProps) => {
                 borderRadius="md"
                 position="relative"
               >
-                <Center position="relative" width="54px" height="54px">
+                <Center position="relative" width="44px" height="44px">
                   {item.imageSrc && (
                     <Image
                       src={item.imageSrc}
-                      boxSize="54px"
+                      boxSize="40px"
                       objectFit="cover"
                       borderRadius="full"
                       position="absolute"
@@ -75,8 +75,8 @@ export const RankingGraph = ({ rank }: RankingGraphProps) => {
                   )}
                   <Box
                     as={rankIcons[item.ranking]}
-                    width="40px"
-                    height="40px"
+                    width="30px"
+                    height="30px"
                     position="absolute"
                     top={item.imageSrc ? '30px' : '10px'}
                     left="50%"
@@ -90,22 +90,22 @@ export const RankingGraph = ({ rank }: RankingGraphProps) => {
       </HStack>
 
       {/* 오른쪽 랭킹 리스트 */}
-      <VStack spacing={4} align="stretch">
+      <VStack spacing={3} align="stretch">
         {rank.map((item) => (
           <HStack key={item.ranking} align="center">
             {item.imageSrc && (
               <Image
                 src={item.imageSrc}
-                boxSize="60px"
+                boxSize="40px"
                 objectFit="cover"
                 borderRadius="full"
               />
             )}
             {!item.imageSrc && <div style={{ width: '60px' }} />}
-            <VStack align="flex-start" spacing={0} height="60px" width="360px">
+            <VStack align="flex-start" spacing={0} height="60px" width="250px">
               {' '}
               {/* 이미지 높이에 맞춰 텍스트 위아래 정렬 */}
-              <Text fontWeight="bold" isTruncated width="100%">
+              <Text fontWeight="400" isTruncated width="100%">
                 {item.title}
               </Text>
               <Text fontSize="sm" color="text_detail" isTruncated width="100%">
