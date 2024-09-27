@@ -1,22 +1,8 @@
-import { BiChevronsRight, BiGroup } from 'react-icons/bi'
+import { Box, SimpleGrid } from '@chakra-ui/react'
 
-import {
-  Avatar,
-  Box,
-  Button,
-  Flex,
-  SimpleGrid,
-  Text,
-  VStack,
-} from '@chakra-ui/react'
-
-const Question = () => {
-  return (
-    <Text fontWeight="600" fontSize="4xl" color="text" mb={24}>
-      가장 MZ스러운 사람
-    </Text>
-  )
-}
+import Buttons from './etcButtons'
+import ProfileButton from './profileButton'
+import Question from './question'
 
 const MainPage = () => {
   const all = [
@@ -27,6 +13,8 @@ const MainPage = () => {
     { name: '신승욱', img: '/image.png' },
   ]
 
+  const questionText = '가장 MZ스러운 사람'
+
   return (
     <Box
       bg="secondary_background"
@@ -34,76 +22,23 @@ const MainPage = () => {
       borderRadius="20px"
       textAlign="center"
     >
-      <Question />
+      <Question questionText={questionText} />
 
       {/* 첫 번째 줄 프로필 3개 */}
       <SimpleGrid columns={3} spacing={16} mb={20}>
         {all.slice(0, 3).map((profile) => (
-          <Button
-            key={profile.name}
-            variant="ghost"
-            textAlign="center"
-            _hover={{ bg: 'brown.50' }}
-          >
-            <VStack spacing={4}>
-              <Avatar
-                src={profile.img}
-                size="lg"
-                _hover={{
-                  boxShadow: '0 0 0 4px rgba(210, 180, 140, 0.5)',
-                }}
-              />
-              <Text fontSize="sm" color="text_secondary" fontWeight="300">
-                {profile.name}
-              </Text>
-            </VStack>
-          </Button>
+          <ProfileButton profile={profile} key={profile.name} />
         ))}
       </SimpleGrid>
 
       {/* 두 번째 줄 프로필 2개 */}
       <SimpleGrid columns={2} mb={16}>
         {all.slice(3, 5).map((profile) => (
-          <Button
-            key={profile.name}
-            variant="ghost"
-            textAlign="center"
-            _hover={{ bg: 'brown.50' }}
-          >
-            <VStack spacing={4}>
-              <Avatar
-                src={profile.img}
-                size="lg"
-                _hover={{
-                  boxShadow: '0 0 0 4px rgba(210, 180, 140, 0.5)',
-                }}
-              />
-              <Text fontSize="sm" color="text_secondary" fontWeight="300">
-                {profile.name}
-              </Text>
-            </VStack>
-          </Button>
+          <ProfileButton profile={profile} key={profile.name} />
         ))}
       </SimpleGrid>
 
-      <Flex justify="space-between">
-        <Button
-          leftIcon={<BiGroup />}
-          bg="brown.50"
-          color="brown.600"
-          _hover={{ bg: 'brown.50', color: 'black.900' }}
-        >
-          Reload
-        </Button>
-        <Button
-          rightIcon={<BiChevronsRight />}
-          bg="brown.50"
-          color="brown.600"
-          _hover={{ bg: 'brown.50', color: 'black.900' }}
-        >
-          Skip
-        </Button>
-      </Flex>
+      <Buttons />
     </Box>
   )
 }
