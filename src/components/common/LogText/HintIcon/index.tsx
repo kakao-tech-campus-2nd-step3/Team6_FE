@@ -2,7 +2,7 @@ import { BiLockAlt, BiLockOpenAlt } from 'react-icons/bi'
 
 import { Flex } from '@chakra-ui/react'
 
-type HintIconProps = {
+interface HintIconProps {
   hintCount: 0 | 1 | 2 | 3
 }
 

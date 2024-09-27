@@ -9,3 +9,11 @@
 body {
   margin: 0;
 }
+
+::-webkit-scrollbar {
+  display: none;
+}
+.scroll {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

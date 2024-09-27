@@ -11,7 +11,7 @@ import {
   Text,
 } from '@chakra-ui/react'
 
-type ConfirmModalProps = {
+interface ConfirmModalProps {
   isOpen: boolean
   onClose: () => void
   icon: ReactElement
