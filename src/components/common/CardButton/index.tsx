@@ -1,13 +1,8 @@
 import { IconType } from 'react-icons'
 
-import {
-  Box,
-  Button,
-  HStack,
-  ResponsiveValue,
-  Text,
-  VStack,
-} from '@chakra-ui/react'
+import { Box, Button, HStack, Text, VStack, useTheme } from '@chakra-ui/react'
+
+import { css } from '@emotion/react'
 
 type CardButtonProps = {
   variant: 'orange' | 'white'
@@ -19,9 +14,10 @@ type CardButtonProps = {
 
 const CardButton = ({ buttonElement }: { buttonElement: CardButtonProps }) => {
   const { variant, orientation, label, description, Icon } = buttonElement
+  const theme = useTheme()
   const borderRadius = orientation === 'vertical' ? '20px' : '8px'
 
-  const commonStyles = {
+  const commonStyles = css({
     borderRadius,
     height: orientation === 'vertical' ? '145px' : '60px',
     width: orientation === 'vertical' ? '148px' : '300px',
@@ -34,45 +30,22 @@ const CardButton = ({ buttonElement }: { buttonElement: CardButtonProps }) => {
     boxShadow: 'md',
     flexDirection: orientation === 'vertical' ? 'column' : 'row',
     textAlign: orientation === 'vertical' ? 'left' : 'center',
-    position: 'relative' as ResponsiveValue<'relative'>,
-  }
-
-  const orangeStyle = {
-    bg: 'orange.400',
+    position: 'relative',
+    backgroundColor:
+      variant === 'orange' ? theme.colors.orange[400] : theme.colors.white,
     color: 'black',
-    border: 'none',
-    hover: { bg: 'orange.500' },
-  }
-
-  const whiteStyle = {
-    bg: 'white',
-    color: 'black',
-    border: '2px solid black.300',
-    hover: { bg: 'black.100' },
-  }
-
-  const styles = variant === 'orange' ? orangeStyle : whiteStyle
+    border:
+      variant === 'white' ? `2px solid ${theme.colors.black[300]}` : 'none',
+    '&:hover': {
+      backgroundColor:
+        variant === 'orange'
+          ? theme.colors.orange[500]
+          : theme.colors.black[100],
+    },
+  })
 
   return (
-    <Button
-      borderRadius={commonStyles.borderRadius}
-      height={commonStyles.height}
-      width={commonStyles.width}
-      fontSize={commonStyles.fontSize}
-      fontWeight={commonStyles.fontWeight}
-      display={commonStyles.display}
-      justifyContent={commonStyles.justifyContent}
-      alignItems={commonStyles.alignItems}
-      padding={commonStyles.padding}
-      boxShadow={commonStyles.boxShadow}
-      flexDirection={commonStyles.flexDirection as 'column' | 'row'}
-      textAlign={commonStyles.textAlign as 'left' | 'center'}
-      position={commonStyles.position}
-      bg={styles.bg}
-      color={styles.color}
-      border={styles.border}
-      _hover={styles.hover}
-    >
+    <Button css={commonStyles}>
       {orientation === 'vertical' ? (
         <VStack
           spacing={2}
