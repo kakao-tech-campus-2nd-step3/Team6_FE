@@ -11,7 +11,7 @@ import {
   Text,
 } from '@chakra-ui/react'
 
-type AlertModalProps = {
+interface AlertModalProps {
   isOpen: boolean
   onClose: () => void
   icon: ReactElement
