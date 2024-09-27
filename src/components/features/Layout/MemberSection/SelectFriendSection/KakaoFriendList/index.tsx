@@ -1,5 +1,4 @@
 import { Button, Flex, Text } from '@chakra-ui/react'
-import { css } from '@emotion/react'
 
 import { Friend } from '@/types'
 
@@ -20,7 +19,6 @@ export const KakaoFriendList = ({ friends }: KakaoFriendListProps) => {
       paddingRight={3}
       gap={4}
       overflowY="scroll"
-      css={hideScrollbar}
     >
       <Flex flexDirection="column">
         <Flex justifyContent="space-between" alignItems="center">
@@ -42,7 +40,3 @@ export const KakaoFriendList = ({ friends }: KakaoFriendListProps) => {
     </Flex>
   )
 }
-
-const hideScrollbar = css({
-  '&::-webkit-scrollbar': { display: 'none' },
-})

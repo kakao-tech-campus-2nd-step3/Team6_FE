@@ -1,5 +1,4 @@
 import { Avatar, Flex, HStack, Text } from '@chakra-ui/react'
-import { css } from '@emotion/react'
 
 import { Friend } from '@/types'
 
@@ -14,7 +13,6 @@ export const FriendList = ({ friends }: FriendListProps) => {
       alignItems="start"
       paddingX={2}
       overflowY="scroll"
-      css={hideScrollbar}
     >
       <Text fontSize="small" color="text_detail" paddingY={1}>
         친한 친구 - {friends.length}
@@ -30,7 +28,3 @@ export const FriendList = ({ friends }: FriendListProps) => {
     </Flex>
   )
 }
-
-const hideScrollbar = css({
-  '&::-webkit-scrollbar': { display: 'none' },
-})
