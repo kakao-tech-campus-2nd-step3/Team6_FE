@@ -3,8 +3,8 @@ import { IconType } from 'react-icons'
 import {
   Box,
   Button,
-  ButtonProps,
   HStack,
+  ResponsiveValue,
   Text,
   VStack,
 } from '@chakra-ui/react'
@@ -15,19 +15,13 @@ type CardButtonProps = {
   label: string
   description: string
   Icon: IconType
-} & ButtonProps
+}
 
-const CardButton: React.FC<CardButtonProps> = ({
-  variant,
-  orientation,
-  label,
-  description,
-  Icon,
-  ...props
-}) => {
+const CardButton = ({ buttonElement }: { buttonElement: CardButtonProps }) => {
+  const { variant, orientation, label, description, Icon } = buttonElement
   const borderRadius = orientation === 'vertical' ? '20px' : '8px'
 
-  const commonStyles: ButtonProps = {
+  const commonStyles = {
     borderRadius,
     height: orientation === 'vertical' ? '145px' : '60px',
     width: orientation === 'vertical' ? '148px' : '300px',
@@ -40,26 +34,45 @@ const CardButton: React.FC<CardButtonProps> = ({
     boxShadow: 'md',
     flexDirection: orientation === 'vertical' ? 'column' : 'row',
     textAlign: orientation === 'vertical' ? 'left' : 'center',
-    position: 'relative',
+    position: 'relative' as ResponsiveValue<'relative'>,
   }
 
-  const orangeStyle: ButtonProps = {
+  const orangeStyle = {
     bg: 'orange.400',
     color: 'black',
-    _hover: { bg: 'orange.500' },
+    border: 'none',
+    hover: { bg: 'orange.500' },
   }
 
-  const whiteStyle: ButtonProps = {
+  const whiteStyle = {
     bg: 'white',
     color: 'black',
     border: '2px solid black.300',
-    _hover: { bg: 'black.100' },
+    hover: { bg: 'black.100' },
   }
 
   const styles = variant === 'orange' ? orangeStyle : whiteStyle
 
   return (
-    <Button {...commonStyles} {...styles} {...props}>
+    <Button
+      borderRadius={commonStyles.borderRadius}
+      height={commonStyles.height}
+      width={commonStyles.width}
+      fontSize={commonStyles.fontSize}
+      fontWeight={commonStyles.fontWeight}
+      display={commonStyles.display}
+      justifyContent={commonStyles.justifyContent}
+      alignItems={commonStyles.alignItems}
+      padding={commonStyles.padding}
+      boxShadow={commonStyles.boxShadow}
+      flexDirection={commonStyles.flexDirection as 'column' | 'row'}
+      textAlign={commonStyles.textAlign as 'left' | 'center'}
+      position={commonStyles.position}
+      bg={styles.bg}
+      color={styles.color}
+      border={styles.border}
+      _hover={styles.hover}
+    >
       {orientation === 'vertical' ? (
         <VStack
           spacing={2}
