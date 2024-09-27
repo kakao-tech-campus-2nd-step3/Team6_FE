@@ -3,7 +3,7 @@ import { GiRank1, GiRank2, GiRank3 } from 'react-icons/gi'
 
 import { Box, Center, HStack, Image, Text, VStack } from '@chakra-ui/react'
 
-type RankItem = {
+interface RankItem {
   imageSrc?: string
   title: string
   subtitle: string
@@ -11,9 +11,9 @@ type RankItem = {
   ranking: 1 | 2 | 3
 }
 
-type RankingGraphProps = {
+interface RankingGraphProps extends React.HTMLAttributes<HTMLDivElement> {
   rank: RankItem[]
-} & React.HTMLAttributes<HTMLDivElement>
+}
 
 export const RankingGraph = ({ rank }: RankingGraphProps) => {
   const maxAmount = rank.find((item) => item.ranking === 1)?.amount || 1
