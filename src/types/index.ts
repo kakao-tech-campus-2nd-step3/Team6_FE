@@ -4,3 +4,11 @@ export type Friend = {
   imageUrl: string
   isFriend: boolean
 }
+
+export type Group = {
+  groupdId: number
+  groupName: string
+  groupdImageUrl: string
+  groupDescription: string
+  groupMemberCount: number
+}
