@@ -2,6 +2,7 @@ import { BiQuestionMark } from 'react-icons/bi'
 
 import { Center, Flex, HStack, Text } from '@chakra-ui/react'
 
+import { useSeletedGroupStore } from '@/stores/selected-group'
 import { Group } from '@/types'
 
 import { GroupListItem } from './GroupListItem'
@@ -11,6 +12,9 @@ interface GroupListProps {
 }
 
 export const GroupList = ({ groups }: GroupListProps) => {
+  const groupId = useSeletedGroupStore((state) => state.groupId)
+  const setSeletedGroup = useSeletedGroupStore((state) => state.setGroupId)
+
   return (
     <Flex
       flexDirection="column"
@@ -28,6 +32,11 @@ export const GroupList = ({ groups }: GroupListProps) => {
           paddingX={2}
           width="full"
           _hover={{ background: 'brown.50', cursor: 'pointer' }}
+          borderRight={groupId === 'ALL' ? 3 : 0}
+          borderRightColor="brown.400"
+          borderRightStyle="solid"
+          background={groupId === 'ALL' ? 'brown.50' : ''}
+          onClick={() => setSeletedGroup('ALL')}
         >
           <Center background="primary" width={7} height={7} rounded="full">
             <BiQuestionMark size={20} color="white" />
@@ -40,7 +49,11 @@ export const GroupList = ({ groups }: GroupListProps) => {
           그룹 친구에게
         </Text>
         {groups.map((group) => (
-          <GroupListItem key={group.groupdId} group={group} />
+          <GroupListItem
+            key={group.groupdId}
+            group={group}
+            selectedGroup={groupId}
+          />
         ))}
       </Flex>
     </Flex>
