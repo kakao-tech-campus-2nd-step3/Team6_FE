@@ -1,6 +1,10 @@
-import { Avatar, Flex, HStack, Text } from '@chakra-ui/react'
+import { BiQuestionMark } from 'react-icons/bi'
+
+import { Center, Flex, HStack, Text } from '@chakra-ui/react'
 
 import { Group } from '@/types'
+
+import { GroupListItem } from './GroupListItem'
 
 interface GroupListProps {
   groups: Group[]
@@ -11,29 +15,32 @@ export const GroupList = ({ groups }: GroupListProps) => {
     <Flex
       flexDirection="column"
       alignItems="start"
-      paddingX={2}
       overflowY="scroll"
       maxHeight="32rem"
       gap={2}
     >
-      <Flex flexDirection="column">
-        <Text fontSize="small" color="text_detail" paddingY={1}>
+      <Flex flexDirection="column" width="full">
+        <Text fontSize="small" color="text_detail" paddingY={1} paddingX={2}>
           모든 친구에게
         </Text>
-        <HStack paddingY={1.5}>
-          <Avatar width={7} height={7} />
+        <HStack
+          paddingY={1.5}
+          paddingX={2}
+          width="full"
+          _hover={{ background: 'brown.50', cursor: 'pointer' }}
+        >
+          <Center background="primary" width={7} height={7} rounded="full">
+            <BiQuestionMark size={20} color="white" />
+          </Center>
           <Text>ALL</Text>
         </HStack>
       </Flex>
-      <Flex flexDirection="column">
-        <Text fontSize="small" color="text_detail" paddingY={1}>
-          그룹 친구에게 - {groups.length}
+      <Flex flexDirection="column" width="full">
+        <Text fontSize="small" color="text_detail" paddingY={1} paddingX={2}>
+          그룹 친구에게
         </Text>
         {groups.map((group) => (
-          <HStack key={group.groupdId} paddingY={1.5}>
-            <Avatar width={7} height={7} src={group.groupdImageUrl} />
-            <Text>{group.groupName}</Text>
-          </HStack>
+          <GroupListItem key={group.groupdId} group={group} />
         ))}
       </Flex>
     </Flex>
