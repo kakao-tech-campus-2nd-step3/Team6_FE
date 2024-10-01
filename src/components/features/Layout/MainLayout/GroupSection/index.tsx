@@ -1,21 +1,21 @@
-import { Divider, Flex } from '@chakra-ui/react'
+import { BiDonateHeart } from 'react-icons/bi'
 
-import { GroupHeader } from './GroupHeader'
+import { PageLayout } from '@/components/common/PageLayout'
+
 import { GroupList } from './GroupList'
 
 export const GroupSection = () => {
   return (
-    <Flex
-      flexDirection="column"
-      background="white"
-      width="200px"
-      height="full"
-      gap={1}
+    <PageLayout.SideSection
+      SectionHeader={
+        <PageLayout.SideSection.SectionHeader
+          Icon={BiDonateHeart}
+          title="쿠키 주기"
+        />
+      }
     >
-      <GroupHeader />
-      <Divider />
       <GroupList groups={mockGroupList} />
-    </Flex>
+    </PageLayout.SideSection>
   )
 }
 
