@@ -24,7 +24,12 @@ export const GroupList = ({ groups }: GroupListProps) => {
       gap={2}
     >
       <Flex flexDirection="column" width="full">
-        <Text fontSize="small" color="text_detail" paddingY={1} paddingX={2}>
+        <Text
+          fontSize="small"
+          color="text_description"
+          paddingY={1}
+          paddingX={2}
+        >
           모든 친구에게
         </Text>
         <HStack
@@ -45,7 +50,12 @@ export const GroupList = ({ groups }: GroupListProps) => {
         </HStack>
       </Flex>
       <Flex flexDirection="column" width="full">
-        <Text fontSize="small" color="text_detail" paddingY={1} paddingX={2}>
+        <Text
+          fontSize="small"
+          color="text_description"
+          paddingY={1}
+          paddingX={2}
+        >
           그룹 친구에게
         </Text>
         {groups.map((group) => (

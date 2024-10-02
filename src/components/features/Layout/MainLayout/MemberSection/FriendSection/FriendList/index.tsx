@@ -14,7 +14,7 @@ export const FriendList = ({ friends }: FriendListProps) => {
       paddingX={2}
       overflowY="scroll"
     >
-      <Text fontSize="small" color="text_detail" paddingY={1}>
+      <Text fontSize="small" color="text_description" paddingY={1}>
         친한 친구 - {friends.length}
       </Text>
       <Flex flexDirection="column" width="full" maxHeight="30rem">
