@@ -1,7 +1,8 @@
 import { BiCircle, BiSolidCheckCircle } from 'react-icons/bi'
 
-import { Avatar, Box, Flex, HStack, Text } from '@chakra-ui/react'
+import { Box, Flex } from '@chakra-ui/react'
 
+import { AvatarLabel } from '@/components/features/Layout/MainLayout/AvatarLabel'
 import { Friend } from '@/types'
 
 interface KakaoFriendListItemProps {
@@ -21,10 +22,7 @@ export const KakaoFriendListItem = ({
           alignItems="center"
           justifyContent="space-between"
         >
-          <HStack paddingY={1.5}>
-            <Avatar width={7} height={7} src={friend.imageUrl} />
-            <Text>{friend.name}</Text>
-          </HStack>
+          <AvatarLabel avatarSrc={friend.imageUrl} label={friend.name} />
           {isFriend && (
             <Box _hover={{ color: 'black.800', cursor: 'pointer' }}>
               <BiSolidCheckCircle size={24} />
