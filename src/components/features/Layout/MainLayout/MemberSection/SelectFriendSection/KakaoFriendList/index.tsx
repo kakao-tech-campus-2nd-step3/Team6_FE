@@ -22,7 +22,7 @@ export const KakaoFriendList = ({ friends }: KakaoFriendListProps) => {
     >
       <Flex flexDirection="column">
         <Flex justifyContent="space-between" alignItems="center">
-          <Text fontSize="small" color="text_detail" paddingY={1}>
+          <Text fontSize="small" color="text_description" paddingY={1}>
             친한 친구 - {friendList.length}
           </Text>
           <Button variant="link" fontSize="small" colorScheme="primary">
@@ -32,7 +32,7 @@ export const KakaoFriendList = ({ friends }: KakaoFriendListProps) => {
         <KakaoFriendListItem friends={friendList} isFriend />
       </Flex>
       <Flex flexDirection="column">
-        <Text fontSize="small" color="text_detail" paddingY={1}>
+        <Text fontSize="small" color="text_description" paddingY={1}>
           추천 친구 - {recommendList.length}
         </Text>
         <KakaoFriendListItem friends={recommendList} isFriend={false} />

@@ -55,7 +55,7 @@ export const RankingGraph = ({ rank }: RankingGraphProps) => {
                 width="44px"
                 height={`${percentage}%`}
                 minHeight="75px"
-                bg="orange.400"
+                bg="orange.200"
                 transition="height 0.3s ease-in-out"
                 borderRadius="md"
                 position="relative"
@@ -108,7 +108,12 @@ export const RankingGraph = ({ rank }: RankingGraphProps) => {
               <Text fontWeight="400" isTruncated width="100%">
                 {item.title}
               </Text>
-              <Text fontSize="sm" color="text_detail" isTruncated width="100%">
+              <Text
+                fontSize="sm"
+                color="text_description"
+                isTruncated
+                width="100%"
+              >
                 {item.subtitle}
               </Text>
             </VStack>
