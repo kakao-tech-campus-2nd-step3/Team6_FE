@@ -3,6 +3,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import { Layout } from '@/components/features/Layout'
 import MainPage from '@/pages/MainPage'
 import MyPage from '@/pages/MyPage'
+import ProfileQuestion from '@/pages/ProfileQuestion'
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
       {
         path: '/mypage',
         element: <MyPage />,
+      },
+      {
+        path: '/mypage/question',
+        element: <ProfileQuestion />,
       },
     ],
   },
