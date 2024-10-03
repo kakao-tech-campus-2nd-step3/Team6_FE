@@ -1,23 +1,28 @@
 import { ReactNode } from 'react'
 import { Outlet } from 'react-router-dom'
 
-import { Box, Flex, HStack } from '@chakra-ui/react'
+import { Box, ColorProps, Flex, FlexProps, HStack } from '@chakra-ui/react'
 
 import { Footer } from './Footer'
 import { SideNavigation } from './SideNavigation'
 import { SideSection } from './SideSection'
 
-interface PageLayoutProps {
+interface PageLayoutProps extends FlexProps {
   LeftSection: ReactNode
   RightSection?: ReactNode
+  pageColor?: ColorProps['color']
 }
 
-const PageLayout = ({ LeftSection, RightSection }: PageLayoutProps) => {
+const PageLayout = ({
+  LeftSection,
+  RightSection,
+  pageColor = 'brown.50',
+}: PageLayoutProps) => {
   return (
     <Flex background="brown.600" height="100vh" flexDirection="column">
       <Flex flex="1" justifyContent="center" alignItems="center">
         <HStack
-          background="brown.50"
+          background={pageColor}
           width="1024px"
           height="560px"
           rounded="24px"
