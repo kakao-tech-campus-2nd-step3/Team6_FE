@@ -12,7 +12,7 @@ import {
   Text,
 } from '@chakra-ui/react'
 
-type FormModalProps = {
+interface FormModalProps {
   isOpen: boolean
   onClose: () => void
   icon: ReactElement

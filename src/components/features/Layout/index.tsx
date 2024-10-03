@@ -3,8 +3,8 @@ import { Outlet } from 'react-router-dom'
 import { Box, Flex, HStack } from '@chakra-ui/react'
 
 import { Footer } from './Footer'
-import { FriendSection } from './FriendSection'
 import { GroupSection } from './GroupSection'
+import { MemberSection } from './MemberSection'
 import { SideNavigation } from './SideNavigation'
 
 export const Layout = () => {
@@ -23,10 +23,10 @@ export const Layout = () => {
         >
           <SideNavigation />
           <GroupSection />
-          <Box flex="1" height="full">
+          <Box flex="1" height="full" overflowY="scroll">
             <Outlet />
           </Box>
-          <FriendSection />
+          <MemberSection />
         </HStack>
       </Flex>
       <Footer />
