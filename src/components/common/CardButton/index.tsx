@@ -67,7 +67,17 @@ const CardButton = ({ buttonElement }: { buttonElement: CardButtonProps }) => {
           <Text fontSize="16px" fontWeight="bold" color="text">
             {label}
           </Text>
-          <Text fontSize="10px" fontWeight="medium" color="text_description">
+          <Text
+            fontSize="10px"
+            fontWeight="medium"
+            color="text_description"
+            sx={{
+              maxWidth: '60px',
+              overflowWrap: 'break-word',
+              whiteSpace: 'normal',
+              lineHeight: '1.5',
+            }}
+          >
             {description}
           </Text>
         </VStack>
