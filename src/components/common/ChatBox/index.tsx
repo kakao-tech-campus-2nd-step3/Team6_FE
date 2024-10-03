@@ -2,7 +2,7 @@ import { Box, Flex } from '@chakra-ui/react'
 
 interface ChatProps {
   chatItem: {
-    direction: string
+    direction: 'left' | 'right'
     content: string
     createdAt?: string
   }
