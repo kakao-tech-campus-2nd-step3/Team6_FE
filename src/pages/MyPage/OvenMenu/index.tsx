@@ -29,11 +29,11 @@ export default function OvenMenu() {
       margin="30px"
       p="10px"
       borderRadius="10px"
-      bg="orange.300"
+      bg="orange.100"
     >
       <Box>
         <Text fontWeight="bold">나의 오븐</Text>
-        <Text fontSize="xs" color="text_detail">
+        <Text fontSize="xs" color="text_description">
           질문과 답변을 확인해보세요
         </Text>
       </Box>

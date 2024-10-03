@@ -1,8 +1,8 @@
 import { Box } from '@chakra-ui/react'
 
-import Buttons from './etcButtons'
-import ProfileGrid from './progileGrid'
-import Question from './question'
+import ProfileGrid from './ProfileGrid'
+import Question from './Question'
+import Buttons from './SkipReloadButton'
 
 const MainPage = () => {
   const all = [
