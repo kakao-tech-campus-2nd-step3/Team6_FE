@@ -1,6 +1,6 @@
 import { SimpleGrid } from '@chakra-ui/react'
 
-import ProfileButton from './profileButton'
+import ProfileButton from '../ProfileButton'
 
 type ProfileGridProps = {
   profiles: {
