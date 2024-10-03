@@ -17,7 +17,11 @@ const GroupProfileDummyData = {
   description: '카카오테크 캠퍼스 2기의 그룹페이지 입니다',
 }
 
-export default function Profile() {
+interface ProfileProps {
+  role: 'leader' | 'member'
+}
+
+export default function Profile({ role }: ProfileProps) {
   return (
     <header>
       <Box height="144px" position="relative" marginBottom="-15px">
@@ -41,36 +45,38 @@ export default function Profile() {
           <VStack align="flex-start" spacing={0}>
             <HStack spacing={2} alignItems="center">
               <Text fontSize="xl">{GroupProfileDummyData.name}</Text>
-
-              <Text
-                fontSize="xs"
-                padding="3px 6px"
-                borderRadius="8px"
-                border="1px solid"
-                borderColor="primary"
-                fontWeight="bold"
-                color="primary"
-              >
-                그룹장
-              </Text>
+              {role === 'leader' && (
+                <Text
+                  fontSize="xs"
+                  padding="3px 6px"
+                  borderRadius="8px"
+                  border="1px solid"
+                  borderColor="primary"
+                  fontWeight="bold"
+                  color="primary"
+                >
+                  그룹장
+                </Text>
+              )}
             </HStack>
 
             <HStack spacing={2} alignItems="center">
               <Text color="text_secondary" fontSize="md">
                 {GroupProfileDummyData.description}
               </Text>
-
-              <IconButton
-                aria-label="Edit"
-                icon={<Icon as={BiEditAlt} boxSize="10px" />}
-                borderRadius="20px"
-                minWidth="20px"
-                width="20px"
-                height="20px"
-                padding="0"
-                border="1px solid"
-                borderColor="black.400"
-              />
+              {role === 'leader' && (
+                <IconButton
+                  aria-label="Edit"
+                  icon={<Icon as={BiEditAlt} boxSize="10px" />}
+                  borderRadius="20px"
+                  minWidth="20px"
+                  width="20px"
+                  height="20px"
+                  padding="0"
+                  border="1px solid"
+                  borderColor="black.400"
+                />
+              )}
             </HStack>
           </VStack>
         </HStack>

@@ -33,11 +33,13 @@ const dummyRankData = [
   },
 ]
 
+const userRole = 'member' // "leader" or "member"
+
 export default function GroupPage() {
   return (
     <div>
       <Navigate />
-      <Profile />
+      <Profile role={userRole} />
       <Box p="0 30px">
         <Text fontSize="md" fontWeight="bold" mb="2">
           랭킹
@@ -47,7 +49,7 @@ export default function GroupPage() {
         </Text>
         <RankingGraph rank={dummyRankData} />
       </Box>
-      <Management />
+      <Management role={userRole} />
     </div>
   )
 }

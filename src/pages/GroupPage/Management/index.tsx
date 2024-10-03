@@ -34,7 +34,11 @@ const CardData4 = {
   Icon: BiPlus as IconType,
 }
 
-export default function Management() {
+interface ManagementProps {
+  role: 'leader' | 'member'
+}
+
+export default function Management({ role }: ManagementProps) {
   return (
     <Box p="30px">
       <Flex gap={4} marginTop="10px" marginBottom="16px">
@@ -42,25 +46,27 @@ export default function Management() {
         <CardButton buttonElement={CardData4} />
       </Flex>
 
-      <Box
-        display="flex"
-        flexDirection="row"
-        justifyContent="space-between"
-        p="10px"
-        borderRadius="10px"
-        bg="orange.100"
-      >
-        <Box>
-          <Text fontWeight="bold">그룹 관리</Text>
-          <Text fontSize="xs" color="text_detail">
-            당신의 그룹을 원활하게 관리해보세요
-          </Text>
+      {role === 'leader' && (
+        <Box
+          display="flex"
+          flexDirection="row"
+          justifyContent="space-between"
+          p="10px"
+          borderRadius="10px"
+          bg="orange.100"
+        >
+          <Box>
+            <Text fontWeight="bold">그룹 관리</Text>
+            <Text fontSize="xs" color="text_detail">
+              당신의 그룹을 원활하게 관리해보세요
+            </Text>
+          </Box>
+          <Flex gap={4}>
+            <CardButton buttonElement={CardData1} />
+            <CardButton buttonElement={CardData2} />
+          </Flex>
         </Box>
-        <Flex gap={4}>
-          <CardButton buttonElement={CardData1} />
-          <CardButton buttonElement={CardData2} />
-        </Flex>
-      </Box>
+      )}
     </Box>
   )
 }
