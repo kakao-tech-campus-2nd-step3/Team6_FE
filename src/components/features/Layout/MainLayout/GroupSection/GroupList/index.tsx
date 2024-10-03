@@ -3,10 +3,9 @@ import { BiQuestionMark } from 'react-icons/bi'
 import { Center, Flex, HStack, Text } from '@chakra-ui/react'
 
 import { ActiveBrownBox } from '@/components/features/Layout/ActiveBrownBox'
+import { AvatarLabelWithNavigate } from '@/components/features/Layout/MainLayout/AvatarLabel'
 import { useSeletedGroupStore } from '@/stores/selected-group'
 import { Group } from '@/types'
-
-import { GroupListItem } from './GroupListItem'
 
 interface GroupListProps {
   groups: Group[]
@@ -55,11 +54,18 @@ export const GroupList = ({ groups }: GroupListProps) => {
           그룹 친구에게
         </Text>
         {groups.map((group) => (
-          <GroupListItem
+          <ActiveBrownBox
             key={group.groupdId}
-            group={group}
-            selectedGroup={groupId}
-          />
+            isActive={groupId === group.groupdId}
+            onClick={() => setSeletedGroup(group.groupdId)}
+          >
+            <AvatarLabelWithNavigate
+              avatarSrc={group.groupdImageUrl}
+              label={group.groupName}
+              tooltipLabel={`${group.groupName} 페이지`}
+              linkTo="/"
+            />
+          </ActiveBrownBox>
         ))}
       </Flex>
     </Flex>

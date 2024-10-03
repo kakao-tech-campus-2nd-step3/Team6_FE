@@ -1,5 +1,6 @@
-import { Avatar, Flex, HStack, Text } from '@chakra-ui/react'
+import { Box, Flex, Text } from '@chakra-ui/react'
 
+import { AvatarLabelWithNavigate } from '@/components/features/Layout/MainLayout/AvatarLabel'
 import { Friend } from '@/types'
 
 interface FriendListProps {
@@ -8,21 +9,20 @@ interface FriendListProps {
 
 export const FriendList = ({ friends }: FriendListProps) => {
   return (
-    <Flex
-      flexDirection="column"
-      alignItems="start"
-      paddingX={2}
-      overflowY="scroll"
-    >
-      <Text fontSize="small" color="text_description" paddingY={1}>
+    <Flex flexDirection="column" alignItems="start" overflowY="scroll">
+      <Text fontSize="small" color="text_description" paddingY={1} paddingX={2}>
         친한 친구 - {friends.length}
       </Text>
       <Flex flexDirection="column" width="full" maxHeight="30rem">
         {friends.map((friend) => (
-          <HStack key={friend.friendId} paddingY={1.5}>
-            <Avatar width={7} height={7} src={friend.imageUrl} />
-            <Text>{friend.name}</Text>
-          </HStack>
+          <Box key={friend.friendId} paddingY={1} paddingX={2} width="full">
+            <AvatarLabelWithNavigate
+              avatarSrc={friend.imageUrl}
+              label={friend.name}
+              linkTo="/"
+              tooltipLabel={`${friend.name} 페이지`}
+            />
+          </Box>
         ))}
       </Flex>
     </Flex>
