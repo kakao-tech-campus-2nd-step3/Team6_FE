@@ -2,6 +2,7 @@ import { BiQuestionMark } from 'react-icons/bi'
 
 import { Center, Flex, HStack, Text } from '@chakra-ui/react'
 
+import { ActiveBrownBox } from '@/components/features/Layout/ActiveBrownBox'
 import { useSeletedGroupStore } from '@/stores/selected-group'
 import { Group } from '@/types'
 
@@ -32,22 +33,17 @@ export const GroupList = ({ groups }: GroupListProps) => {
         >
           모든 친구에게
         </Text>
-        <HStack
-          paddingY={1.5}
-          paddingX={2}
-          width="full"
-          _hover={{ background: 'brown.50', cursor: 'pointer' }}
-          borderRight={groupId === 'ALL' ? 3 : 0}
-          borderRightColor="brown.400"
-          borderRightStyle="solid"
-          background={groupId === 'ALL' ? 'brown.50' : ''}
+        <ActiveBrownBox
+          isActive={groupId === 'ALL'}
           onClick={() => setSeletedGroup('ALL')}
         >
-          <Center background="primary" width={7} height={7} rounded="full">
-            <BiQuestionMark size={20} color="white" />
-          </Center>
-          <Text>ALL</Text>
-        </HStack>
+          <HStack>
+            <Center background="primary" width={7} height={7} rounded="full">
+              <BiQuestionMark size={20} color="white" />
+            </Center>
+            <Text>ALL</Text>
+          </HStack>
+        </ActiveBrownBox>
       </Flex>
       <Flex flexDirection="column" width="full">
         <Text
