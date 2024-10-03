@@ -30,7 +30,6 @@ export const ChatBox = ({
             : 'polygon(100% 0, 0 50%, 100% 100%)'
         }
         position="absolute"
-        // left="20px"
         right={isRight ? '23px' : 'auto'}
         left={isRight ? 'auto' : '23px'}
         top="7px"
