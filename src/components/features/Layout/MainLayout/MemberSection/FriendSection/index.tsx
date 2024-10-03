@@ -1,15 +1,13 @@
-import { Divider, Flex } from '@chakra-ui/react'
+import { PageLayout } from '@/components/common/PageLayout'
 
 import { FriendHeader } from './FriendHeader'
 import { FriendList } from './FriendList'
 
 export const FriendSection = () => {
   return (
-    <Flex flexDirection="column" gap={1}>
-      <FriendHeader />
-      <Divider />
+    <PageLayout.SideSection SectionHeader={<FriendHeader />}>
       <FriendList friends={mockFriendList} />
-    </Flex>
+    </PageLayout.SideSection>
   )
 }
 

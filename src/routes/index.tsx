@@ -1,13 +1,15 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 
-import { Layout } from '@/components/features/Layout'
+import { MainLayout } from '@/components/features/Layout/MainLayout'
+import { ProfileQuestionLayout } from '@/components/features/Layout/ProfileQuestionLayout'
 import MainPage from '@/pages/MainPage'
 import MyPage from '@/pages/MyPage'
+import ProfileQuestionPage from '@/pages/ProfileQuestionPage'
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Layout />,
+    element: <MainLayout />,
     children: [
       {
         path: '/',
@@ -18,6 +20,11 @@ const router = createBrowserRouter([
         element: <MyPage />,
       },
     ],
+  },
+  {
+    path: '/',
+    element: <ProfileQuestionLayout />,
+    children: [{ path: '/profile-question', element: <ProfileQuestionPage /> }],
   },
 ])
 
