@@ -57,7 +57,16 @@ export default function Management({ role }: ManagementProps) {
         >
           <Box>
             <Text fontWeight="bold">그룹 관리</Text>
-            <Text fontSize="xs" color="text_detail">
+            <Text
+              fontSize="xs"
+              color="text_description"
+              sx={{
+                maxWidth: '120px',
+                overflowWrap: 'break-word',
+                whiteSpace: 'normal',
+                lineHeight: '1.5',
+              }}
+            >
               당신의 그룹을 원활하게 관리해보세요
             </Text>
           </Box>

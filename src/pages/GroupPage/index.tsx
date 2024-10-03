@@ -33,7 +33,7 @@ const dummyRankData = [
   },
 ]
 
-const userRole = 'member' // "leader" or "member"
+const userRole = 'leader' // "leader" or "member"
 
 export default function GroupPage() {
   return (
