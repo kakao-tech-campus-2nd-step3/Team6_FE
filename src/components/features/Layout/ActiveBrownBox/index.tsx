@@ -22,6 +22,10 @@ export const ActiveBrownBox = ({
       paddingX={2}
       width="full"
       css={dynamicStyle(isActive)}
+      borderRight={isActive ? 3 : 0}
+      background={isActive ? 'brown.50' : ''}
+      borderRightColor="brown.400"
+      borderRightStyle="solid"
       onClick={onClick}
     >
       {children}
