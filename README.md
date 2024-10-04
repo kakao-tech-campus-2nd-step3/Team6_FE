@@ -5,7 +5,9 @@
 
 ### 📌 주요 기능
 
-    Issue#22 레이아웃 UI 구현
+```
+Issue#22 레이아웃 UI 구현
+```
     
 프로젝트에서 공통으로 사용되는 레이아웃 UI 구현
 
@@ -16,7 +18,9 @@
 - overflow-y scroll 적용은 #23 에서 해결
 
 
-    Issue#29 폰트 적용
+```
+Issue#29 폰트 적용
+```
   
 프로젝트에서 공통으로 사용되는 폰트를 IBM Plex Sans KR로 적용
 
@@ -27,7 +31,9 @@
 - 600: bold
 
 
-    Issue#23 멤버 목록 UI 구현
+```
+Issue#23 멤버 목록 UI 구현
+```
   
 공통 레이아웃의 우측 사이드 섹션인 멤버 목록을 보여주는 UI 구현
 
@@ -36,7 +42,9 @@
 - 친한 친구 선택 구현
 
 
-    Issue#27 쿠키 주기 페이지 UI 구현
+```
+Issue#27 쿠키 주기 페이지 UI 구현
+```
   
 메인 섹션 메인 페이지 쿠키 주기 섹션 UI 구현
 
@@ -55,8 +63,9 @@
 > [ ] 프로필 보여주는 코드 하나로 묶어서 중복 코드 제거할 것
 
 
-
-    Issue#24 마이페이지 UI 구현
+```
+Issue#24 마이페이지 UI 구현
+```
     
 메인 섹션 마이페이지 UI 구현
 
@@ -71,13 +80,17 @@
 
 ### 🛠️ 수정 사항
 
-    Issue#11 프로젝트 세팅 추가
-    
+```
+Issue#11 프로젝트 세팅 추가
+```
+ 
 react-router-dom 추가, alias 절대경로 @/ 세팅
 
 
-    Issue#36 카드 버튼 컴포넌트 수정
-    
+```
+Issue#36 카드 버튼 컴포넌트 수정
+```
+ 
 화면에 맞게 컴포넌트 크키와 아이콘 위치 수정
 
 > **PR 해결**
@@ -89,8 +102,10 @@ react-router-dom 추가, alias 절대경로 @/ 세팅
 > [x] emotion css 작성 형태 가독성 고려하여 변경
 
 
- Issue#21 props 타입 지정 interface로 통일
- 
+```
+Issue#21 props 타입 지정 interface로 통일
+```
+
 props의 타입 지정시에 type과 interface가 혼용되어 interface로 통일
 
 
@@ -100,8 +115,10 @@ props의 타입 지정시에 type과 interface가 혼용되어 interface로 통�
 ### 📌 주요 기능
 
 
-    Issue#40 그룹 섹션 구현
-    
+```
+Issue#40 그룹 섹션 구현
+```
+ 
 프로젝트에서 공통으로 사용되는 좌측 사이드 레이아웃 그룹 섹션 UI 구현
 
 - 선택 그룹 store 저장
@@ -109,7 +126,9 @@ props의 타입 지정시에 type과 interface가 혼용되어 interface로 통�
 - hover tooltip 적용
 
 
-    Issue#28 채팅 컴포넌트 구현
+```
+Issue#28 채팅 컴포넌트 구현
+```
 
 프로필 질문에서 사용할 채팅 박스 컴포넌트 구현
 
@@ -118,7 +137,9 @@ props의 타입 지정시에 type과 interface가 혼용되어 interface로 통�
 - 채팅, 날짜 띄우기
 
 
-    Issue#51 그룹 페이지 UI 구현
+```
+Issue#51 그룹 페이지 UI 구현
+```
 
 그룹 페이지 UI를 구현
 
@@ -128,7 +149,9 @@ props의 타입 지정시에 type과 interface가 혼용되어 interface로 통�
 ### 🛠️ 수정 사항
 
 
-    Issue#45 페이지 레이아웃 리팩토링
+```
+Issue#45 페이지 레이아웃 리팩토링
+```
 
 프로젝트에서 공통으로 사용되는 페이지 레이아웃 UI 리팩토링
 
@@ -137,7 +160,9 @@ props의 타입 지정시에 type과 interface가 혼용되어 interface로 통�
 - 레이아웃 선택 가능
  
 
-    Issue#43 프로필 버튼 그리드 재사용하도록 수정
+```
+Issue#43 프로필 버튼 그리드 재사용하도록 수정
+```
 
 코드 재사용성을 위해 분리
 
@@ -146,7 +171,9 @@ props의 타입 지정시에 type과 interface가 혼용되어 interface로 통�
 - 코드 중복성 제거
 
 
-    Issue#49 컬러 팔레트 수정
+```
+Issue#49 컬러 팔레트 수정
+```
 
 필요 색상 추가
 
@@ -155,7 +182,9 @@ props의 타입 지정시에 type과 interface가 혼용되어 interface로 통�
 - 컬러 모듈화
 
 
-    Issue#47 페이지 레이아웃 컴포넌트 분리
+```
+Issue#47 페이지 레이아웃 컴포넌트 분리
+```
 
 페이지 레이아웃에서 공통으로 사용되는 UI를 모듈화
 
@@ -164,7 +193,9 @@ props의 타입 지정시에 type과 interface가 혼용되어 interface로 통�
 - navigate 적용
 
 
-    Issue#56 카드 컴포넌트 설명 부분 수정
+```
+Issue#56 카드 컴포넌트 설명 부분 수정
+```
 
 카드 컴포넌트의 description 줄바꿈을 추가
 
