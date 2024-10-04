@@ -45,19 +45,17 @@ export default function Profile({ role }: ProfileProps) {
           <VStack align="flex-start" spacing={0}>
             <HStack spacing={2} alignItems="center">
               <Text fontSize="xl">{GroupProfileDummyData.name}</Text>
-              {role === 'leader' && (
-                <Text
-                  fontSize="xs"
-                  padding="3px 6px"
-                  borderRadius="8px"
-                  border="1px solid"
-                  borderColor="primary"
-                  fontWeight="bold"
-                  color="primary"
-                >
-                  그룹장
-                </Text>
-              )}
+              <Text
+                fontSize="xs"
+                padding="3px 6px"
+                borderRadius="8px"
+                border="1px solid"
+                borderColor="primary"
+                fontWeight="bold"
+                color="primary"
+              >
+                {role === 'leader' ? '그룹장' : '그룹원'}
+              </Text>
             </HStack>
 
             <HStack spacing={2} alignItems="center">
