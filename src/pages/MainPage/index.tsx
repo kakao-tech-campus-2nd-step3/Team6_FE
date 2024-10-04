@@ -1,8 +1,8 @@
-import { Box, SimpleGrid } from '@chakra-ui/react'
+import { Box } from '@chakra-ui/react'
 
-import Buttons from './etcButtons'
-import ProfileButton from './profileButton'
-import Question from './question'
+import ProfileGrid from './ProfileGrid'
+import Question from './Question'
+import Buttons from './SkipReloadButton'
 
 const MainPage = () => {
   const all = [
@@ -24,25 +24,8 @@ const MainPage = () => {
     >
       <Question questionText={questionText} />
 
-      {/* 첫 번째 줄 프로필 3개 */}
-      <SimpleGrid columns={3} spacing={16} mb={20}>
-        {all.slice(0, 3).map((profile) => (
-          <ProfileButton
-            profile={{ name: profile.userName, img: profile.imageUrl }}
-            key={profile.userId}
-          />
-        ))}
-      </SimpleGrid>
-
-      {/* 두 번째 줄 프로필 2개 */}
-      <SimpleGrid columns={2} mb={16}>
-        {all.slice(3, 5).map((profile) => (
-          <ProfileButton
-            profile={{ name: profile.userName, img: profile.imageUrl }}
-            key={profile.userId}
-          />
-        ))}
-      </SimpleGrid>
+      <ProfileGrid profiles={all.slice(0, 3)} />
+      <ProfileGrid profiles={all.slice(3, 5)} />
 
       <Buttons />
     </Box>

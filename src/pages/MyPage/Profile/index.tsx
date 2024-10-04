@@ -68,7 +68,7 @@ export default function Profile() {
             borderRadius="20px"
             minHeight="5px"
             height="auto"
-            _hover={{ bg: '#ea780c', boxShadow: 'md' }}
+            _hover={{ bg: 'orange.600', boxShadow: 'md' }}
           >
             <Text
               width="13px"

@@ -1,7 +1,6 @@
 import { IconType } from 'react-icons'
 
 import { Box, Button, HStack, Text, VStack, useTheme } from '@chakra-ui/react'
-
 import { css } from '@emotion/react'
 
 type CardButtonProps = {
@@ -32,14 +31,14 @@ const CardButton = ({ buttonElement }: { buttonElement: CardButtonProps }) => {
     textAlign: orientation === 'vertical' ? 'left' : 'center',
     position: 'relative',
     backgroundColor:
-      variant === 'orange' ? theme.colors.orange[400] : theme.colors.white,
+      variant === 'orange' ? theme.colors.orange[200] : theme.colors.white,
     color: 'black',
     border:
-      variant === 'white' ? `2px solid ${theme.colors.black[300]}` : 'none',
+      variant === 'white' ? `2px solid ${theme.colors.black[100]}` : 'none',
     '&:hover': {
       backgroundColor:
         variant === 'orange'
-          ? theme.colors.orange[500]
+          ? theme.colors.orange[300]
           : theme.colors.black[100],
     },
   })
@@ -56,7 +55,7 @@ const CardButton = ({ buttonElement }: { buttonElement: CardButtonProps }) => {
         >
           <Box
             as={Icon}
-            color="orange.600"
+            color="orange.400"
             backgroundColor="orange.50"
             borderRadius="8px"
             padding="4px"
@@ -68,7 +67,17 @@ const CardButton = ({ buttonElement }: { buttonElement: CardButtonProps }) => {
           <Text fontSize="16px" fontWeight="bold" color="text">
             {label}
           </Text>
-          <Text fontSize="10px" fontWeight="medium" color="text_detail">
+          <Text
+            fontSize="10px"
+            fontWeight="medium"
+            color="text_description"
+            sx={{
+              maxWidth: '60px',
+              overflowWrap: 'break-word',
+              whiteSpace: 'normal',
+              lineHeight: '1.5',
+            }}
+          >
             {description}
           </Text>
         </VStack>
@@ -76,7 +85,7 @@ const CardButton = ({ buttonElement }: { buttonElement: CardButtonProps }) => {
         <HStack spacing={3} justify="center" align="center" h="full">
           <Box
             as={Icon}
-            color="orange.600"
+            color="orange.400"
             backgroundColor="orange.50"
             borderRadius="8px"
             padding="4px"
@@ -85,7 +94,7 @@ const CardButton = ({ buttonElement }: { buttonElement: CardButtonProps }) => {
           <Text fontSize="16px" fontWeight="bold" color="text">
             {label}
           </Text>
-          <Text fontSize="10px" fontWeight="medium" color="text_detail">
+          <Text fontSize="10px" fontWeight="medium" color="text_description">
             {description}
           </Text>
         </HStack>
