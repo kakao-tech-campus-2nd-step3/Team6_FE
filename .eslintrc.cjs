@@ -31,6 +31,12 @@ module.exports = {
   },
   plugins: ['react', '@typescript-eslint', 'prettier'],
   rules: {
+    'prettier/prettier': [
+      'error',
+      {
+        endOfLine: 'auto',
+      },
+    ],
     'react/react-in-jsx-scope': 'off',
     'react/function-component-definition': [
       2,
@@ -38,5 +44,21 @@ module.exports = {
     ],
     'import/prefer-default-export': 'off',
     'react/require-default-props': 'off',
+    'import/extensions': [
+      'error',
+      'ignorePackages',
+      {
+        '': 'never',
+        js: 'never',
+        jsx: 'never',
+        ts: 'never',
+        tsx: 'never',
+      },
+    ],
+    'no-use-before-define': 'off',
+    '@typescript-eslint/no-use-before-define': [
+      'error',
+      { variables: false, functions: false, classes: false },
+    ],
   },
 }

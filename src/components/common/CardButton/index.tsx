@@ -1,116 +1,102 @@
 import { IconType } from 'react-icons'
 
-import { Button, ButtonProps, HStack, Text, VStack } from '@chakra-ui/react'
+import { Box, Button, HStack, Text, VStack, useTheme } from '@chakra-ui/react'
+import { css } from '@emotion/react'
 
 type CardButtonProps = {
+  variant: 'orange' | 'white'
   orientation: 'vertical' | 'horizontal'
   label: string
   description: string
   Icon: IconType
-} & ButtonProps
-
-// 스타일 분리
-const orientationStyles = {
-  vertical: {
-    container: {
-      height: '200px',
-      width: '190px',
-      flexDirection: 'column' as const,
-      justifyContent: 'flex-start',
-      alignItems: 'flex-start',
-    },
-    icon: {
-      position: 'absolute' as const,
-      color: 'orange.600',
-      top: '20px',
-      left: '10px',
-      fontSize: '40px',
-      backgroundColor: 'orange.50',
-      borderRadius: '8px',
-      padding: '6px',
-    },
-    labelStyle: {
-      fontSize: '20px',
-      fontWeight: 'bold',
-    },
-    descriptionStyle: {
-      fontSize: '14px',
-      fontWeight: 'light',
-    },
-    textAlign: 'left',
-  },
-  horizontal: {
-    container: {
-      height: '60px',
-      width: '400px',
-      flexDirection: 'row' as const,
-      justifyContent: 'space-between',
-      alignItems: 'center',
-    },
-    icon: {
-      color: 'primary.500',
-      backgroundColor: 'primary.50',
-      borderRadius: '8px',
-      padding: '4px',
-      fontSize: '30px',
-    },
-    labelStyle: {
-      fontSize: '20px',
-      fontWeight: 'bold',
-    },
-    descriptionStyle: {
-      fontSize: '14px',
-      fontWeight: 'light',
-    },
-    textAlign: 'center',
-  },
 }
 
-const CardButton: React.FC<CardButtonProps> = ({
-  orientation,
-  label,
-  description,
-  Icon,
-  ...props
-}) => {
-  const borderRadius = orientation === 'vertical' ? '20px' : '8px' // 가로, 세로 버튼에 따라 다른 borderRadius 설정
+const CardButton = ({ buttonElement }: { buttonElement: CardButtonProps }) => {
+  const { variant, orientation, label, description, Icon } = buttonElement
+  const theme = useTheme()
+  const borderRadius = orientation === 'vertical' ? '20px' : '8px'
 
-  const commonStyles: ButtonProps = {
+  const commonStyles = css({
     borderRadius,
+    height: orientation === 'vertical' ? '145px' : '60px',
+    width: orientation === 'vertical' ? '148px' : '300px',
+    fontSize: '16px',
+    fontWeight: 'bold',
     display: 'flex',
-    boxShadow: 'md',
+    justifyContent: orientation === 'vertical' ? 'flex-start' : 'space-between',
+    alignItems: orientation === 'vertical' ? 'flex-start' : 'center',
     padding: '10px',
+    boxShadow: 'md',
+    flexDirection: orientation === 'vertical' ? 'column' : 'row',
+    textAlign: orientation === 'vertical' ? 'left' : 'center',
     position: 'relative',
-  }
-
-  const styles = orientationStyles[orientation]
+    backgroundColor:
+      variant === 'orange' ? theme.colors.orange[200] : theme.colors.white,
+    color: 'black',
+    border:
+      variant === 'white' ? `2px solid ${theme.colors.black[100]}` : 'none',
+    '&:hover': {
+      backgroundColor:
+        variant === 'orange'
+          ? theme.colors.orange[300]
+          : theme.colors.black[100],
+    },
+  })
 
   return (
-    <Button {...commonStyles} {...styles.container} {...props}>
+    <Button css={commonStyles}>
       {orientation === 'vertical' ? (
         <VStack
           spacing={2}
           align="flex-start"
           justify="flex-end"
           h="full"
-          paddingBottom="20px"
-          sx={{ textAlign: styles.textAlign }}
+          paddingBottom="10px"
         >
-          <Icon style={styles.icon} />
-          <Text {...styles.labelStyle}>{label}</Text>
-          <Text {...styles.descriptionStyle}>{description}</Text>
+          <Box
+            as={Icon}
+            color="orange.400"
+            backgroundColor="orange.50"
+            borderRadius="8px"
+            padding="4px"
+            fontSize="30px"
+            position="absolute"
+            top="20px"
+            left="10px"
+          />
+          <Text fontSize="16px" fontWeight="bold" color="text">
+            {label}
+          </Text>
+          <Text
+            fontSize="10px"
+            fontWeight="medium"
+            color="text_description"
+            sx={{
+              maxWidth: '60px',
+              overflowWrap: 'break-word',
+              whiteSpace: 'normal',
+              lineHeight: '1.5',
+            }}
+          >
+            {description}
+          </Text>
         </VStack>
       ) : (
-        <HStack
-          spacing={3}
-          justify="center"
-          align="center"
-          h="full"
-          sx={{ textAlign: styles.textAlign }}
-        >
-          <Icon style={styles.icon} />
-          <Text {...styles.labelStyle}>{label}</Text>
-          <Text {...styles.descriptionStyle}>{description}</Text>
+        <HStack spacing={3} justify="center" align="center" h="full">
+          <Box
+            as={Icon}
+            color="orange.400"
+            backgroundColor="orange.50"
+            borderRadius="8px"
+            padding="4px"
+            fontSize="30px"
+          />
+          <Text fontSize="16px" fontWeight="bold" color="text">
+            {label}
+          </Text>
+          <Text fontSize="10px" fontWeight="medium" color="text_description">
+            {description}
+          </Text>
         </HStack>
       )}
     </Button>

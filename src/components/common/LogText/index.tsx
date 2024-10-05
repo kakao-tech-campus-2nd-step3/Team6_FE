@@ -2,7 +2,7 @@ import { Flex, Tag, Text } from '@chakra-ui/react'
 
 import { HintIcon } from './HintIcon'
 
-type LogTextProps = {
+interface LogTextProps {
   groupName?: 'ALL' | string
   logContent: string
   hintCount: 0 | 1 | 2 | 3

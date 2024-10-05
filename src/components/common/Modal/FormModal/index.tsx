@@ -12,7 +12,7 @@ import {
   Text,
 } from '@chakra-ui/react'
 
-type FormModalProps = {
+interface FormModalProps {
   isOpen: boolean
   onClose: () => void
   icon: ReactElement
@@ -54,7 +54,7 @@ export const FormModal = ({
             fontWeight="medium"
             paddingTop="0.3rem"
             marginLeft="0.5rem"
-            color="text_detail"
+            color="text_description"
           >
             {description}
           </Text>
