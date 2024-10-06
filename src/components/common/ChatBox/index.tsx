@@ -1,16 +1,10 @@
 import { Box, Flex } from '@chakra-ui/react'
 
-interface ChatProps {
-  chatItem: {
-    direction: 'left' | 'right'
-    content: string
-    createdAt?: string
-  }
-}
+import { ChatBoxProps } from '@/types'
 
 export const ChatBox = ({
   chatItem: { direction, content, createdAt },
-}: ChatProps) => {
+}: ChatBoxProps) => {
   const isRight = direction === 'right'
 
   return (
