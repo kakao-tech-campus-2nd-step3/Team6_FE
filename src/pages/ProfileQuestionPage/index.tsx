@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 import { Box, Button, Flex } from '@chakra-ui/react'
 
 import { ChatItem } from '@/types'
@@ -22,14 +24,16 @@ export default function ProfileQuestionPage() {
         borderTopRightRadius="20px"
       >
         <Flex justifyContent="end" padding="10px">
-          <Button
-            bg="none"
-            _hover={{ background: 'none' }}
-            fontSize="large"
-            padding="0"
-          >
-            ×
-          </Button>
+          <Link to="/mypage">
+            <Button
+              bg="none"
+              _hover={{ background: 'none' }}
+              fontSize="large"
+              padding="0"
+            >
+              ×
+            </Button>
+          </Link>
         </Flex>
         <Question dummyData={dummyData1} />
       </Box>
