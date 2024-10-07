@@ -6,6 +6,7 @@ import MainPage from '@/pages/MainPage'
 import MyPage from '@/pages/MyPage'
 import ProfileQuestionPage from '@/pages/ProfileQuestionPage'
 import TestLoginPage from '@/pages/TestLoginPage'
+import TestLoginRedirectPage from '@/pages/TestLoginRedirectPage'
 
 const router = createBrowserRouter([
   {
@@ -21,8 +22,12 @@ const router = createBrowserRouter([
         element: <MyPage />,
       },
       {
-        path: '/test-login',
+        path: '/test/login',
         element: <TestLoginPage />,
+      },
+      {
+        path: '/test/login/redirect',
+        element: <TestLoginRedirectPage />,
       },
     ],
   },

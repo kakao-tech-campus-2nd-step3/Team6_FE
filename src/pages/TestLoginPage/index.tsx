@@ -1,10 +1,12 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
-import { Flex, Heading, Image, Text } from '@chakra-ui/react'
+import { Button, Flex, Heading, Image, Text } from '@chakra-ui/react'
 
 import KakaoSymbol from '@/assets/kakao-logo-symbol.svg'
 
 export default function TestLoginPage() {
+  const navigate = useNavigate()
+
   return (
     <Flex
       flexDirection="column"
@@ -39,6 +41,9 @@ export default function TestLoginPage() {
             </Text>
           </Flex>
         </Link>
+        <Button marginTop={3} onClick={() => navigate('/test/login/redirect')}>
+          access token 세팅하기
+        </Button>
       </Flex>
     </Flex>
   )
