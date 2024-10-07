@@ -1,8 +1,10 @@
+import { Link } from 'react-router-dom'
+
 import { Flex, Heading, Image, Text } from '@chakra-ui/react'
 
 import KakaoSymbol from '@/assets/kakao-logo-symbol.svg'
 
-export default function LoginPage() {
+export default function TestLoginPage() {
   return (
     <Flex
       flexDirection="column"
@@ -21,20 +23,22 @@ export default function LoginPage() {
         <Text fontSize="small" color="text_secondary" paddingBottom={6}>
           후키에서는 친구들에게 긍정적인 투표를 할 수 있어요
         </Text>
-        <Flex
-          background="kakao"
-          rounded="6px"
-          justifyContent="center"
-          alignItems="center"
-          height={10}
-          gap={3}
-          _hover={{ cursor: 'pointer' }}
-        >
-          <Image src={KakaoSymbol} width={5} />
-          <Text fontSize="14px" fontWeight="bold" color="rgba(0, 0, 0, 0.85)">
-            카카오 로그인
-          </Text>
-        </Flex>
+        <Link to={`${import.meta.env.VITE_BASE_URL}/api/user/login`}>
+          <Flex
+            background="kakao"
+            rounded="6px"
+            justifyContent="center"
+            alignItems="center"
+            height={10}
+            gap={3}
+            _hover={{ cursor: 'pointer' }}
+          >
+            <Image src={KakaoSymbol} width={5} />
+            <Text fontSize="14px" fontWeight="bold" color="rgba(0, 0, 0, 0.85)">
+              카카오 테스트 로그인
+            </Text>
+          </Flex>
+        </Link>
       </Flex>
     </Flex>
   )
