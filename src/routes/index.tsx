@@ -8,6 +8,8 @@ import ProfileQuestionPage from '@/pages/ProfileQuestionPage'
 import TestLoginPage from '@/pages/TestLoginPage'
 import TestLoginRedirectPage from '@/pages/TestLoginRedirectPage'
 
+import { ProtectedRoute } from './ProtectedRoute'
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -18,8 +20,14 @@ const router = createBrowserRouter([
         element: <MainPage />,
       },
       {
-        path: '/mypage',
-        element: <MyPage />,
+        path: '/',
+        element: <ProtectedRoute />,
+        children: [
+          {
+            path: '/mypage',
+            element: <MyPage />,
+          },
+        ],
       },
       {
         path: '/test/login',
