@@ -2,11 +2,11 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 
 import { MainLayout } from '@/components/features/Layout/MainLayout'
 import { ProfileQuestionLayout } from '@/components/features/Layout/ProfileQuestionLayout'
+import LoginPage from '@/pages/LoginPage'
+import LoginRedirectPage from '@/pages/LoginRedirectPage'
 import MainPage from '@/pages/MainPage'
 import MyPage from '@/pages/MyPage'
 import ProfileQuestionPage from '@/pages/ProfileQuestionPage'
-import TestLoginPage from '@/pages/TestLoginPage'
-import TestLoginRedirectPage from '@/pages/TestLoginRedirectPage'
 
 import { ProtectedRoute } from './ProtectedRoute'
 
@@ -30,12 +30,12 @@ const router = createBrowserRouter([
         ],
       },
       {
-        path: '/test/login',
-        element: <TestLoginPage />,
+        path: '/login',
+        element: <LoginPage />,
       },
       {
-        path: '/test/login/redirect',
-        element: <TestLoginRedirectPage />,
+        path: '/login/redirect',
+        element: <LoginRedirectPage />,
       },
     ],
   },
