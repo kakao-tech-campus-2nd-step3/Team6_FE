@@ -1,4 +1,4 @@
-import { BiWinkTongue } from 'react-icons/bi'
+import { BiCookie } from 'react-icons/bi'
 
 import { Text } from '@chakra-ui/react'
 
@@ -11,7 +11,7 @@ export const QuestionSection = () => {
     <PageLayout.SideSection
       SectionHeader={
         <PageLayout.SideSection.SectionHeader
-          Icon={BiWinkTongue}
+          Icon={BiCookie}
           title="프로필 질문"
         />
       }
