@@ -28,7 +28,18 @@ export const ActiveBrownBox = ({
       borderRightStyle="solid"
       onClick={onClick}
     >
-      {children}
+      <Box
+        display="-webkit-box"
+        overflow="hidden"
+        textOverflow="ellipsis"
+        whiteSpace="normal"
+        sx={{
+          WebkitLineClamp: 2,
+          WebkitBoxOrient: 'vertical',
+        }}
+      >
+        {children}
+      </Box>
     </Box>
   )
 }
