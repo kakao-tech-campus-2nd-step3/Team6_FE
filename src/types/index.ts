@@ -23,3 +23,9 @@ export interface ChatItem {
 export interface ChatBoxProps {
   chatItem: ChatItem
 }
+
+export interface QuestionItem {
+  profileQuestionId: number
+  profileQuestionContent: string
+  createdAt: string
+}
