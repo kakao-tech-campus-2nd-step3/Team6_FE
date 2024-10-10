@@ -12,6 +12,18 @@ const loadingAnimation = keyframes`
 `
 
 export const Loading = () => {
+  const dots = ['dot1', 'dot2', 'dot3'].map((dotKey, index) => (
+    <Box
+      key={dotKey}
+      as="span"
+      width="10px"
+      height="10px"
+      borderRadius="50%"
+      bg="primary"
+      animation={`${loadingAnimation} 1.5s infinite ease-in-out ${index * 0.5}s`}
+    />
+  ))
+
   return (
     <Box
       display="flex"
@@ -23,30 +35,7 @@ export const Loading = () => {
       left="50%"
       transform="translate(-50%, -50%)"
     >
-      <Box
-        as="span"
-        width="10px"
-        height="10px"
-        borderRadius="50%"
-        bg="primary"
-        animation={`${loadingAnimation} 1.5s infinite ease-in-out`}
-      />
-      <Box
-        as="span"
-        width="10px"
-        height="10px"
-        borderRadius="50%"
-        bg="primary"
-        animation={`${loadingAnimation} 1.5s infinite ease-in-out 0.5s`}
-      />
-      <Box
-        as="span"
-        width="10px"
-        height="10px"
-        borderRadius="50%"
-        bg="primary"
-        animation={`${loadingAnimation} 1.5s infinite ease-in-out 1s`}
-      />
+      {dots}
     </Box>
   )
 }
