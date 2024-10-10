@@ -1,3 +1,4 @@
+import { BiX } from 'react-icons/bi'
 import { Link } from 'react-router-dom'
 
 import { Box, Button, Flex } from '@chakra-ui/react'
@@ -31,7 +32,7 @@ export default function ProfileQuestionPage() {
               fontSize="large"
               padding="0"
             >
-              ×
+              <BiX />
             </Button>
           </Link>
         </Flex>
