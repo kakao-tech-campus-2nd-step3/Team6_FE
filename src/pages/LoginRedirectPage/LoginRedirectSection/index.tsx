@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { useKakaoLogin } from '@/api/services/login'
+import { Loading } from '@/components/common/Loading'
 import { useAuthTokenStore } from '@/stores/auth-token'
 
 interface LoginRedirectSectionProps {
@@ -21,9 +22,9 @@ export const LoginRedirectSection = ({ code }: LoginRedirectSectionProps) => {
     }
   }, [data, setAuthToken, navigate])
 
-  if (status === 'pending') return <div>loading...</div>
+  if (status === 'pending') return <Loading />
 
   if (error) return <div>{error.message}</div>
 
-  return <div>loading...</div>
+  return <Loading />
 }
