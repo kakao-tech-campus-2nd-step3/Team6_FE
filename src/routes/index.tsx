@@ -2,6 +2,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 
 import { MainLayout } from '@/components/features/Layout/MainLayout'
 import { ProfileQuestionLayout } from '@/components/features/Layout/ProfileQuestionLayout'
+import ErrorPage from '@/pages/ErrorPage'
 import GroupPage from '@/pages/GroupPage'
 import LoginPage from '@/pages/LoginPage'
 import LoginRedirectPage from '@/pages/LoginRedirectPage'
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
     path: '/',
     element: <ProfileQuestionLayout />,
     children: [{ path: '/profile-question', element: <ProfileQuestionPage /> }],
+  },
+  {
+    path: '*',
+    element: <ErrorPage />,
   },
 ])
 
