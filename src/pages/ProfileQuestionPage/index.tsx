@@ -18,7 +18,7 @@ export default function ProfileQuestionPage() {
       justifyContent="space-between"
     >
       <Box
-        bg="brown.300"
+        bg="brown.200"
         zIndex="1000"
         width="784px"
         borderTopRightRadius="20px"

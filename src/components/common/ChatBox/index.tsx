@@ -17,7 +17,7 @@ export const ChatBox = ({
       <Flex
         height="15px"
         width="20px"
-        bg={isRight ? 'orange.600' : 'white'}
+        bg={isRight ? 'orange.300' : 'white'}
         clipPath={
           isRight
             ? 'polygon(0 0, 0 100%, 100% 50%)'
@@ -32,7 +32,7 @@ export const ChatBox = ({
       <Flex
         minHeight="30px"
         width="260px"
-        bg={isRight ? 'orange.600' : 'white'}
+        bg={isRight ? 'orange.300' : 'white'}
         borderRadius="20px"
         margin={isRight ? '0 30px 0 5px' : '0 5px 0 30px'}
         padding="4px 15px"
