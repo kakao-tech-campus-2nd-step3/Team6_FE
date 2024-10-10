@@ -1,6 +1,8 @@
 import { QueryClient } from '@tanstack/react-query'
 import axios, { AxiosRequestConfig } from 'axios'
 
+import { useAuthTokenStore } from '@/stores/auth-token'
+
 const BASE_URL = import.meta.env.VITE_BASE_URL
 
 const initInstance = (config: AxiosRequestConfig) => {
@@ -23,6 +25,21 @@ export const authorizationInstance = initInstance({
   baseURL: BASE_URL,
   withCredentials: true,
 })
+
+authorizationInstance.interceptors.request.use(
+  (request) => {
+    const authToken = useAuthTokenStore((state) => state.authToken)
+
+    if (authToken) {
+      request.headers.Authorization = `Bearer ${authToken}`
+    }
+
+    return request
+  },
+  (error) => {
+    return Promise.reject(error)
+  }
+)
 
 export const queryClient = new QueryClient({
   defaultOptions: {

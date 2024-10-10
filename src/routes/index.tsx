@@ -4,9 +4,13 @@ import { MainLayout } from '@/components/features/Layout/MainLayout'
 import { ProfileQuestionLayout } from '@/components/features/Layout/ProfileQuestionLayout'
 import ErrorPage from '@/pages/ErrorPage'
 import GroupPage from '@/pages/GroupPage'
+import LoginPage from '@/pages/LoginPage'
+import LoginRedirectPage from '@/pages/LoginRedirectPage'
 import MainPage from '@/pages/MainPage'
 import MyPage from '@/pages/MyPage'
 import ProfileQuestionPage from '@/pages/ProfileQuestionPage'
+
+import { ProtectedRoute } from './ProtectedRoute'
 
 const router = createBrowserRouter([
   {
@@ -18,8 +22,22 @@ const router = createBrowserRouter([
         element: <MainPage />,
       },
       {
-        path: '/mypage',
-        element: <MyPage />,
+        path: '/',
+        element: <ProtectedRoute />,
+        children: [
+          {
+            path: '/mypage',
+            element: <MyPage />,
+          },
+        ],
+      },
+      {
+        path: '/login',
+        element: <LoginPage />,
+      },
+      {
+        path: '/login/redirect',
+        element: <LoginRedirectPage />,
       },
       {
         path: '/grouppage',

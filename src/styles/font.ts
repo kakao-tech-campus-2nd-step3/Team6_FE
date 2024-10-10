@@ -6,6 +6,7 @@ const fontWeights = {
 
 const fonts = {
   body: "'IBM Plex Sans KR'",
+  heading: "'IBM Plex Sans KR'",
   question: "'IBM Plex Sans KR'",
   chating: "'IBM Plex Sans KR'",
 }
