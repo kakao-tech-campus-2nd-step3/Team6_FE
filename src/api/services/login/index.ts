@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 
 import { fetchInstance } from '@/api/instance'
+import { API_ERROR_MESSAGES } from '@/constants/errorMessage'
 
 type KakaoLoginParam = {
   code: string
@@ -14,7 +15,7 @@ const kakaoLogin = async ({ code }: KakaoLoginParam) => {
 
     return { accessToken }
   } catch (error) {
-    throw new Error('gg')
+    throw new Error(API_ERROR_MESSAGES.UNKNOWN_ERROR)
   }
 }
 
