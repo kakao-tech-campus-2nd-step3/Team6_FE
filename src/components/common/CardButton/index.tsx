@@ -3,7 +3,7 @@ import { IconType } from 'react-icons'
 import { Box, Button, HStack, Text, VStack, useTheme } from '@chakra-ui/react'
 import { css } from '@emotion/react'
 
-type CardButtonProps = {
+export type CardButtonProps = {
   variant: 'orange' | 'white'
   orientation: 'vertical' | 'horizontal'
   label: string
