@@ -9,8 +9,16 @@ export default function WriteReply() {
       padding="0 5px"
       flexDirection="column"
       justifyContent="space-evenly"
+      borderLeft="0.5px solid"
+      borderLeftColor="brown.400"
     >
-      <Textarea width="100%" height="auto" variant="unstyled" padding="0" />
+      <Textarea
+        width="100%"
+        height="auto"
+        variant="unstyled"
+        padding="0"
+        placeholder="메시지 입력"
+      />
       <Flex justifyContent="end" height="29px" margin="4px 0">
         <Button
           marginRight="15px"
