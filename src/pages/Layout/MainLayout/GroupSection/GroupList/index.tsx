@@ -3,7 +3,7 @@ import { BiQuestionMark } from 'react-icons/bi'
 import { Center, Flex, HStack, Text } from '@chakra-ui/react'
 
 import { ActiveBrownBox } from '@/components/common/ActiveBrownBox'
-import { AvatarLabelWithNavigate } from '@/components/features/Layout/MainLayout/AvatarLabel'
+import { AvatarLabelWithNavigate } from '@/components/common/AvatarLabel'
 import { useSeletedGroupStore } from '@/stores/selected-group'
 import { Group } from '@/types'
 
@@ -60,6 +60,7 @@ export const GroupList = ({ groups }: GroupListProps) => {
             onClick={() => setSeletedGroup(group.groupdId)}
           >
             <AvatarLabelWithNavigate
+              isNavigate
               avatarSrc={group.groupdImageUrl}
               label={group.groupName}
               tooltipLabel={`${group.groupName} 페이지`}
