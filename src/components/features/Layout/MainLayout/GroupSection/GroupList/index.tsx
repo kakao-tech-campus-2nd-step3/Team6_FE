@@ -2,7 +2,7 @@ import { BiQuestionMark } from 'react-icons/bi'
 
 import { Center, Flex, HStack, Text } from '@chakra-ui/react'
 
-import { ActiveBrownBox } from '@/components/features/Layout/ActiveBrownBox'
+import { ActiveBrownBox } from '@/components/common/ActiveBrownBox'
 import { AvatarLabelWithNavigate } from '@/components/features/Layout/MainLayout/AvatarLabel'
 import { useSeletedGroupStore } from '@/stores/selected-group'
 import { Group } from '@/types'
