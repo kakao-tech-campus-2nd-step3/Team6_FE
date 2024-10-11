@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 
 import { fetchInstance } from '@/api/instance'
-import { API_ERROR_MESSAGES } from '@/constants/errorMessage'
+import { API_ERROR_MESSAGES } from '@/constants/error-message'
 
 type KakaoLoginParam = {
   code: string
