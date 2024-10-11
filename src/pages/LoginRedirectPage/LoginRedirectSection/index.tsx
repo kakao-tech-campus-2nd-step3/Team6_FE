@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { useKakaoLogin } from '@/api/services/login'
-import { Loading } from '@/components/common/Loading'
+import { Loading } from '@/components/Loading'
 import { useAuthTokenStore } from '@/stores/auth-token'
 
 interface LoginRedirectSectionProps {

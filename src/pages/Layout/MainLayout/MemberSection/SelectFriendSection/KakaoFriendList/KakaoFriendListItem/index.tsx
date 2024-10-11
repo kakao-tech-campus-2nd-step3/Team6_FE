@@ -2,7 +2,7 @@ import { BiCircle, BiSolidCheckCircle } from 'react-icons/bi'
 
 import { Box, Flex } from '@chakra-ui/react'
 
-import { AvatarLabelWithNavigate } from '@/components/common/AvatarLabel'
+import { AvatarLabelWithNavigate } from '@/components/AvatarLabel'
 import { Friend } from '@/types'
 
 interface KakaoFriendListItemProps {

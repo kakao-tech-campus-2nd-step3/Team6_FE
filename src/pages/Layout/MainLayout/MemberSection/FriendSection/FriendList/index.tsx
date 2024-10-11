@@ -1,6 +1,6 @@
 import { Box, Flex, Text } from '@chakra-ui/react'
 
-import { AvatarLabelWithNavigate } from '@/components/common/AvatarLabel'
+import { AvatarLabelWithNavigate } from '@/components/AvatarLabel'
 import { Friend } from '@/types'
 
 interface FriendListProps {

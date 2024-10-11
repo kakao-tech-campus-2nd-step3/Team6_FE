@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 
 import { Flex } from '@chakra-ui/react'
 
-import { ActiveBrownBox } from '@/components/common/ActiveBrownBox'
+import { ActiveBrownBox } from '@/components/ActiveBrownBox'
 import { useSeletedQuestionStore } from '@/stores/selected-question'
 import { QuestionItem } from '@/types'
 
