@@ -1,11 +1,16 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 
-import { MainLayout } from '@/components/features/Layout/MainLayout'
-import { ProfileQuestionLayout } from '@/components/features/Layout/ProfileQuestionLayout'
+import ErrorPage from '@/pages/ErrorPage'
 import GroupPage from '@/pages/GroupPage'
+import { MainLayout } from '@/pages/Layout/MainLayout'
+import { ProfileQuestionLayout } from '@/pages/Layout/ProfileQuestionLayout'
+import LoginPage from '@/pages/LoginPage'
+import LoginRedirectPage from '@/pages/LoginRedirectPage'
 import MainPage from '@/pages/MainPage'
 import MyPage from '@/pages/MyPage'
 import ProfileQuestionPage from '@/pages/ProfileQuestionPage'
+
+import { ProtectedRoute } from './ProtectedRoute'
 
 const router = createBrowserRouter([
   {
@@ -14,15 +19,29 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <MainPage />,
+        element: <ProtectedRoute />,
+        children: [
+          {
+            path: '/',
+            element: <MainPage />,
+          },
+          {
+            path: '/mypage',
+            element: <MyPage />,
+          },
+          {
+            path: '/grouppage',
+            element: <GroupPage />,
+          },
+        ],
       },
       {
-        path: '/mypage',
-        element: <MyPage />,
+        path: '/login',
+        element: <LoginPage />,
       },
       {
-        path: '/grouppage',
-        element: <GroupPage />,
+        path: '/login/redirect',
+        element: <LoginRedirectPage />,
       },
     ],
   },
@@ -30,6 +49,10 @@ const router = createBrowserRouter([
     path: '/',
     element: <ProfileQuestionLayout />,
     children: [{ path: '/profile-question', element: <ProfileQuestionPage /> }],
+  },
+  {
+    path: '*',
+    element: <ErrorPage />,
   },
 ])
 

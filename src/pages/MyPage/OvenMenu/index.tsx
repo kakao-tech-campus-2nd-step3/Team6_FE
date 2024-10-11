@@ -1,9 +1,10 @@
 import { IconType } from 'react-icons'
 import { BiListUl, BiSolidMessageRounded } from 'react-icons/bi'
+import { Link } from 'react-router-dom'
 
 import { Box, Flex, Text } from '@chakra-ui/react'
 
-import CardButton from '@/components/common/CardButton'
+import CardButton from '@/components/CardButton'
 
 const CardData1 = {
   variant: 'orange' as const,
@@ -38,7 +39,9 @@ export default function OvenMenu() {
         </Text>
       </Box>
       <Flex gap={4}>
-        <CardButton buttonElement={CardData1} />
+        <Link to="/profile-question">
+          <CardButton buttonElement={CardData1} />
+        </Link>
         <CardButton buttonElement={CardData2} />
       </Flex>
     </Box>
