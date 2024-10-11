@@ -1,22 +1,43 @@
-import { BiWinkTongue } from 'react-icons/bi'
+import { BiCookie } from 'react-icons/bi'
 
 import { Text } from '@chakra-ui/react'
 
 import { PageLayout } from '@/components/common/PageLayout'
+
+import { QuestionList } from '../QuestionList'
 
 export const QuestionSection = () => {
   return (
     <PageLayout.SideSection
       SectionHeader={
         <PageLayout.SideSection.SectionHeader
-          Icon={BiWinkTongue}
+          Icon={BiCookie}
           title="프로필 질문"
         />
       }
     >
       <Text fontSize="small">
-        여기에 질문 리스트 컴포넌트 넣으면 됩니다. 위에 아이콘도 수정하셔요~
+        <QuestionList questions={mockGroupList} />
       </Text>
     </PageLayout.SideSection>
   )
 }
+
+const mockGroupList = [
+  {
+    profileQuestionId: 1,
+    profileQuestionContent: '내 MBTI는?',
+    createdAt: '2024-10-1',
+  },
+  {
+    profileQuestionId: 2,
+    profileQuestionContent:
+      '내 키는? 가나다라마바사아자차카타파하 가나다라마바사 아자 차카 타파하',
+    createdAt: '2024-10-1',
+  },
+  {
+    profileQuestionId: 3,
+    profileQuestionContent: '내 혈액형은?',
+    createdAt: '2024-10-1',
+  },
+]
