@@ -19,15 +19,19 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <MainPage />,
-      },
-      {
-        path: '/',
         element: <ProtectedRoute />,
         children: [
           {
+            path: '/',
+            element: <MainPage />,
+          },
+          {
             path: '/mypage',
             element: <MyPage />,
+          },
+          {
+            path: '/grouppage',
+            element: <GroupPage />,
           },
         ],
       },
@@ -38,10 +42,6 @@ const router = createBrowserRouter([
       {
         path: '/login/redirect',
         element: <LoginRedirectPage />,
-      },
-      {
-        path: '/grouppage',
-        element: <GroupPage />,
       },
     ],
   },

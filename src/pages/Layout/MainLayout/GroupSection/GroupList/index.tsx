@@ -33,8 +33,8 @@ export const GroupList = ({ groups }: GroupListProps) => {
           모든 친구에게
         </Text>
         <ActiveBrownBox
-          isActive={groupId === 'ALL'}
-          onClick={() => setSeletedGroup('ALL')}
+          isActive={!groupId}
+          onClick={() => setSeletedGroup(undefined)}
         >
           <HStack>
             <Center background="primary" width={7} height={7} rounded="full">
