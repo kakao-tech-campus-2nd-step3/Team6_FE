@@ -2,7 +2,7 @@ import { BiCog, BiGroup, BiLink, BiPlus } from 'react-icons/bi'
 
 import { Box, Flex, Text } from '@chakra-ui/react'
 
-import CardButton, { CardButtonProps } from '@/components/common/CardButton'
+import CardButton, { CardButtonProps } from '@/components/CardButton'
 
 const CardData: CardButtonProps[] = [
   {

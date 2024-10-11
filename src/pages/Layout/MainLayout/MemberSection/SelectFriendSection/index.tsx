@@ -1,4 +1,4 @@
-import { PageLayout } from '@/components/common/PageLayout'
+import { PageLayout } from '@/components/PageLayout'
 
 import { KakaoFriendList } from './KakaoFriendList'
 import { SelectFreindHeader } from './SelectFriendHeader'

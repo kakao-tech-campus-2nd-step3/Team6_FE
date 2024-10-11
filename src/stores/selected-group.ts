@@ -1,12 +1,12 @@
 import { create } from 'zustand'
 
 interface SelectedGroupProps {
-  groupId: number | 'ALL'
-  setGroupId: (groupId: number | 'ALL') => void
+  groupId?: number
+  setGroupId: (groupId?: number) => void
 }
 
 export const useSeletedGroupStore = create<SelectedGroupProps>((set) => ({
-  groupId: 'ALL',
+  groupId: undefined,
   setGroupId: (groupId) => {
     set({ groupId })
   },

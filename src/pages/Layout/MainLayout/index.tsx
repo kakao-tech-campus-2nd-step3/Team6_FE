@@ -1,4 +1,4 @@
-import { PageLayout } from '@/components/common/PageLayout/index'
+import { PageLayout } from '@/components/PageLayout/index'
 
 import { GroupSection } from './GroupSection'
 import { MemberSection } from './MemberSection'
