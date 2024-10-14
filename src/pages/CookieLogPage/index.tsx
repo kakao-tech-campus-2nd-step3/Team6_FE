@@ -1,16 +1,11 @@
-import { BiChevronLeft } from 'react-icons/bi'
-
 import {
-  Box,
   Center,
-  Divider,
   Flex,
   Tab,
   TabList,
   TabPanel,
   TabPanels,
   Tabs,
-  Text,
 } from '@chakra-ui/react'
 import { useQuery } from '@tanstack/react-query'
 
@@ -19,6 +14,7 @@ import { Loading } from '@/components/common/Loading'
 import { AnswerRecord } from '@/types'
 import { convertToDailyCookies } from '@/utils/answer/convertToDailyCookies'
 
+import { CookieLogHeader } from './CookieLogHeader'
 import { LogSection } from './LogSection'
 
 export default function CookieLogPage() {
@@ -34,15 +30,7 @@ export default function CookieLogPage() {
 
   return (
     <Flex flexDirection="column">
-      <Box height={8} display="flex" flexDirection="row" width="full">
-        <Center paddingX={2} _hover={{ cursor: 'pointer', color: 'black.700' }}>
-          <BiChevronLeft size={20} />
-        </Center>
-        <Text height="100%" lineHeight="2" fontWeight="bold">
-          쿠키 기록
-        </Text>
-      </Box>
-      <Divider borderColor="brown.200" />
+      <CookieLogHeader />
       <Tabs
         variant="soft-rounded"
         colorScheme="secondary"
