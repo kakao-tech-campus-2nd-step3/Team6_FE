@@ -1,5 +1,5 @@
 import { authorizationInstance } from '@/api/instance'
-import { API_ERROR_MESSAGES } from '@/constants/errorMessage'
+import { API_ERROR_MESSAGES } from '@/constants/error-message'
 import { AnswerRecord, Paging } from '@/types'
 
 type AnswerRecordPagingRequestParams = {

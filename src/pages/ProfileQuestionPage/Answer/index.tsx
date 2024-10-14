@@ -1,7 +1,7 @@
 // components/Answer.tsx
 import { Box } from '@chakra-ui/react'
 
-import { ChatBox } from '@/components/common/ChatBox'
+import { ChatBox } from '@/components/ChatBox'
 import { ChatItem } from '@/types'
 
 interface AnswerProps {

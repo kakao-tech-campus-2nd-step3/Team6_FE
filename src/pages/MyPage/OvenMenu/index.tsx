@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 import { Box, Flex, Text } from '@chakra-ui/react'
 
-import CardButton from '@/components/common/CardButton'
+import CardButton from '@/components/CardButton'
 
 const CardData1 = {
   variant: 'orange' as const,

@@ -2,7 +2,7 @@ import { BiHeart, BiUser } from 'react-icons/bi'
 
 import { Box } from '@chakra-ui/react'
 
-import { PageLayout } from '@/components/common/PageLayout'
+import { PageLayout } from '@/components/PageLayout'
 import { useMemberTypeStore } from '@/stores/member-type'
 
 export const FriendHeader = () => {

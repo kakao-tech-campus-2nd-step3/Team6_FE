@@ -1,6 +1,6 @@
 import { Box, Flex, Text } from '@chakra-ui/react'
 
-import { AvatarLabelWithNavigate } from '@/components/features/Layout/MainLayout/AvatarLabel'
+import { AvatarLabelWithNavigate } from '@/components/AvatarLabel'
 import { Friend } from '@/types'
 
 interface FriendListProps {
@@ -17,6 +17,7 @@ export const FriendList = ({ friends }: FriendListProps) => {
         {friends.map((friend) => (
           <Box key={friend.friendId} paddingY={1} paddingX={2} width="full">
             <AvatarLabelWithNavigate
+              isNavigate
               avatarSrc={friend.imageUrl}
               label={friend.name}
               linkTo="/"

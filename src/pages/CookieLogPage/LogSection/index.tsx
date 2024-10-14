@@ -1,7 +1,7 @@
 import { Flex, Heading } from '@chakra-ui/react'
 import { format } from 'date-fns'
 
-import { CookieLogText } from '@/components/common/CookieLogText'
+import { CookieLogText } from '@/components/CookieLogText'
 import { DailyCookie } from '@/types'
 
 interface LogSectionProps {

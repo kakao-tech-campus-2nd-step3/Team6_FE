@@ -2,7 +2,7 @@ import { BiCookie } from 'react-icons/bi'
 
 import { Text } from '@chakra-ui/react'
 
-import { PageLayout } from '@/components/common/PageLayout'
+import { PageLayout } from '@/components/PageLayout'
 
 import { QuestionList } from '../QuestionList'
 

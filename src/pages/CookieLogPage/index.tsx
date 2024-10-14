@@ -10,7 +10,7 @@ import {
 import { useQuery } from '@tanstack/react-query'
 
 import { answerQueries } from '@/api/services/answer/queries'
-import { Loading } from '@/components/common/Loading'
+import { Loading } from '@/components/Loading'
 import { AnswerRecord } from '@/types'
 import { convertToDailyCookies } from '@/utils/answer/convertToDailyCookies'
 
