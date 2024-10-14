@@ -29,3 +29,25 @@ export interface QuestionItem {
   profileQuestionContent: string
   createdAt: string
 }
+
+export type AnswerRecord = {
+  answerId: number
+  questionId: number
+  questionContent: string
+  hintCount: 0 | 1 | 2 | 3
+  createdAt: Date
+}
+
+export type Paging = {
+  totalElements: number
+  totalPages: number
+  size: number
+  page: number
+}
+
+export type DailyCookie = {
+  createdAt: Date
+  cookies: CookieLog[]
+}
+
+export type CookieLog = Omit<AnswerRecord, 'createdAt'>

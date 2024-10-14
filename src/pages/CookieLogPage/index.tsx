@@ -12,8 +12,21 @@ import {
   Tabs,
   Text,
 } from '@chakra-ui/react'
+import { useQuery } from '@tanstack/react-query'
+
+import { answerQueries } from '@/api/services/answer/queries'
+import { Loading } from '@/components/common/Loading'
 
 export default function CookieLogPage() {
+  const { data, status, error } = useQuery(
+    answerQueries.record({ page: 0, size: 10, sort: [] })
+  )
+  console.log(data) // UI 추가 전, API 연결 테스트
+
+  if (status === 'pending') return <Loading />
+
+  if (error) return <div>{error.message}</div>
+
   return (
     <Flex flexDirection="column">
       <Box height={8} display="flex" flexDirection="row" width="full">
