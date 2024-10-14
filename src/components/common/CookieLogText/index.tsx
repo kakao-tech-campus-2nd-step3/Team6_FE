@@ -16,19 +16,20 @@ export const CookieLogText = ({
   return (
     <Flex gap="0.5rem" alignItems="center">
       <Tag
-        fontSize="small"
+        fontSize="x-small"
         minWidth="fit-content"
         height="fit-content"
         borderRadius="full"
-        paddingY="0.5rem"
-        paddingX="1rem"
+        paddingY="0.3rem"
+        paddingX="0.6rem"
+        backgroundColor="brown.200"
       >
         {groupName}
       </Tag>
-      <div>
+      <Flex gap={1} fontSize="small">
         <Text as="b">{logContent}</Text>
         <Text display="inline">으로 쿠키를 받았습니다.</Text>
-      </div>
+      </Flex>
       <HintIcon hintCount={hintCount} />
     </Flex>
   )

@@ -16,12 +16,17 @@ import { useQuery } from '@tanstack/react-query'
 
 import { answerQueries } from '@/api/services/answer/queries'
 import { Loading } from '@/components/common/Loading'
+import { AnswerRecord } from '@/types'
+import { convertToDailyCookies } from '@/utils/answer/convertToDailyCookies'
+
+import { LogSection } from './LogSection'
 
 export default function CookieLogPage() {
   const { data, status, error } = useQuery(
     answerQueries.record({ page: 0, size: 10, sort: [] })
   )
-  console.log(data) // UI 추가 전, API 연결 테스트
+  console.log(data) // 백엔드에서 mock data 추가 후 변경
+  const mockCookieLogs = convertToDailyCookies(mockData)
 
   if (status === 'pending') return <Loading />
 
@@ -57,7 +62,7 @@ export default function CookieLogPage() {
         </Flex>
         <TabPanels>
           <TabPanel>
-            <Center>로그 섹션</Center>
+            <LogSection cookieLogs={mockCookieLogs} />
           </TabPanel>
           <TabPanel>
             <Center>캘린더 섹션</Center>
@@ -67,3 +72,27 @@ export default function CookieLogPage() {
     </Flex>
   )
 }
+
+const mockData: AnswerRecord[] = [
+  {
+    answerId: 0,
+    questionId: 0,
+    questionContent: '대충 예시 질문1',
+    hintCount: 0,
+    createdAt: new Date('2024-10-14T10:00:00Z'),
+  },
+  {
+    answerId: 1,
+    questionId: 1,
+    questionContent: '대충 예시 질문2',
+    hintCount: 2,
+    createdAt: new Date('2024-10-14T12:00:00Z'),
+  },
+  {
+    answerId: 2,
+    questionId: 0,
+    questionContent: '대충 예시 질문1',
+    hintCount: 1,
+    createdAt: new Date('2024-10-15T10:00:00Z'),
+  },
+]
