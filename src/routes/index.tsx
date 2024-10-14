@@ -2,6 +2,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 
 import { MainLayout } from '@/components/features/Layout/MainLayout'
 import { ProfileQuestionLayout } from '@/components/features/Layout/ProfileQuestionLayout'
+import CookieLogPage from '@/pages/CookieLogPage'
 import ErrorPage from '@/pages/ErrorPage'
 import GroupPage from '@/pages/GroupPage'
 import LoginPage from '@/pages/LoginPage'
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
           {
             path: '/mypage',
             element: <MyPage />,
+          },
+          {
+            path: '/cookie-log',
+            element: <CookieLogPage />,
           },
         ],
       },
