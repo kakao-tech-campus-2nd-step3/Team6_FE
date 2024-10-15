@@ -1,13 +1,11 @@
 import { SimpleGrid } from '@chakra-ui/react'
 
+import { Friend } from '@/types'
+
 import ProfileButton from '../ProfileButton'
 
 type ProfileGridProps = {
-  profiles: {
-    userId: number
-    userName: string
-    imageUrl: string
-  }[]
+  profiles: Friend[]
   onProfileSelect: (profileId: number) => void
 }
 
@@ -20,9 +18,9 @@ const ProfileGrid = ({ profiles, onProfileSelect }: ProfileGridProps) => {
     <SimpleGrid columns={columns} spacing={spacingValue} mb={marginBottom}>
       {profiles.map((profile) => (
         <ProfileButton
-          profile={{ name: profile.userName, img: profile.imageUrl }}
-          key={profile.userId}
-          onClick={() => onProfileSelect(profile.userId)}
+          profile={profile}
+          key={profile.friendId}
+          onClick={() => onProfileSelect(profile.friendId)}
         />
       ))}
     </SimpleGrid>

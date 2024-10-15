@@ -4,6 +4,7 @@ import { Box } from '@chakra-ui/react'
 
 import { useRandomQuestion, useRefreshProfiles } from '@/api/services/whokie'
 import { Loading } from '@/components/Loading'
+import { Friend } from '@/types'
 
 import ProfileGrid from './ProfileGrid'
 import Question from './Question'
@@ -27,12 +28,13 @@ const MainPage = () => {
   const questionText =
     questionData.questions[questionIndex] &&
     questionData.questions[questionIndex].content
-  const allDummy = [
-    { userId: 1, userName: '홍길동', imageUrl: '/image.png' },
-    { userId: 2, userName: '곽희주', imageUrl: '/image.png' },
-    { userId: 3, userName: '김다운', imageUrl: '/image.png' },
-    { userId: 4, userName: '이형진', imageUrl: '/image.png' },
-    { userId: 5, userName: '신승욱', imageUrl: '/image.png' },
+
+  const allDummy: Friend[] = [
+    { friendId: 1, name: '홍길동', imageUrl: '/image.png', isFriend: true },
+    { friendId: 2, name: '곽희주', imageUrl: '/image.png', isFriend: true },
+    { friendId: 3, name: '김다운', imageUrl: '/image.png', isFriend: true },
+    { friendId: 4, name: '이형진', imageUrl: '/image.png', isFriend: true },
+    { friendId: 5, name: '신승욱', imageUrl: '/image.png', isFriend: true },
   ]
 
   const profiles = all.length > 0 ? all : allDummy
