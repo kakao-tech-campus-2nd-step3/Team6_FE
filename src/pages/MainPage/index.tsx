@@ -13,7 +13,7 @@ const MainPage = () => {
   const {
     data: all,
     isLoading: profilesLoading,
-    refetch: refreshProfiles,
+    refetch: refreshProfiles, // '/api/answer/refresh' 데이터 추가된 후 동작 확인하기
   } = useRefreshProfiles()
 
   const { data: questionData, isLoading: questionLoading } = useRandomQuestion()
@@ -54,6 +54,12 @@ const MainPage = () => {
     }
   }
 
+  // reloadProfiles 테스트
+  const handleReload = async () => {
+    const data = await refreshProfiles()
+    console.log('프로필 새로 불러오기:', data)
+  }
+
   return (
     <Box
       bg="secondary_background"
@@ -72,7 +78,7 @@ const MainPage = () => {
           onProfileSelect={handleProfileSelect}
         />
       </>
-      <Buttons onReload={refreshProfiles} onSkip={handleSkip} />
+      <Buttons onReload={handleReload} onSkip={handleSkip} />
     </Box>
   )
 }
