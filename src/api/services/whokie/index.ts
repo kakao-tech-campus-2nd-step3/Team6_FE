@@ -43,3 +43,20 @@ export const useAnswerQuestion = ({ friendId }: AnswerQuestionParam) => {
     mutationFn: () => answerRandomQuestion({ friendId }),
   })
 }
+
+// 카카오톡 친구 불러오기
+const fetchKakaoFriends = async () => {
+  try {
+    const response = await authorizationInstance.get('/api/friend')
+    return response.data
+  } catch (error) {
+    throw new Error(API_ERROR_MESSAGES.UNKNOWN_ERROR)
+  }
+}
+
+export const useKakaoFriends = () => {
+  return useQuery({
+    queryKey: ['kakaoFriends'],
+    queryFn: fetchKakaoFriends,
+  })
+}
