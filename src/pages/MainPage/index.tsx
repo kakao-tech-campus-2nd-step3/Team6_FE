@@ -1,5 +1,8 @@
 import { Box } from '@chakra-ui/react'
 
+import { useRandomQuestion } from '@/api/services/whokie'
+import { Loading } from '@/components/Loading'
+
 import ProfileGrid from './ProfileGrid'
 import Question from './Question'
 import Buttons from './SkipReloadButton'
@@ -13,7 +16,16 @@ const MainPage = () => {
     { userId: 5, userName: '신승욱', imageUrl: '/image.png' },
   ]
 
-  const questionText = '가장 MZ스러운 사람'
+  const { data: questionData, isLoading: questionLoading } = useRandomQuestion()
+
+  if (questionLoading) {
+    return <Loading />
+  }
+
+  let questionText = ''
+  questionText = questionData.questions[0].content
+
+  console.log(questionText) // api 연결 테스트
 
   return (
     <Box
