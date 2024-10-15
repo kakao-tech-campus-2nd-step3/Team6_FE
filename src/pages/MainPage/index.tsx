@@ -22,9 +22,16 @@ const MainPage = () => {
 
   let questionText = ''
   questionText = questionData.questions[0].content
+  const allDummy = [
+    // 데이터 추가 후 수정하기
+    { userId: 1, userName: '홍길동', imageUrl: '/image.png' },
+    { userId: 2, userName: '곽희주', imageUrl: '/image.png' },
+    { userId: 3, userName: '김다운', imageUrl: '/image.png' },
+    { userId: 4, userName: '이형진', imageUrl: '/image.png' },
+    { userId: 5, userName: '신승욱', imageUrl: '/image.png' },
+  ]
 
-  console.log(questionText) // api 연결 테스트
-  console.log(all) // api 연결 테스트
+  const profiles = all.length > 0 ? all : allDummy
 
   return (
     <Box
@@ -34,12 +41,10 @@ const MainPage = () => {
       textAlign="center"
     >
       <Question questionText={questionText} />
-      {all.length > 0 && ( // 현재 데이터가 없는 상태여서 데이터가 없는 경우 처리를 위해 추가
-        <>
-          <ProfileGrid profiles={all.slice(0, 3)} />
-          <ProfileGrid profiles={all.slice(3, 5)} />
-        </>
-      )}
+      <>
+        <ProfileGrid profiles={profiles.slice(0, 3)} />
+        <ProfileGrid profiles={profiles.slice(3, 5)} />
+      </>
       <Buttons onReload={refreshProfiles} />
     </Box>
   )
