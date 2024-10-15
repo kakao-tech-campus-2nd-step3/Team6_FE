@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
 
 import { authorizationInstance } from '@/api/instance'
 import { API_ERROR_MESSAGES } from '@/constants/error-message'
@@ -19,5 +19,27 @@ export const useRandomQuestion = () => {
   return useQuery({
     queryKey: ['randomQuestion'],
     queryFn: fetchRandomQuestion,
+  })
+}
+
+// 랜덤 공통 질문 답하기
+type AnswerQuestionParam = {
+  friendId: number
+}
+
+const answerRandomQuestion = async ({ friendId }: AnswerQuestionParam) => {
+  try {
+    const response = await authorizationInstance.post('/api/answer/common', {
+      friendId,
+    })
+    return response.data
+  } catch (error) {
+    throw new Error(API_ERROR_MESSAGES.UNKNOWN_ERROR)
+  }
+}
+
+export const useAnswerQuestion = ({ friendId }: AnswerQuestionParam) => {
+  return useMutation({
+    mutationFn: () => answerRandomQuestion({ friendId }),
   })
 }
