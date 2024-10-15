@@ -46,6 +46,14 @@ const MainPage = () => {
     }
   }
 
+  const handleSkip = () => {
+    if (questionIndex < questionData.questions.length - 1) {
+      setquestionIndex(questionIndex + 1)
+    } else {
+      setquestionIndex(0)
+    }
+  }
+
   return (
     <Box
       bg="secondary_background"
@@ -64,7 +72,7 @@ const MainPage = () => {
           onProfileSelect={handleProfileSelect}
         />
       </>
-      <Buttons onReload={refreshProfiles} />
+      <Buttons onReload={refreshProfiles} onSkip={handleSkip} />
     </Box>
   )
 }

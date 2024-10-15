@@ -4,9 +4,10 @@ import { Button, Flex } from '@chakra-ui/react'
 
 type ButtonsProps = {
   onReload: () => void
+  onSkip: () => void
 }
 
-const Buttons = ({ onReload }: ButtonsProps) => {
+const Buttons = ({ onReload, onSkip }: ButtonsProps) => {
   return (
     <Flex justify="space-between">
       <Button
@@ -23,6 +24,7 @@ const Buttons = ({ onReload }: ButtonsProps) => {
         bg="brown.50"
         color="brown.600"
         _hover={{ bg: 'brown.50', color: 'black.900' }}
+        onClick={onSkip}
       >
         Skip
       </Button>
