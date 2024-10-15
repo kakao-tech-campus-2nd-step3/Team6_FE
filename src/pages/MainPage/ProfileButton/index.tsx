@@ -5,11 +5,17 @@ type ProfileButtonProps = {
     name: string
     img: string
   }
+  onClick: () => void
 }
 
-const ProfileButton = ({ profile }: ProfileButtonProps) => {
+const ProfileButton = ({ profile, onClick }: ProfileButtonProps) => {
   return (
-    <Button variant="ghost" textAlign="center" _hover={{ bg: 'brown.50' }}>
+    <Button
+      variant="ghost"
+      textAlign="center"
+      _hover={{ bg: 'brown.50' }}
+      onClick={onClick}
+    >
       <VStack spacing={4}>
         <Avatar
           src={profile.img}

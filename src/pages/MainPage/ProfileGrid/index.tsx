@@ -7,10 +7,11 @@ type ProfileGridProps = {
     userId: number
     userName: string
     imageUrl: string
-  }[] // 배열로
+  }[]
+  onProfileSelect: (profileId: number) => void
 }
 
-const ProfileGrid = ({ profiles }: ProfileGridProps) => {
+const ProfileGrid = ({ profiles, onProfileSelect }: ProfileGridProps) => {
   const columns = profiles.length === 3 ? 3 : 2
   const marginBottom = columns === 2 ? 16 : 20
   const spacingValue = columns === 2 ? 0 : 16
@@ -21,6 +22,7 @@ const ProfileGrid = ({ profiles }: ProfileGridProps) => {
         <ProfileButton
           profile={{ name: profile.userName, img: profile.imageUrl }}
           key={profile.userId}
+          onClick={() => onProfileSelect(profile.userId)}
         />
       ))}
     </SimpleGrid>
