@@ -60,3 +60,20 @@ export const useKakaoFriends = () => {
     queryFn: fetchKakaoFriends,
   })
 }
+
+// 답변 대상 새로고침
+const fetchProfiles = async () => {
+  try {
+    const response = await authorizationInstance.get('/api/answer/refresh')
+    return response.data
+  } catch (error) {
+    throw new Error(API_ERROR_MESSAGES.UNKNOWN_ERROR)
+  }
+}
+
+export const useRefreshProfiles = () => {
+  return useQuery({
+    queryKey: ['refreshProfiles'],
+    queryFn: fetchProfiles,
+  })
+}
