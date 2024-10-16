@@ -2,7 +2,8 @@ import { useState } from 'react'
 
 import { Box } from '@chakra-ui/react'
 
-import { useRandomQuestion, useRefreshProfiles } from '@/api/services/whokie'
+import { useRefreshProfiles } from '@/api/services/answer'
+import { useRandomQuestion } from '@/api/services/question'
 import { Loading } from '@/components/Loading'
 import { Friend } from '@/types'
 
