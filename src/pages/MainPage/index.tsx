@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { Suspense, useState } from 'react'
 
 import { Box } from '@chakra-ui/react'
 
@@ -12,19 +12,28 @@ import Question from './Question'
 import Buttons from './SkipReloadButton'
 
 const MainPage = () => {
-  const {
-    data: all,
-    isLoading: profilesLoading,
-    refetch: refreshProfiles, // '/api/answer/refresh' 데이터 추가된 후 동작 확인하기
-  } = useRefreshProfiles()
-
-  const { data: questionData, isLoading: questionLoading } = useRandomQuestion()
-
   const [questionIndex, setquestionIndex] = useState(0)
 
-  if (questionLoading || profilesLoading) {
-    return <Loading />
-  }
+  return (
+    <Suspense fallback={<Loading />}>
+      <Content
+        questionIndex={questionIndex}
+        setquestionIndex={setquestionIndex}
+      />
+    </Suspense>
+  )
+}
+
+const Content = ({
+  questionIndex,
+  setquestionIndex,
+}: {
+  questionIndex: number
+  setquestionIndex: React.Dispatch<React.SetStateAction<number>>
+}) => {
+  const { data: all = [], refetch: refreshProfiles } = useRefreshProfiles()
+
+  const { data: questionData } = useRandomQuestion()
 
   let questionText = ''
   let questions = []
@@ -50,7 +59,7 @@ const MainPage = () => {
     if (questionIndex < questions.length - 1) {
       setquestionIndex(questionIndex + 1)
     } else {
-      console.log(`${profileId}`, '질문 끝') // 질문이 모두 나왔는지 확인하기
+      console.log('질문 끝') // 질문이 모두 나왔는지 확인하기
       setquestionIndex(0) // 처음 질문으로 돌아가서 질문 다시 반복
     }
   }
@@ -77,16 +86,14 @@ const MainPage = () => {
       textAlign="center"
     >
       <Question questionText={questionText} />
-      <>
-        <ProfileGrid
-          profiles={profiles.slice(0, 3)}
-          onProfileSelect={handleProfileSelect}
-        />
-        <ProfileGrid
-          profiles={profiles.slice(3, 5)}
-          onProfileSelect={handleProfileSelect}
-        />
-      </>
+      <ProfileGrid
+        profiles={profiles.slice(0, 3)}
+        onProfileSelect={handleProfileSelect}
+      />
+      <ProfileGrid
+        profiles={profiles.slice(3, 5)}
+        onProfileSelect={handleProfileSelect}
+      />
       <Buttons onReload={handleReload} onSkip={handleSkip} />
     </Box>
   )
