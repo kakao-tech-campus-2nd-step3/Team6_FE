@@ -4,7 +4,7 @@ import { authorizationInstance } from '@/api/instance'
 import { API_ERROR_MESSAGES } from '@/constants/error-message'
 import { Question } from '@/types'
 
-type RandomQuestionResponse = {
+export type RandomQuestionResponse = {
   questions: Question[]
 }
 

@@ -3,7 +3,6 @@ import { Suspense, useState } from 'react'
 import { Box } from '@chakra-ui/react'
 
 import { useRefreshProfiles } from '@/api/services/answer'
-import { useRandomQuestion } from '@/api/services/question'
 import { Loading } from '@/components/Loading'
 import { Friend } from '@/types'
 
@@ -33,18 +32,6 @@ const Content = ({
 }) => {
   const { data: all = [], refetch: refreshProfiles } = useRefreshProfiles()
 
-  const { data: questionData } = useRandomQuestion()
-
-  let questionText = ''
-  let questions = []
-
-  if (questionData && questionData.questions) {
-    questions = questionData.questions
-    if (questionIndex < questions.length) {
-      questionText = questions[questionIndex].content
-    }
-  }
-
   const allDummy: Friend[] = [
     { friendId: 1, name: '홍길동', imageUrl: '/image.png', isFriend: true },
     { friendId: 2, name: '곽희주', imageUrl: '/image.png', isFriend: true },
@@ -56,22 +43,12 @@ const Content = ({
   const profiles = all.length > 0 ? all : allDummy
   const handleProfileSelect = (profileId: number) => {
     console.log(`${profileId}`) // 선택된 프로필 ID 확인하기
-    if (questionIndex < questions.length - 1) {
-      setquestionIndex(questionIndex + 1)
-    } else {
-      console.log('질문 끝') // 질문이 모두 나왔는지 확인하기
-      setquestionIndex(0) // 처음 질문으로 돌아가서 질문 다시 반복
-    }
+    setquestionIndex((prevIndex) => (prevIndex + 1) % profiles.length)
   }
 
   const handleSkip = () => {
-    if (questionIndex < questions.length - 1) {
-      setquestionIndex(questionIndex + 1)
-    } else {
-      setquestionIndex(0)
-    }
+    setquestionIndex((prevIndex) => (prevIndex + 1) % profiles.length)
   }
-
   // reloadProfiles 테스트
   const handleReload = async () => {
     const data = await refreshProfiles()
@@ -85,7 +62,7 @@ const Content = ({
       borderRadius="20px"
       textAlign="center"
     >
-      <Question questionText={questionText} />
+      <Question questionIndex={questionIndex} />
       <ProfileGrid
         profiles={profiles.slice(0, 3)}
         onProfileSelect={handleProfileSelect}
