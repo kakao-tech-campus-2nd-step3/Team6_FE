@@ -2,10 +2,15 @@ import { useQuery } from '@tanstack/react-query'
 
 import { authorizationInstance } from '@/api/instance'
 import { API_ERROR_MESSAGES } from '@/constants/error-message'
+import { Question } from '@/types'
 
-const fetchRandomQuestion = async () => {
+type RandomQuestionResponse = {
+  questions: Question[]
+}
+
+const fetchRandomQuestion = async (): Promise<RandomQuestionResponse> => {
   try {
-    const response = await authorizationInstance.get(
+    const response = await authorizationInstance.get<RandomQuestionResponse>(
       '/api/common/question/random'
     )
     return response.data

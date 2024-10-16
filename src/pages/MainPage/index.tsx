@@ -26,9 +26,15 @@ const MainPage = () => {
     return <Loading />
   }
 
-  const questionText =
-    questionData.questions[questionIndex] &&
-    questionData.questions[questionIndex].content
+  let questionText = ''
+  let questions = []
+
+  if (questionData && questionData.questions) {
+    questions = questionData.questions
+    if (questionIndex < questions.length) {
+      questionText = questions[questionIndex].content
+    }
+  }
 
   const allDummy: Friend[] = [
     { friendId: 1, name: '홍길동', imageUrl: '/image.png', isFriend: true },
@@ -41,7 +47,7 @@ const MainPage = () => {
   const profiles = all.length > 0 ? all : allDummy
   const handleProfileSelect = (profileId: number) => {
     console.log(`${profileId}`) // 선택된 프로필 ID 확인하기
-    if (questionIndex < questionData.questions.length - 1) {
+    if (questionIndex < questions.length - 1) {
       setquestionIndex(questionIndex + 1)
     } else {
       console.log(`${profileId}`, '질문 끝') // 질문이 모두 나왔는지 확인하기
@@ -50,7 +56,7 @@ const MainPage = () => {
   }
 
   const handleSkip = () => {
-    if (questionIndex < questionData.questions.length - 1) {
+    if (questionIndex < questions.length - 1) {
       setquestionIndex(questionIndex + 1)
     } else {
       setquestionIndex(0)
