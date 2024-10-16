@@ -3,7 +3,6 @@ import { useMutation, useQuery } from '@tanstack/react-query'
 import { authorizationInstance } from '@/api/instance'
 import { API_ERROR_MESSAGES } from '@/constants/error-message'
 
-// 랜덤 공통 질문 조회
 const fetchRandomQuestion = async () => {
   try {
     const response = await authorizationInstance.get(
@@ -22,7 +21,6 @@ export const useRandomQuestion = () => {
   })
 }
 
-// 랜덤 공통 질문 답하기
 type AnswerQuestionParam = {
   friendId: number
 }
@@ -44,7 +42,6 @@ export const useAnswerQuestion = ({ friendId }: AnswerQuestionParam) => {
   })
 }
 
-// 카카오톡 친구 불러오기
 const fetchKakaoFriends = async () => {
   try {
     const response = await authorizationInstance.get('/api/friend')
@@ -61,7 +58,6 @@ export const useKakaoFriends = () => {
   })
 }
 
-// 답변 대상 새로고침
 const fetchProfiles = async () => {
   try {
     const response = await authorizationInstance.get('/api/answer/refresh')
