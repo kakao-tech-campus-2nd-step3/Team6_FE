@@ -1,4 +1,4 @@
-import { useSuspenseQuery } from '@tanstack/react-query'
+import { useSuspenseInfiniteQuery } from '@tanstack/react-query'
 
 import { authorizationInstance } from '@/api/instance'
 import {
@@ -8,8 +8,8 @@ import {
 import { AnswerRecord, Paging } from '@/types'
 
 type AnswerRecordPagingRequestParams = {
-  page: number
-  size: number
+  size?: number
+  page?: string
   sort?: string[]
 }
 
@@ -26,23 +26,41 @@ const getAnswerRecordPaging = async (
         getAnswerRecordPagingPath(params)
       )
 
-    return response.data
+    const { data } = response
+
+    return {
+      records: data.content,
+      nextPageToken:
+        data.page !== data.totalPages - 1
+          ? (data.page + 1).toString()
+          : undefined,
+      totalElements: data.totalElements,
+      totalPages: data.totalPages,
+    }
   } catch (error) {
     throw new Error(API_ERROR_MESSAGES.UNKNOWN_ERROR)
   }
 }
 
-export const useAnswerRecordPaging = ({
-  page,
-  size,
-  sort,
-}: AnswerRecordPagingRequestParams) => {
-  const { data, status, error } = useSuspenseQuery({
-    queryKey: ['answer', 'record', page],
-    queryFn: () => getAnswerRecordPaging({ page, size, sort }),
-  })
+interface AnswerRecordPagingProps extends AnswerRecordPagingRequestParams {
+  initPageToken?: string
+}
 
-  const answerRecords = data?.content
+export const useAnswerRecordPaging = ({
+  size = 10,
+  sort,
+  initPageToken,
+}: AnswerRecordPagingProps) => {
+  const { data, status, error, fetchNextPage, hasNextPage } =
+    useSuspenseInfiniteQuery({
+      queryKey: ['answer', 'record', initPageToken],
+      queryFn: ({ pageParam = initPageToken }) =>
+        getAnswerRecordPaging({ page: pageParam, size, sort }),
+      initialPageParam: initPageToken,
+      getNextPageParam: (lastPage) => lastPage.nextPageToken,
+    })
+
+  const answerRecords = data?.pages.flatMap((page) => page.records)
 
   if (!answerRecords.length)
     throw new Error(DATA_ERROR_MESSAGES.ANSWER_RECORD_NOT_FOUND)
@@ -51,6 +69,8 @@ export const useAnswerRecordPaging = ({
     answerRecords,
     status,
     error,
+    fetchNextPage,
+    hasNextPage,
   }
 }
 
@@ -61,8 +81,13 @@ const getAnswerRecordPagingPath = ({
 }: AnswerRecordPagingRequestParams) => {
   const params = new URLSearchParams()
 
-  params.append('page', page.toString())
-  params.append('size', size.toString())
+  if (size) {
+    params.append('size', size.toString())
+  }
+
+  if (page) {
+    params.append('page', page.toString())
+  }
 
   if (sort) {
     sort.forEach((sortField) => params.append('sort', sortField))
