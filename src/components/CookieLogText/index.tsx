@@ -2,33 +2,34 @@ import { Flex, Tag, Text } from '@chakra-ui/react'
 
 import { HintIcon } from './HintIcon'
 
-interface LogTextProps {
+interface CookieLogTextProps {
   groupName?: 'ALL' | string
   logContent: string
   hintCount: 0 | 1 | 2 | 3
 }
 
-export const LogText = ({
+export const CookieLogText = ({
   groupName = 'ALL',
   logContent,
   hintCount,
-}: LogTextProps) => {
+}: CookieLogTextProps) => {
   return (
     <Flex gap="0.5rem" alignItems="center">
       <Tag
-        fontSize="small"
+        fontSize="x-small"
         minWidth="fit-content"
         height="fit-content"
         borderRadius="full"
-        paddingY="0.5rem"
-        paddingX="1rem"
+        paddingY="0.3rem"
+        paddingX="0.6rem"
+        backgroundColor="brown.200"
       >
         {groupName}
       </Tag>
-      <div>
+      <Flex gap={1} fontSize="small">
         <Text as="b">{logContent}</Text>
         <Text display="inline">으로 쿠키를 받았습니다.</Text>
-      </div>
+      </Flex>
       <HintIcon hintCount={hintCount} />
     </Flex>
   )
