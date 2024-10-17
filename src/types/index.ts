@@ -29,3 +29,9 @@ export interface QuestionItem {
   profileQuestionContent: string
   createdAt: string
 }
+
+export interface Question {
+  questionId: number
+  content: string
+  users: Friend[]
+}
