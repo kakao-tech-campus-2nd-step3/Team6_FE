@@ -1,3 +1,6 @@
+import { Suspense } from 'react'
+import { ErrorBoundary } from 'react-error-boundary'
+
 import {
   Center,
   Flex,
@@ -8,6 +11,9 @@ import {
   Tabs,
 } from '@chakra-ui/react'
 
+import { Loading } from '@/components/Loading'
+
+import { CookieLogErrorFallback } from './CookieLogErrorFallback'
 import { CookieLogHeader } from './CookieLogHeader'
 import { LogSection } from './LogSection'
 
@@ -32,14 +38,18 @@ export default function CookieLogPage() {
             <Tab>캘린더</Tab>
           </TabList>
         </Flex>
-        <TabPanels>
-          <TabPanel>
-            <LogSection />
-          </TabPanel>
-          <TabPanel>
-            <Center>캘린더 섹션</Center>
-          </TabPanel>
-        </TabPanels>
+        <ErrorBoundary FallbackComponent={CookieLogErrorFallback}>
+          <Suspense fallback={<Loading />}>
+            <TabPanels>
+              <TabPanel>
+                <LogSection />
+              </TabPanel>
+              <TabPanel>
+                <Center>캘린더 섹션</Center>
+              </TabPanel>
+            </TabPanels>
+          </Suspense>
+        </ErrorBoundary>
       </Tabs>
     </Flex>
   )

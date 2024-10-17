@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query'
+import { useSuspenseQuery } from '@tanstack/react-query'
 
 import { authorizationInstance } from '@/api/instance'
 import {
@@ -37,14 +37,14 @@ export const useAnswerRecordPaging = ({
   size,
   sort,
 }: AnswerRecordPagingRequestParams) => {
-  const { data, status, error } = useQuery({
+  const { data, status, error } = useSuspenseQuery({
     queryKey: ['answer', 'record', page],
     queryFn: () => getAnswerRecordPaging({ page, size, sort }),
   })
 
   const answerRecords = data?.content
 
-  if (!answerRecords)
+  if (!answerRecords.length)
     throw new Error(DATA_ERROR_MESSAGES.ANSWER_RECORD_NOT_FOUND)
 
   return {
