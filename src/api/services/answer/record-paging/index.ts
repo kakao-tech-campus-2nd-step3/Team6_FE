@@ -27,8 +27,6 @@ export const getAnswerRecordPaging = async (
       records: data.content,
       nextPageToken:
         data.page !== data.totalPages ? (data.page + 1).toString() : undefined,
-      totalElements: data.totalElements,
-      totalPages: data.totalPages,
     }
   } catch (error) {
     throw new Error(API_ERROR_MESSAGES.UNKNOWN_ERROR)
