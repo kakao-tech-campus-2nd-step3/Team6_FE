@@ -27,7 +27,7 @@ export const useAnswerQuestion = ({ friendId }: AnswerQuestionParam) => {
 const fetchKakaoFriends = async () => {
   try {
     const response = await authorizationInstance.get('/api/friend')
-    return response.data
+    return response.data.friends
   } catch (error) {
     throw new Error(API_ERROR_MESSAGES.UNKNOWN_ERROR)
   }
@@ -37,21 +37,5 @@ export const useKakaoFriends = () => {
   return useQuery({
     queryKey: ['kakaoFriends'],
     queryFn: fetchKakaoFriends,
-  })
-}
-
-const fetchProfiles = async () => {
-  try {
-    const response = await authorizationInstance.get('/api/answer/refresh')
-    return response.data
-  } catch (error) {
-    throw new Error(API_ERROR_MESSAGES.UNKNOWN_ERROR)
-  }
-}
-
-export const useRefreshProfiles = () => {
-  return useQuery({
-    queryKey: ['refreshProfiles'],
-    queryFn: fetchProfiles,
   })
 }
