@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react'
+
 import { Text } from '@chakra-ui/react'
 
 import {
@@ -13,14 +15,16 @@ const Question = ({ questionIndex }: QuestionProps) => {
   const { data }: { data: RandomQuestionResponse | undefined } =
     useRandomQuestion()
 
-  let questionText = ''
+  const [questionText, setquestionText] = useState('')
 
-  if (data) {
-    const { questions } = data
-    if (questionIndex < questions.length) {
-      questionText = questions[questionIndex].content
+  useEffect(() => {
+    if (data) {
+      const { questions } = data
+      if (questionIndex < questions.length) {
+        setquestionText(questions[questionIndex].content)
+      }
     }
-  }
+  }, [data, questionIndex])
 
   return (
     <Text fontWeight="600" fontSize="4xl" color="text" mb={24}>
