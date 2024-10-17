@@ -29,11 +29,8 @@ const Content = ({
   questionIndex: number
   setquestionIndex: React.Dispatch<React.SetStateAction<number>>
 }) => {
-  const { data: all = [], isLoading } = useKakaoFriends()
+  const { data: all = [] } = useKakaoFriends()
 
-  if (isLoading) {
-    return <Loading />
-  }
   const handleProfileSelect = (profileId: number) => {
     console.log(`${profileId}`) // 선택된 프로필 ID 확인하기
     setquestionIndex((prevIndex) => (prevIndex + 1) % all.length)
