@@ -13,14 +13,14 @@ import {
 
 import { Loading } from '@/components/Loading'
 
-import { CookieLogErrorFallback } from './CookieLogErrorFallback'
-import { CookieLogHeader } from './CookieLogHeader'
+import { CookieRecordErrorFallback } from './CookieRecordErrorFallback'
+import { CookieRecordHeader } from './CookieRecordHeader'
 import { LogSection } from './LogSection'
 
-export default function CookieLogPage() {
+export default function CookieRecordPage() {
   return (
     <Flex flexDirection="column">
-      <CookieLogHeader />
+      <CookieRecordHeader />
       <Tabs
         variant="soft-rounded"
         colorScheme="secondary"
@@ -38,7 +38,7 @@ export default function CookieLogPage() {
             <Tab>캘린더</Tab>
           </TabList>
         </Flex>
-        <ErrorBoundary FallbackComponent={CookieLogErrorFallback}>
+        <ErrorBoundary FallbackComponent={CookieRecordErrorFallback}>
           <Suspense fallback={<Loading />}>
             <TabPanels>
               <TabPanel>

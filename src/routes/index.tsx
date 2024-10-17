@@ -1,6 +1,6 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 
-import CookieLogPage from '@/pages/CookieLogPage'
+import CookieRecordPage from '@/pages/CookieRecordPage'
 import ErrorPage from '@/pages/ErrorPage'
 import GroupPage from '@/pages/GroupPage'
 import { MainLayout } from '@/pages/Layout/MainLayout'
@@ -31,8 +31,8 @@ const router = createBrowserRouter([
             element: <MyPage />,
           },
           {
-            path: '/cookie-log',
-            element: <CookieLogPage />,
+            path: '/cookie-record',
+            element: <CookieRecordPage />,
           },
           {
             path: '/grouppage',

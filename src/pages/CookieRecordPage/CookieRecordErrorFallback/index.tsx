@@ -4,7 +4,7 @@ type CookieLogErrorFallbackProps = {
   error: Error
 }
 
-export const CookieLogErrorFallback = ({
+export const CookieRecordErrorFallback = ({
   error,
 }: CookieLogErrorFallbackProps) => {
   return (

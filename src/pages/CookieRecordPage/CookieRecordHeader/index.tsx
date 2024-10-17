@@ -2,7 +2,7 @@ import { BiChevronLeft } from 'react-icons/bi'
 
 import { Box, Center, Divider, Flex, Text } from '@chakra-ui/react'
 
-export const CookieLogHeader = () => {
+export const CookieRecordHeader = () => {
   return (
     <Flex flexDirection="column">
       <Box height={8} display="flex" flexDirection="row" width="full">

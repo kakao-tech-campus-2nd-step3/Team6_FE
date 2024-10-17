@@ -27,7 +27,7 @@ export const SideNavigation = () => {
       >
         <BiLogOut size={26} />
       </Box>
-      <Link to="/cookie-log">
+      <Link to="/cookie-record">
         <Box _hover={{ cursor: 'pointer', color: 'brown.500' }}>
           <BiBell size={26} />
         </Box>
