@@ -1,6 +1,6 @@
 import { Suspense, useEffect, useState } from 'react'
 
-import { Box } from '@chakra-ui/react'
+import { Box, Flex } from '@chakra-ui/react'
 
 import { useKakaoFriends } from '@/api/services/answer'
 import { Loading } from '@/components/Loading'
@@ -87,22 +87,21 @@ const Content = ({
   }, [currentIndex, all])
 
   return (
-    <Box
-      bg="secondary_background"
-      p={24}
-      borderRadius="20px"
-      textAlign="center"
-    >
+    <Box bg="secondary_background" borderRadius="20px" textAlign="center">
       <Question questionIndex={questionIndex} />
-      <ProfileGrid
-        profiles={topProfiles}
-        onProfileSelect={handleProfileSelect}
-      />
-      <ProfileGrid
-        profiles={bottomProfiles}
-        onProfileSelect={handleProfileSelect}
-      />
-      <Buttons onReload={handleReload} onSkip={handleSkip} />
+      <Box p={24}>
+        <Flex direction="column" position="absolute" bottom={32} left="31.1%">
+          <ProfileGrid
+            profiles={topProfiles}
+            onProfileSelect={handleProfileSelect}
+          />
+          <ProfileGrid
+            profiles={bottomProfiles}
+            onProfileSelect={handleProfileSelect}
+          />
+          <Buttons onReload={handleReload} onSkip={handleSkip} />
+        </Flex>
+      </Box>
     </Box>
   )
 }
