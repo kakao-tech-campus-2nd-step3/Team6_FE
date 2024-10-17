@@ -1,7 +1,7 @@
 import { Flex, Heading } from '@chakra-ui/react'
 import { format } from 'date-fns'
 
-import { useAnswerRecordPaging } from '@/api/services/answer/record-paging'
+import { useAnswerRecordPaging } from '@/api/services/answer/record-paging/useAnswerRecordPaging'
 import { CookieLogText } from '@/components/CookieLogText'
 import { IntersectionObserverLoader } from '@/components/IntersectionObserverLoader'
 import { convertToDailyCookies } from '@/utils/answer/convertToDailyCookies'
