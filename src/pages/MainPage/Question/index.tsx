@@ -2,10 +2,8 @@ import { useEffect, useState } from 'react'
 
 import { Text } from '@chakra-ui/react'
 
-import {
-  RandomQuestionResponse,
-  useRandomQuestion,
-} from '@/api/services/question'
+import { RandomQuestionResponse } from '@/api/services/question/random'
+import { useRandomQuestion } from '@/api/services/question/random/useRandomQuestion'
 
 type QuestionProps = {
   questionIndex: number

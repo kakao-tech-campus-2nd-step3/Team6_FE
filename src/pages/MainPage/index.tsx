@@ -2,7 +2,7 @@ import { Suspense, useEffect, useState } from 'react'
 
 import { Box, Flex } from '@chakra-ui/react'
 
-import { useKakaoFriends } from '@/api/services/answer'
+import { useKakaoFriends } from '@/api/services/friend/useKakaoFriends'
 import { Loading } from '@/components/Loading'
 import { Friend } from '@/types'
 
