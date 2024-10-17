@@ -2,7 +2,7 @@ import { BiUserCheck } from 'react-icons/bi'
 
 import { Box, Text } from '@chakra-ui/react'
 
-import { PageLayout } from '@/components/common/PageLayout'
+import { PageLayout } from '@/components/PageLayout'
 import { useMemberTypeStore } from '@/stores/member-type'
 
 export const SelectFreindHeader = () => {

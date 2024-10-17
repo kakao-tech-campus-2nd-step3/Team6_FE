@@ -1,6 +1,6 @@
 import { Box } from '@chakra-ui/react'
 
-import { RankingGraph } from '@/components/common/RankingGraph'
+import { RankingGraph } from '@/components/RankingGraph'
 
 import Navigate from './Navigate'
 import OvenMenu from './OvenMenu'

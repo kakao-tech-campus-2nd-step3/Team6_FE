@@ -1,9 +1,9 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 
-import { MainLayout } from '@/components/features/Layout/MainLayout'
-import { ProfileQuestionLayout } from '@/components/features/Layout/ProfileQuestionLayout'
 import ErrorPage from '@/pages/ErrorPage'
 import GroupPage from '@/pages/GroupPage'
+import { MainLayout } from '@/pages/Layout/MainLayout'
+import { ProfileQuestionLayout } from '@/pages/Layout/ProfileQuestionLayout'
 import LoginPage from '@/pages/LoginPage'
 import LoginRedirectPage from '@/pages/LoginRedirectPage'
 import MainPage from '@/pages/MainPage'
@@ -19,15 +19,19 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <MainPage />,
-      },
-      {
-        path: '/',
         element: <ProtectedRoute />,
         children: [
           {
+            path: '/',
+            element: <MainPage />,
+          },
+          {
             path: '/mypage',
             element: <MyPage />,
+          },
+          {
+            path: '/grouppage',
+            element: <GroupPage />,
           },
         ],
       },
@@ -38,10 +42,6 @@ const router = createBrowserRouter([
       {
         path: '/login/redirect',
         element: <LoginRedirectPage />,
-      },
-      {
-        path: '/grouppage',
-        element: <GroupPage />,
       },
     ],
   },

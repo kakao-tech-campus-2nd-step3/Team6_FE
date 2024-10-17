@@ -1,6 +1,6 @@
 import { Box, Text } from '@chakra-ui/react'
 
-import { RankingGraph } from '@/components/common/RankingGraph'
+import { RankingGraph } from '@/components/RankingGraph'
 
 import Management from './Management'
 import Navigate from './Navigate'

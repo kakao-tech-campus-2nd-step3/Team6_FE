@@ -1,6 +1,6 @@
 import { BiDonateHeart } from 'react-icons/bi'
 
-import { PageLayout } from '@/components/common/PageLayout'
+import { PageLayout } from '@/components/PageLayout'
 
 import { GroupList } from './GroupList'
 
