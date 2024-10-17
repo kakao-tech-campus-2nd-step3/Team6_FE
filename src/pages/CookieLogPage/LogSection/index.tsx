@@ -3,10 +3,12 @@ import { format } from 'date-fns'
 
 import { useAnswerRecordPaging } from '@/api/services/answer/record-paging'
 import { CookieLogText } from '@/components/CookieLogText'
+import { IntersectionObserverLoader } from '@/components/IntersectionObserverLoader'
 import { convertToDailyCookies } from '@/utils/answer/convertToDailyCookies'
 
 export const LogSection = () => {
-  const { answerRecords } = useAnswerRecordPaging({})
+  const { answerRecords, hasNextPage, isFetchingNextPage, fetchNextPage } =
+    useAnswerRecordPaging({})
   const cookieLogs = convertToDailyCookies(answerRecords)
 
   return (
@@ -32,7 +34,15 @@ export const LogSection = () => {
           </Flex>
         </Flex>
       ))}
-      <div>test</div>
+      {hasNextPage && (
+        <IntersectionObserverLoader
+          callback={() => {
+            if (!isFetchingNextPage) {
+              fetchNextPage()
+            }
+          }}
+        />
+      )}
     </Flex>
   )
 }

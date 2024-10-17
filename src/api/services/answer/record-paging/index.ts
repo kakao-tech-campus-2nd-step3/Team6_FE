@@ -31,9 +31,7 @@ const getAnswerRecordPaging = async (
     return {
       records: data.content,
       nextPageToken:
-        data.page !== data.totalPages - 1
-          ? (data.page + 1).toString()
-          : undefined,
+        data.page !== data.totalPages ? (data.page + 1).toString() : undefined,
       totalElements: data.totalElements,
       totalPages: data.totalPages,
     }
@@ -51,14 +49,20 @@ export const useAnswerRecordPaging = ({
   sort,
   initPageToken,
 }: AnswerRecordPagingProps) => {
-  const { data, status, error, fetchNextPage, hasNextPage } =
-    useSuspenseInfiniteQuery({
-      queryKey: ['answer', 'record', initPageToken],
-      queryFn: ({ pageParam = initPageToken }) =>
-        getAnswerRecordPaging({ page: pageParam, size, sort }),
-      initialPageParam: initPageToken,
-      getNextPageParam: (lastPage) => lastPage.nextPageToken,
-    })
+  const {
+    data,
+    status,
+    error,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useSuspenseInfiniteQuery({
+    queryKey: ['answer', 'record', initPageToken],
+    queryFn: ({ pageParam = initPageToken }) =>
+      getAnswerRecordPaging({ page: pageParam, size, sort }),
+    initialPageParam: initPageToken,
+    getNextPageParam: (lastPage) => lastPage.nextPageToken,
+  })
 
   const answerRecords = data?.pages.flatMap((page) => page.records)
 
@@ -71,6 +75,7 @@ export const useAnswerRecordPaging = ({
     error,
     fetchNextPage,
     hasNextPage,
+    isFetchingNextPage,
   }
 }
 
