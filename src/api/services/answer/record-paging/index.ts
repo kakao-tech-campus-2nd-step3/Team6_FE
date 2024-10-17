@@ -1,5 +1,10 @@
+import { useQuery } from '@tanstack/react-query'
+
 import { authorizationInstance } from '@/api/instance'
-import { API_ERROR_MESSAGES } from '@/constants/error-message'
+import {
+  API_ERROR_MESSAGES,
+  DATA_ERROR_MESSAGES,
+} from '@/constants/error-message'
 import { AnswerRecord, Paging } from '@/types'
 
 type AnswerRecordPagingRequestParams = {
@@ -12,7 +17,7 @@ type AnswerRecordPagingResponse = {
   content: AnswerRecord[]
 } & Paging
 
-export const getAnswerRecordPaging = async (
+const getAnswerRecordPaging = async (
   params: AnswerRecordPagingRequestParams
 ) => {
   try {
@@ -24,6 +29,28 @@ export const getAnswerRecordPaging = async (
     return response.data
   } catch (error) {
     throw new Error(API_ERROR_MESSAGES.UNKNOWN_ERROR)
+  }
+}
+
+export const useAnswerRecordPaging = ({
+  page,
+  size,
+  sort,
+}: AnswerRecordPagingRequestParams) => {
+  const { data, status, error } = useQuery({
+    queryKey: ['answer', 'record', page],
+    queryFn: () => getAnswerRecordPaging({ page, size, sort }),
+  })
+
+  const answerRecords = data?.content
+
+  if (!answerRecords)
+    throw new Error(DATA_ERROR_MESSAGES.ANSWER_RECORD_NOT_FOUND)
+
+  return {
+    answerRecords,
+    status,
+    error,
   }
 }
 
