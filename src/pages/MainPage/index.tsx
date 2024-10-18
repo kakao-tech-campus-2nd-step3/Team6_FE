@@ -1,4 +1,4 @@
-import { Suspense, useEffect, useState } from 'react'
+import { Suspense, useCallback, useEffect, useState } from 'react'
 
 import { Box, Flex } from '@chakra-ui/react'
 
@@ -31,9 +31,8 @@ const Content = ({
   setquestionIndex: React.Dispatch<React.SetStateAction<number>>
 }) => {
   const { data: all = [] } = useKakaoFriends()
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const [topProfiles, setTopProfiles] = useState<Friend[]>([])
-  const [bottomProfiles, setBottomProfiles] = useState<Friend[]>([])
+  const [remain, setRemain] = useState<Friend[]>([])
+  const [picked, setPicked] = useState<Friend[]>([])
 
   const handleProfileSelect = (profileId: number) => {
     console.log(`${profileId}`) // 선택된 프로필 ID 확인하기
@@ -44,47 +43,45 @@ const Content = ({
     setquestionIndex((prevIndex) => (prevIndex + 1) % all.length)
   }
 
-  const handleReload = () => {
-    const totalProfiles = all.length
-    const nextIndex = (currentIndex + 5) % totalProfiles
-    setCurrentIndex(nextIndex)
-  }
+  const pickRandomProfiles = useCallback((arr: Friend[], count: number) => {
+    const shuffled = [...arr].sort(() => 0.5 - Math.random())
+    return shuffled.slice(0, count)
+  }, [])
+
+  const handleReload = useCallback(() => {
+    if (remain.length >= 5) {
+      const randomFive = pickRandomProfiles(remain, 5) // remain에서 5명 뽑기
+      setPicked(randomFive)
+
+      // 남은 선택지들을 remain에 넣기
+      const updatedRemain = remain.filter(
+        (profile) => !randomFive.includes(profile)
+      )
+      setRemain(updatedRemain)
+    } else {
+      // picked와 remain을 swap
+      const combined = [...remain, ...picked]
+      const randomFive = pickRandomProfiles(combined, 5)
+      setPicked(randomFive)
+
+      const updatedRemain = combined.filter(
+        (profile) => !randomFive.includes(profile)
+      )
+      setRemain(updatedRemain)
+    }
+  }, [remain, picked, pickRandomProfiles])
 
   useEffect(() => {
-    const remainingProfiles: Friend[] = all.slice(currentIndex) // 현재 인덱스 이후의 프로필
-    const remainingCount = remainingProfiles.length
-
-    if (remainingCount === 0) {
-      // 남은 데이터가 없으면 처음부터 시작
-      setTopProfiles(all.slice(0, 3))
-      setBottomProfiles(all.slice(3, 5))
-      setCurrentIndex(0) // 다시 0으로 초기화
-    } else if (remainingCount === 1) {
-      setTopProfiles([remainingProfiles[0], all[0], all[1]])
-      setBottomProfiles([all[2], all[3]])
-    } else if (remainingCount === 2) {
-      setTopProfiles([remainingProfiles[0], remainingProfiles[1], all[0]])
-      setBottomProfiles([all[1], all[2]])
-    } else if (remainingCount === 3) {
-      setTopProfiles([
-        remainingProfiles[0],
-        remainingProfiles[1],
-        remainingProfiles[2],
-      ])
-      setBottomProfiles([all[0], all[1]])
-    } else if (remainingCount === 4) {
-      setTopProfiles([
-        remainingProfiles[0],
-        remainingProfiles[1],
-        remainingProfiles[2],
-      ])
-      setBottomProfiles([remainingProfiles[3], all[0]])
-    } else {
-      // 5개 이상의 남은 프로필이 있을 경우
-      setTopProfiles(remainingProfiles.slice(0, 3))
-      setBottomProfiles(remainingProfiles.slice(3, 5))
+    if (all.length > 0) {
+      setRemain(all)
     }
-  }, [currentIndex, all])
+  }, [all])
+
+  useEffect(() => {
+    if (remain.length > 0 && picked.length === 0) {
+      handleReload()
+    }
+  }, [remain, picked, handleReload])
 
   return (
     <Box bg="secondary_background" borderRadius="20px" textAlign="center">
@@ -98,11 +95,11 @@ const Content = ({
           transform="translateX(-45%)"
         >
           <ProfileGrid
-            profiles={topProfiles}
+            profiles={picked.slice(0, 3)}
             onProfileSelect={handleProfileSelect}
           />
           <ProfileGrid
-            profiles={bottomProfiles}
+            profiles={picked.slice(3, 5)}
             onProfileSelect={handleProfileSelect}
           />
           <Buttons onReload={handleReload} onSkip={handleSkip} />
