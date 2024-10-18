@@ -1,7 +1,11 @@
+import { useParams } from 'react-router-dom'
+
 import { Box } from '@chakra-ui/react'
 
+import { useMyPage } from '@/api/services/profile/mypage/useMyPage'
 import { RankingGraph } from '@/components/RankingGraph'
 
+import ErrorPage from '../ErrorPage'
 import Navigate from './Navigate'
 import OvenMenu from './OvenMenu'
 import Profile from './Profile'
@@ -35,10 +39,17 @@ const dummyRankData = [
 ]
 
 export default function MyPage() {
+  const { userId } = useParams<{ userId: string }>()
+  const { data: profile, isLoading, error } = useMyPage(userId || '')
+
+  if (isLoading) return <div>Loading...</div>
+  if (error) return <ErrorPage />
+  if (!profile) return <ErrorPage />
+
   return (
     <div>
       <Navigate />
-      <Profile />
+      <Profile profile={profile} pointAmount={10000} />
       <Box p="0 30px">
         <RankingGraph rank={dummyRankData} />
       </Box>
