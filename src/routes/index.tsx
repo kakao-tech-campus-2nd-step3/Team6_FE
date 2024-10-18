@@ -27,7 +27,7 @@ const router = createBrowserRouter([
             element: <MainPage />,
           },
           {
-            path: '/mypage',
+            path: '/mypage/:userId',
             element: <MyPage />,
           },
           {

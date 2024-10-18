@@ -51,3 +51,11 @@ export type DailyCookie = {
 }
 
 export type CookieLog = Omit<AnswerRecord, 'createdAt'>
+
+export type MyPageItem = {
+  todayVisited: number
+  totalVisited: number
+  description: string
+  backgroundImageUrl: string
+  name: string
+}
