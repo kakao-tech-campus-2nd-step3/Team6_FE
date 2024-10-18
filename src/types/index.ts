@@ -30,6 +30,12 @@ export interface QuestionItem {
   createdAt: string
 }
 
+export interface Question {
+  questionId: number
+  content: string
+  users: Friend[]
+}
+
 export type AnswerRecord = {
   answerId: number
   questionId: number
