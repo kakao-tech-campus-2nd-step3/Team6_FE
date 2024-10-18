@@ -1,5 +1,6 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 
+import CookieRecordPage from '@/pages/CookieRecordPage'
 import ErrorPage from '@/pages/ErrorPage'
 import GroupPage from '@/pages/GroupPage'
 import { MainLayout } from '@/pages/Layout/MainLayout'
@@ -26,8 +27,12 @@ const router = createBrowserRouter([
             element: <MainPage />,
           },
           {
-            path: '/mypage',
+            path: '/mypage/:userId',
             element: <MyPage />,
+          },
+          {
+            path: '/cookie-record',
+            element: <CookieRecordPage />,
           },
           {
             path: '/grouppage',
