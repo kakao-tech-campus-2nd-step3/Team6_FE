@@ -29,3 +29,11 @@ export interface QuestionItem {
   profileQuestionContent: string
   createdAt: string
 }
+
+export type MyPageItem = {
+  todayVisited: number
+  totalVisited: number
+  description: string
+  backgroundImageUrl: string
+  name: string
+}
