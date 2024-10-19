@@ -1,32 +1,17 @@
 import { Button, Flex, Text } from '@chakra-ui/react'
 
+import { useFriendStore } from '@/stores/friends'
 import { Friend } from '@/types'
 
 import { KakaoFriendListItem } from './KakaoFriendListItem'
 
 interface KakaoFriendListProps {
-  friends: Friend[]
-  setFriends: (friends: Friend[]) => void
-  resetFriends: () => void
+  initialfriends: Friend[]
 }
 
-export const KakaoFriendList = ({
-  friends,
-  setFriends,
-  resetFriends,
-}: KakaoFriendListProps) => {
-  const friendList = friends.filter((friend) => friend.isFriend)
-  const recommendList = friends.filter((friend) => !friend.isFriend)
-
-  const toggleIsFriend = (friendId: number) => {
-    const updatedFriends = friends.map((friend) =>
-      friend.friendId === friendId
-        ? { ...friend, isFriend: !friend.isFriend }
-        : friend
-    )
-
-    setFriends(updatedFriends)
-  }
+export const KakaoFriendList = ({ initialfriends }: KakaoFriendListProps) => {
+  const { friendList, recommendList, toggleIsFriend, setFriends } =
+    useFriendStore()
 
   return (
     <Flex
@@ -45,7 +30,7 @@ export const KakaoFriendList = ({
             variant="link"
             fontSize="small"
             colorScheme="primary"
-            onClick={() => resetFriends()}
+            onClick={() => setFriends(initialfriends)}
           >
             초기화
           </Button>

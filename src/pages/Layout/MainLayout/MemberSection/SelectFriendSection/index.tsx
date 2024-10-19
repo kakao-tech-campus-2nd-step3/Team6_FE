@@ -1,37 +1,29 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
 import { useFriends } from '@/api/services/friend/useFriends'
 import { PageLayout } from '@/components/PageLayout'
-import { Friend } from '@/types'
+import { useFriendStore } from '@/stores/friends'
 
 import { KakaoFriendList } from './KakaoFriendList'
 import { SelectFreindHeader } from './SelectFriendHeader'
 
 export const SelectFriendSection = () => {
   const { data, status, error } = useFriends()
-  const [friends, setFriends] = useState<Friend[]>([])
+  const setFriends = useFriendStore((state) => state.setFriends)
 
   useEffect(() => {
     if (data) {
       setFriends(data.friends)
     }
-  }, [data])
+  }, [data, setFriends])
 
   if (status === 'pending') return <div>loading...</div>
 
   if (error) return <div>{error.message}</div>
 
-  const resetFriends = () => {
-    setFriends(data.friends)
-  }
-
   return (
     <PageLayout.SideSection SectionHeader={<SelectFreindHeader />}>
-      <KakaoFriendList
-        friends={friends}
-        setFriends={(f) => setFriends(f)}
-        resetFriends={resetFriends}
-      />
+      <KakaoFriendList initialfriends={data.friends} />
     </PageLayout.SideSection>
   )
 }
