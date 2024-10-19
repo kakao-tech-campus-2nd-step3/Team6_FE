@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom'
+
 import { Box, Flex, Text } from '@chakra-ui/react'
 
 import { AvatarLabelWithNavigate } from '@/components/AvatarLabel'
@@ -8,6 +10,7 @@ interface FriendListProps {
 }
 
 export const FriendList = ({ friends }: FriendListProps) => {
+  const navigate = useNavigate()
   return (
     <Flex flexDirection="column" alignItems="start" overflowY="scroll">
       <Text fontSize="small" color="text_description" paddingY={1} paddingX={2}>
@@ -15,7 +18,13 @@ export const FriendList = ({ friends }: FriendListProps) => {
       </Text>
       <Flex flexDirection="column" width="full" maxHeight="30rem">
         {friends.map((friend) => (
-          <Box key={friend.friendId} paddingY={1} paddingX={2} width="full">
+          <Box
+            key={friend.friendId}
+            paddingY={1}
+            paddingX={2}
+            width="full"
+            onClick={() => navigate(`/mypage/${friend.friendId}`)}
+          >
             <AvatarLabelWithNavigate
               isNavigate
               avatarSrc={friend.imageUrl}
