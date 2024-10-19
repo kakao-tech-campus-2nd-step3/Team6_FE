@@ -1,11 +1,11 @@
 import { useEffect } from 'react'
 
+import { Center } from '@chakra-ui/react'
+
 import { useFriends } from '@/api/services/friend/useFriends'
-import { PageLayout } from '@/components/PageLayout'
 import { useFriendStore } from '@/stores/friends'
 
 import { KakaoFriendList } from './KakaoFriendList'
-import { SelectFreindHeader } from './SelectFriendHeader'
 
 export const SelectFriendSection = () => {
   const { data, status, error } = useFriends()
@@ -17,13 +17,13 @@ export const SelectFriendSection = () => {
     }
   }, [data, setFriends])
 
-  if (status === 'pending') return <div>loading...</div>
+  if (status === 'pending') {
+    return <Center paddingTop={2}>loading...</Center>
+  }
 
-  if (error) return <div>{error.message}</div>
+  if (error) {
+    return <Center paddingTop={2}>{error.message}</Center>
+  }
 
-  return (
-    <PageLayout.SideSection SectionHeader={<SelectFreindHeader />}>
-      <KakaoFriendList initialfriends={data.friends} />
-    </PageLayout.SideSection>
-  )
+  return <KakaoFriendList initialfriends={data.friends} />
 }

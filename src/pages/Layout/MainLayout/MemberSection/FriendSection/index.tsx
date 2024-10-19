@@ -1,19 +1,19 @@
-import { useMyFriends } from '@/api/services/friend/useFriends'
-import { PageLayout } from '@/components/PageLayout'
+import { Center } from '@chakra-ui/react'
 
-import { FriendHeader } from './FriendHeader'
+import { useMyFriends } from '@/api/services/friend/useFriends'
+
 import { FriendList } from './FriendList'
 
 export const FriendSection = () => {
   const { data: friends, status, error } = useMyFriends()
 
-  if (status === 'pending') return <div>loading...</div>
+  if (status === 'pending') {
+    return <Center paddingTop={2}>loading...</Center>
+  }
 
-  if (error) return <div>{error.message}</div>
+  if (error) {
+    return <Center paddingTop={2}>{error.message}</Center>
+  }
 
-  return (
-    <PageLayout.SideSection SectionHeader={<FriendHeader />}>
-      <FriendList friends={friends} />
-    </PageLayout.SideSection>
-  )
+  return <FriendList friends={friends} />
 }
