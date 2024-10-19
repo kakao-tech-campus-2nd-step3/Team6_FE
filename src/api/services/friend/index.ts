@@ -17,6 +17,24 @@ export const getFriends = async () => {
   }
 }
 
+type FriendId = {
+  id: number
+}
+
+type AddFriendRequestBody = {
+  friends: FriendId[]
+}
+
+export const addFriends = async (friends: AddFriendRequestBody) => {
+  try {
+    const response = await authorizationInstance.post('/api/friend', friends)
+
+    return response.data
+  } catch (error) {
+    throw new Error(API_ERROR_MESSAGES.UNKNOWN_ERROR)
+  }
+}
+
 export const fetchKakaoFriends = async () => {
   try {
     const response = await authorizationInstance.get('/api/friend')
