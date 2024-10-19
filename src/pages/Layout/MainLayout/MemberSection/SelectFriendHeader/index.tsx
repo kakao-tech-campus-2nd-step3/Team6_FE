@@ -1,7 +1,7 @@
 import { BiUserCheck } from 'react-icons/bi'
 
 import { Box, Text } from '@chakra-ui/react'
-import { useQueryClient } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import { addFriends } from '@/api/services/friend'
 import { PageLayout } from '@/components/PageLayout'
@@ -17,10 +17,13 @@ export const SelectFreindHeader = () => {
   const friendList = useFriendStore((state) => state.friendList())
   const friendsId = convertFriendToId(friendList)
 
-  const onClickAddFriends = () => {
-    addFriends({ friends: friendsId })
-    queryClient.invalidateQueries({ queryKey: ['friends'] })
-  }
+  const { mutate: onClickAddFriends } = useMutation({
+    mutationFn: () => addFriends({ friends: friendsId }),
+    onSuccess: () => {
+      setMemberType('FRIEND')
+      queryClient.invalidateQueries({ queryKey: ['friends'] })
+    },
+  })
 
   return (
     <PageLayout.SideSection.SectionHeader
@@ -29,13 +32,9 @@ export const SelectFreindHeader = () => {
       Extentions={
         <Box
           _hover={{ color: 'black.800', cursor: 'pointer' }}
-          onClick={() => setMemberType('FRIEND')}
+          onClick={() => onClickAddFriends()}
         >
-          <Text
-            fontSize="small"
-            fontWeight="bold"
-            onClick={() => onClickAddFriends()}
-          >
+          <Text fontSize="small" fontWeight="bold">
             설정 완료
           </Text>
         </Box>

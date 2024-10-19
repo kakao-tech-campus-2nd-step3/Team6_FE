@@ -1,3 +1,5 @@
+import { ErrorBoundary } from 'react-error-boundary'
+
 import { Center, Text } from '@chakra-ui/react'
 
 import { PageLayout } from '@/components/PageLayout'
@@ -6,6 +8,7 @@ import { useMemberTypeStore } from '@/stores/member-type'
 
 import { FriendHeader } from './FriendHeader'
 import { FriendSection } from './FriendSection'
+import { MemberErrorFallback } from './MemberErrorFallback'
 import { SelectFreindHeader } from './SelectFriendHeader'
 import { SelectFriendSection } from './SelectFriendSection'
 
@@ -30,9 +33,11 @@ export const MemberSection = () => {
         </PageLayout.SideSection>
       )}
       {memberType === 'KAKAO' && (
-        <PageLayout.SideSection SectionHeader={<SelectFreindHeader />}>
-          <SelectFriendSection />
-        </PageLayout.SideSection>
+        <ErrorBoundary FallbackComponent={MemberErrorFallback}>
+          <PageLayout.SideSection SectionHeader={<SelectFreindHeader />}>
+            <SelectFriendSection />
+          </PageLayout.SideSection>
+        </ErrorBoundary>
       )}
     </>
   )
