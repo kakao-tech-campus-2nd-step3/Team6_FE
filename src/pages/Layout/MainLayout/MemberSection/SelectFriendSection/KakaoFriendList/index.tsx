@@ -6,11 +6,25 @@ import { KakaoFriendListItem } from './KakaoFriendListItem'
 
 interface KakaoFriendListProps {
   friends: Friend[]
+  setFriends: (friends: Friend[]) => void
 }
 
-export const KakaoFriendList = ({ friends }: KakaoFriendListProps) => {
+export const KakaoFriendList = ({
+  friends,
+  setFriends,
+}: KakaoFriendListProps) => {
   const friendList = friends.filter((friend) => friend.isFriend)
   const recommendList = friends.filter((friend) => !friend.isFriend)
+
+  const toggleIsFriend = (friendId: number) => {
+    const updatedFriends = friends.map((friend) =>
+      friend.friendId === friendId
+        ? { ...friend, isFriend: !friend.isFriend }
+        : friend
+    )
+
+    setFriends(updatedFriends)
+  }
 
   return (
     <Flex
@@ -29,13 +43,21 @@ export const KakaoFriendList = ({ friends }: KakaoFriendListProps) => {
             초기화
           </Button>
         </Flex>
-        <KakaoFriendListItem friends={friendList} isFriend />
+        <KakaoFriendListItem
+          friends={friendList}
+          toggleIsFriend={toggleIsFriend}
+          isFriend
+        />
       </Flex>
       <Flex flexDirection="column">
         <Text fontSize="small" color="text_description" paddingY={1}>
           추천 친구 - {recommendList.length}
         </Text>
-        <KakaoFriendListItem friends={recommendList} isFriend={false} />
+        <KakaoFriendListItem
+          friends={recommendList}
+          toggleIsFriend={toggleIsFriend}
+          isFriend={false}
+        />
       </Flex>
     </Flex>
   )

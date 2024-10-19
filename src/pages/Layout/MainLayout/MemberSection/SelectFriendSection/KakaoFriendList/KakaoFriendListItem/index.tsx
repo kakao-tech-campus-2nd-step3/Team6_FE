@@ -7,11 +7,13 @@ import { Friend } from '@/types'
 
 interface KakaoFriendListItemProps {
   friends: Friend[]
+  toggleIsFriend: (friendId: number) => void
   isFriend: boolean
 }
 
 export const KakaoFriendListItem = ({
   friends,
+  toggleIsFriend,
   isFriend,
 }: KakaoFriendListItemProps) => {
   return (
@@ -29,7 +31,10 @@ export const KakaoFriendListItem = ({
             label={friend.name}
           />
           {isFriend && (
-            <Box _hover={{ color: 'black.800', cursor: 'pointer' }}>
+            <Box
+              _hover={{ color: 'black.800', cursor: 'pointer' }}
+              onClick={() => toggleIsFriend(friend.friendId)}
+            >
               <BiSolidCheckCircle size={24} />
             </Box>
           )}
@@ -37,6 +42,7 @@ export const KakaoFriendListItem = ({
             <Box
               color="black.300"
               _hover={{ color: 'black.400', cursor: 'pointer' }}
+              onClick={() => toggleIsFriend(friend.friendId)}
             >
               <BiCircle size={24} />
             </Box>
