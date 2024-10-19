@@ -10,8 +10,10 @@ interface KakaoFriendListProps {
 }
 
 export const KakaoFriendList = ({ initialfriends }: KakaoFriendListProps) => {
-  const { friendList, recommendList, toggleIsFriend, setFriends } =
-    useFriendStore()
+  const setFriends = useFriendStore((state) => state.setFriends)
+
+  const friendList = useFriendStore((state) => state.friendList())
+  const recommendList = useFriendStore((state) => state.recommendList())
 
   return (
     <Flex
@@ -35,21 +37,13 @@ export const KakaoFriendList = ({ initialfriends }: KakaoFriendListProps) => {
             초기화
           </Button>
         </Flex>
-        <KakaoFriendListItem
-          friends={friendList}
-          toggleIsFriend={toggleIsFriend}
-          isFriend
-        />
+        <KakaoFriendListItem friends={friendList} isFriend />
       </Flex>
       <Flex flexDirection="column">
         <Text fontSize="small" color="text_description" paddingY={1}>
           추천 친구 - {recommendList.length}
         </Text>
-        <KakaoFriendListItem
-          friends={recommendList}
-          toggleIsFriend={toggleIsFriend}
-          isFriend={false}
-        />
+        <KakaoFriendListItem friends={recommendList} isFriend={false} />
       </Flex>
     </Flex>
   )
