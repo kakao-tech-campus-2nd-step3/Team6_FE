@@ -21,9 +21,17 @@ export const SelectFriendSection = () => {
 
   if (error) return <div>{error.message}</div>
 
+  const resetFriends = () => {
+    setFriends(data.friends)
+  }
+
   return (
     <PageLayout.SideSection SectionHeader={<SelectFreindHeader />}>
-      <KakaoFriendList friends={friends} setFriends={(f) => setFriends(f)} />
+      <KakaoFriendList
+        friends={friends}
+        setFriends={(f) => setFriends(f)}
+        resetFriends={resetFriends}
+      />
     </PageLayout.SideSection>
   )
 }

@@ -7,11 +7,13 @@ import { KakaoFriendListItem } from './KakaoFriendListItem'
 interface KakaoFriendListProps {
   friends: Friend[]
   setFriends: (friends: Friend[]) => void
+  resetFriends: () => void
 }
 
 export const KakaoFriendList = ({
   friends,
   setFriends,
+  resetFriends,
 }: KakaoFriendListProps) => {
   const friendList = friends.filter((friend) => friend.isFriend)
   const recommendList = friends.filter((friend) => !friend.isFriend)
@@ -39,7 +41,12 @@ export const KakaoFriendList = ({
           <Text fontSize="small" color="text_description" paddingY={1}>
             친한 친구 - {friendList.length}
           </Text>
-          <Button variant="link" fontSize="small" colorScheme="primary">
+          <Button
+            variant="link"
+            fontSize="small"
+            colorScheme="primary"
+            onClick={() => resetFriends()}
+          >
             초기화
           </Button>
         </Flex>
