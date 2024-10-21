@@ -24,3 +24,17 @@ export const FriendHeader = () => {
     />
   )
 }
+
+export const FriendHeaderSkeleton = () => {
+  return (
+    <PageLayout.SideSection.SectionHeader
+      Icon={BiUser}
+      title="친구 목록"
+      Extentions={
+        <Box color="black.400">
+          <BiHeart size={20} />
+        </Box>
+      }
+    />
+  )
+}

@@ -4,28 +4,42 @@ import { Box, Text, useDisclosure } from '@chakra-ui/react'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import { addFriends } from '@/api/services/friend'
+import { friendsQueries } from '@/api/services/friend/useFriends'
 import { AlertModal } from '@/components/Modal/AlertModal'
 import { PageLayout } from '@/components/PageLayout'
 import { useFriendStore } from '@/stores/friends'
 import { useMemberTypeStore } from '@/stores/member-type'
 import { Friend } from '@/types'
 
-export const SelectFreindHeader = () => {
+interface SelectFreindHeaderProps {
+  initialfriends?: Friend[]
+}
+
+export const SelectFreindHeader = ({
+  initialfriends,
+}: SelectFreindHeaderProps) => {
   const queryClient = useQueryClient()
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   const setMemberType = useMemberTypeStore((state) => state.setMemberType)
-
   const friendList = useFriendStore((state) => state.friendList())
-  const friendsId = convertFriendToId(friendList)
 
-  const { mutate: onClickAddFriends } = useMutation({
-    mutationFn: () => addFriends({ friends: friendsId }),
+  const { mutate } = useMutation({
+    mutationFn: () => addFriends({ friends: convertFriendsToIds(friendList) }),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['friends'] })
+      queryClient.invalidateQueries({ queryKey: friendsQueries.all() })
       onOpen()
     },
   })
+
+  const onClickAddFriends = () => {
+    if (isFriendListUpdated(initialfriends, friendList)) {
+      setMemberType('FRIEND')
+      return
+    }
+
+    mutate()
+  }
 
   return (
     <div>
@@ -57,8 +71,31 @@ export const SelectFreindHeader = () => {
   )
 }
 
-const convertFriendToId = (friendList: Friend[]) => {
+export const SelectFreindHeaderSkeleton = () => {
+  return (
+    <PageLayout.SideSection.SectionHeader
+      Icon={BiUserCheck}
+      title="친구 설정"
+      Extentions={
+        <Text fontSize="small" color="black.800" fontWeight="bold">
+          설정 완료
+        </Text>
+      }
+    />
+  )
+}
+
+const convertFriendsToIds = (friendList: Friend[]) => {
   return friendList.map((friend) => ({
     id: friend.friendId,
   }))
+}
+
+const isFriendListUpdated = (
+  initialfriends: Friend[] | undefined,
+  friendList: Friend[]
+) => {
+  if (!initialfriends) return false
+
+  return JSON.stringify(initialfriends) === JSON.stringify(friendList)
 }

@@ -1,8 +1,4 @@
-import {
-  queryOptions,
-  useQuery,
-  useSuspenseQueries,
-} from '@tanstack/react-query'
+import { queryOptions, useSuspenseQueries } from '@tanstack/react-query'
 
 import { getFriends } from './index'
 
@@ -32,12 +28,4 @@ export const useFriendsAndMyFriends = () => {
   const myFriends = result[1].data
 
   return { friends, myFriends }
-}
-
-export const useFriends = () => {
-  return useQuery(friendsQueries.friends())
-}
-
-export const useMyFriends = () => {
-  return useQuery(friendsQueries.myFriends())
 }
