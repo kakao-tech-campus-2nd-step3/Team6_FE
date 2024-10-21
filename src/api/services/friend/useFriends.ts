@@ -1,20 +1,43 @@
-import { useQuery } from '@tanstack/react-query'
+import {
+  queryOptions,
+  useQuery,
+  useSuspenseQueries,
+} from '@tanstack/react-query'
 
 import { getFriends } from './index'
 
-export const useFriends = () => {
-  return useQuery({
-    queryKey: ['friends', 'all'],
-    queryFn: () => getFriends(),
+export const friendsQueries = {
+  all: () => ['friends'],
+  friends: () =>
+    queryOptions({
+      queryKey: [...friendsQueries.all()],
+      queryFn: () => getFriends(),
+    }),
+  myFriends: () =>
+    queryOptions({
+      queryKey: [...friendsQueries.all(), 'my'],
+      queryFn: () => getFriends(),
+      select: (data) => {
+        return data.friends.filter((friend) => friend.isFriend)
+      },
+    }),
+}
+
+export const useFriendsAndMyFriends = () => {
+  const result = useSuspenseQueries({
+    queries: [friendsQueries.friends(), friendsQueries.myFriends()],
   })
+
+  const { friends } = result[0].data
+  const myFriends = result[1].data
+
+  return { friends, myFriends }
+}
+
+export const useFriends = () => {
+  return useQuery(friendsQueries.friends())
 }
 
 export const useMyFriends = () => {
-  return useQuery({
-    queryKey: ['friends', 'my'],
-    queryFn: () => getFriends(),
-    select: (data) => {
-      return data.friends.filter((friend) => friend.isFriend)
-    },
-  })
+  return useQuery(friendsQueries.myFriends())
 }
