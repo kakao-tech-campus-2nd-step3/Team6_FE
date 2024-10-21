@@ -1,5 +1,4 @@
 import { authorizationInstance } from '@/api/instance'
-import { API_ERROR_MESSAGES } from '@/constants/error-message'
 import { AnswerRecord, Paging } from '@/types'
 
 export type AnswerRecordPagingRequestParams = {
@@ -15,21 +14,16 @@ type AnswerRecordPagingResponse = {
 export const getAnswerRecordPaging = async (
   params: AnswerRecordPagingRequestParams
 ) => {
-  try {
-    const response =
-      await authorizationInstance.get<AnswerRecordPagingResponse>(
-        getAnswerRecordPagingPath(params)
-      )
+  const response = await authorizationInstance.get<AnswerRecordPagingResponse>(
+    getAnswerRecordPagingPath(params)
+  )
 
-    const { data } = response
+  const { data } = response
 
-    return {
-      records: data.content,
-      nextPageToken:
-        data.page !== data.totalPages ? (data.page + 1).toString() : undefined,
-    }
-  } catch (error) {
-    throw new Error(API_ERROR_MESSAGES.UNKNOWN_ERROR)
+  return {
+    records: data.content,
+    nextPageToken:
+      data.page !== data.totalPages ? (data.page + 1).toString() : undefined,
   }
 }
 
