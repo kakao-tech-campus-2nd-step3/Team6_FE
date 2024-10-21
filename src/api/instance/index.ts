@@ -24,9 +24,9 @@ const initInstance = (config: AxiosRequestConfig) => {
   return instance
 }
 
-const fetchInstance = initInstance({})
+export const fetchInstance = initInstance({})
 
-const authorizationInstance = initInstance({})
+export const authorizationInstance = initInstance({})
 
 authorizationInstance.interceptors.request.use(
   (request) => {
@@ -46,13 +46,12 @@ authorizationInstance.interceptors.response.use(
   authErrorInterceptor
 )
 
-export { fetchInstance, authErrorInterceptor }
-
 export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       retry: 0,
       staleTime: 1000 * 60,
+      throwOnError: true,
     },
   },
 })

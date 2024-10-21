@@ -11,6 +11,14 @@ export const FriendSection = () => {
   )
 }
 
+export const FriendSectionSkeleton = () => {
+  return (
+    <PageLayout.SideSection SectionHeader={<FriendHeader />}>
+      <div />
+    </PageLayout.SideSection>
+  )
+}
+
 const mockFriendList = [
   {
     friendId: 1,

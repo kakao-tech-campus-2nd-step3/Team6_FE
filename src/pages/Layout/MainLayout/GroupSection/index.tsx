@@ -19,6 +19,21 @@ export const GroupSection = () => {
   )
 }
 
+export const GroupSectionSkeleton = () => {
+  return (
+    <PageLayout.SideSection
+      SectionHeader={
+        <PageLayout.SideSection.SectionHeader
+          Icon={BiDonateHeart}
+          title="쿠키 주기"
+        />
+      }
+    >
+      <div />
+    </PageLayout.SideSection>
+  )
+}
+
 const mockGroupList = [
   {
     groupdId: 1,
