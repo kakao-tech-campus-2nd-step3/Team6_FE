@@ -28,7 +28,7 @@ export const authorizationInstance = initInstance({
 
 authorizationInstance.interceptors.request.use(
   (request) => {
-    const authToken = useAuthTokenStore((state) => state.authToken)
+    const { authToken } = useAuthTokenStore.getState()
 
     if (authToken) {
       request.headers.Authorization = `Bearer ${authToken}`

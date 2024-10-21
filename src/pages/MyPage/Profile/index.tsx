@@ -2,32 +2,26 @@ import { BiEditAlt } from 'react-icons/bi'
 
 import { Avatar, Box, Button, Icon, IconButton, Text } from '@chakra-ui/react'
 
-const profileDummyData = {
-  backgroundImageUrl: 'https://picsum.photos/600/400',
-  profileImage:
-    'http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg',
-  name: '안희정',
-  description: '컴퓨터학부 21학번 안희정입니다',
-  todayVisited: 12,
-  totalVisited: 123,
-}
-const pointDummyData = {
-  amount: 10000,
+import { MyPageItem } from '@/types'
+
+type ProfileProps = {
+  profile: MyPageItem
+  pointAmount: number
 }
 
-export default function Profile() {
+export default function Profile({ profile, pointAmount }: ProfileProps) {
   return (
     <header>
       <Box
         height="144px"
-        backgroundImage={`url('${profileDummyData.backgroundImageUrl}')`}
+        backgroundImage={`url('${profile.backgroundImageUrl}')`}
         backgroundSize="cover"
         backgroundPosition="center"
         position="relative"
         marginBottom="40px"
       >
-        <Avatar // absolute
-          src={profileDummyData.profileImage}
+        {/* <Avatar // absolute
+          src={profile.profileImage}
           size="lg"
           position="absolute"
           bottom="-30px"
@@ -36,7 +30,7 @@ export default function Profile() {
             border: '0.8px solid',
             borderColor: 'black.700',
           }}
-        />
+        /> */}
         <IconButton
           aria-label="Edit"
           icon={<Icon as={BiEditAlt} boxSize="10px" />}
@@ -55,7 +49,7 @@ export default function Profile() {
       <Box padding="0 30px">
         <Box display="flex" flexDirection="row" alignItems="center" gap="8px">
           <Text fontSize="xl" fontWeight="400">
-            {profileDummyData.name}
+            {profile.name}
           </Text>
           <Button
             color="primary_background"
@@ -84,7 +78,7 @@ export default function Profile() {
             <Text fontWeight="bold" marginRight="6px">
               포인트
             </Text>
-            <Text>{pointDummyData.amount}</Text>
+            <Text>{pointAmount}</Text>
           </Button>
         </Box>
         <Box
@@ -95,7 +89,7 @@ export default function Profile() {
           alignItems="end"
         >
           <Text color="text_secondary" fontSize="md">
-            {profileDummyData.description}
+            {profile.description}
           </Text>
           <Text
             as="span"
@@ -109,9 +103,9 @@ export default function Profile() {
             borderColor="brown.500"
           >
             <Text fontWeight="bold">TODAY</Text>
-            <Text>{profileDummyData.todayVisited}</Text>
+            <Text>{profile.todayVisited}</Text>
             <Text fontWeight="bold">TOTAL</Text>
-            <Text>{profileDummyData.totalVisited}</Text>
+            <Text>{profile.totalVisited}</Text>
           </Text>
         </Box>
       </Box>
