@@ -5,7 +5,7 @@ import { Box, Button, Center, Flex, useDisclosure } from '@chakra-ui/react'
 
 import { AlertModal } from '@/components/Modal/AlertModal'
 import { PageLayout } from '@/components/PageLayout'
-import { API_ERROR_MESSAGES } from '@/constants/error-message'
+import { DATA_ERROR_MESSAGES } from '@/constants/error-message'
 
 import { SelectFreindHeader } from '../SelectFriendHeader'
 
@@ -17,7 +17,7 @@ export const MemberErrorFallback = ({
 
   return (
     <PageLayout.SideSection SectionHeader={<SelectFreindHeader />}>
-      {error.message === API_ERROR_MESSAGES.FRIEND_CANNOT_BE_EMPTY ? (
+      {error.message === DATA_ERROR_MESSAGES.FRIEND_CANNOT_BE_EMPTY ? (
         <AlertModal
           isOpen
           onClose={() => {
@@ -38,7 +38,7 @@ export const MemberErrorFallback = ({
           </Center>
           <Flex justifyContent="center">
             <Button
-              onClick={() => resetErrorBoundary}
+              onClick={() => resetErrorBoundary()}
               height="fit-content"
               padding={2}
               fontSize="small"
