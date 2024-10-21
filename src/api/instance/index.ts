@@ -4,7 +4,6 @@ import axios, { AxiosRequestConfig } from 'axios'
 import { useAuthTokenStore } from '@/stores/auth-token'
 
 import { authErrorInterceptor } from './auth-error-interceptor'
-import { errorInterceptor } from './error-interceptor'
 
 const BASE_URL = import.meta.env.VITE_BASE_URL
 
@@ -18,8 +17,6 @@ const initInstance = (config: AxiosRequestConfig) => {
       ...config.headers,
     },
   })
-
-  instance.interceptors.response.use((response) => response, errorInterceptor)
 
   return instance
 }

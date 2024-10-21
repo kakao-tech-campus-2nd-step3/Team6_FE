@@ -1,17 +1,15 @@
 import { AxiosError } from 'axios'
 
-import { API_ERROR_MESSAGES } from '@/constants/error-message'
+import { useAuthTokenStore } from '@/stores/auth-token'
 
 export function authErrorInterceptor(error: AxiosError) {
+  const { clearAuthToken } = useAuthTokenStore.getState()
+
   if (error.response) {
     const { status } = error.response
 
     if (status === 401) {
-      throw new Error(API_ERROR_MESSAGES.AUTH_ERROR)
-    }
-
-    if (status === 403) {
-      throw new Error(API_ERROR_MESSAGES.FORBIDDEN_ERROR)
+      clearAuthToken()
     }
   }
 
