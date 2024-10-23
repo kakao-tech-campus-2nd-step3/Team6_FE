@@ -3,10 +3,14 @@ import axios, { AxiosRequestConfig } from 'axios'
 
 import { useAuthTokenStore } from '@/stores/auth-token'
 
+import { authErrorInterceptor } from './auth-error-interceptor'
+
 const BASE_URL = import.meta.env.VITE_BASE_URL
 
 const initInstance = (config: AxiosRequestConfig) => {
   const instance = axios.create({
+    baseURL: BASE_URL,
+    withCredentials: true,
     ...config,
     headers: {
       Accept: 'application/json',
@@ -17,14 +21,9 @@ const initInstance = (config: AxiosRequestConfig) => {
   return instance
 }
 
-export const fetchInstance = initInstance({
-  baseURL: BASE_URL,
-})
+export const fetchInstance = initInstance({})
 
-export const authorizationInstance = initInstance({
-  baseURL: BASE_URL,
-  withCredentials: true,
-})
+export const authorizationInstance = initInstance({})
 
 authorizationInstance.interceptors.request.use(
   (request) => {
@@ -36,9 +35,12 @@ authorizationInstance.interceptors.request.use(
 
     return request
   },
-  (error) => {
-    return Promise.reject(error)
-  }
+  (error) => error
+)
+
+authorizationInstance.interceptors.response.use(
+  (response) => response,
+  authErrorInterceptor
 )
 
 export const queryClient = new QueryClient({
@@ -46,6 +48,7 @@ export const queryClient = new QueryClient({
     queries: {
       retry: 0,
       staleTime: 1000 * 60,
+      throwOnError: true,
     },
   },
 })

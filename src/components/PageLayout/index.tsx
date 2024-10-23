@@ -9,12 +9,14 @@ import { SideSection } from './SideSection'
 
 interface PageLayoutProps extends FlexProps {
   LeftSection: ReactNode
+  children?: ReactNode
   RightSection?: ReactNode
   pageColor?: ColorProps['color']
 }
 
 const PageLayout = ({
   LeftSection,
+  children,
   RightSection,
   pageColor = 'brown.50',
 }: PageLayoutProps) => {
@@ -34,7 +36,7 @@ const PageLayout = ({
           <SideNavigation />
           {LeftSection}
           <Box flex="1" height="full" overflowY="scroll">
-            <Outlet />
+            {children || <Outlet />}
           </Box>
           {RightSection}
         </HStack>
