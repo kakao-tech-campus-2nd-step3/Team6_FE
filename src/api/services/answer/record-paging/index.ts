@@ -1,56 +1,21 @@
 import { authorizationInstance } from '@/api/instance'
-import { API_ERROR_MESSAGES } from '@/constants/error-message'
-import { AnswerRecord, Paging } from '@/types'
-
-export type AnswerRecordPagingRequestParams = {
-  size?: number
-  page?: string
-  sort?: string[]
-}
+import { getPagingPath } from '@/api/utils/common/getPagingPath'
+import { AnswerRecord, Paging, PagingRequestParams } from '@/types'
 
 type AnswerRecordPagingResponse = {
   content: AnswerRecord[]
 } & Paging
 
-export const getAnswerRecordPaging = async (
-  params: AnswerRecordPagingRequestParams
-) => {
-  try {
-    const response =
-      await authorizationInstance.get<AnswerRecordPagingResponse>(
-        getAnswerRecordPagingPath(params)
-      )
+export const getAnswerRecordPaging = async (params: PagingRequestParams) => {
+  const response = await authorizationInstance.get<AnswerRecordPagingResponse>(
+    getPagingPath('/api/answer/record', params)
+  )
 
-    const { data } = response
+  const { data } = response
 
-    return {
-      records: data.content,
-      nextPageToken:
-        data.page !== data.totalPages ? (data.page + 1).toString() : undefined,
-    }
-  } catch (error) {
-    throw new Error(API_ERROR_MESSAGES.UNKNOWN_ERROR)
+  return {
+    records: data.content,
+    nextPageToken:
+      data.page !== data.totalPages ? (data.page + 1).toString() : undefined,
   }
-}
-
-const getAnswerRecordPagingPath = ({
-  page,
-  size,
-  sort,
-}: AnswerRecordPagingRequestParams) => {
-  const params = new URLSearchParams()
-
-  if (size) {
-    params.append('size', size.toString())
-  }
-
-  if (page) {
-    params.append('page', page.toString())
-  }
-
-  if (sort) {
-    sort.forEach((sortField) => params.append('sort', sortField))
-  }
-
-  return `/api/answer/record?${params}`
 }

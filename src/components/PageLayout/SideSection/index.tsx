@@ -16,6 +16,7 @@ const SideSection = ({ SectionHeader, children }: SideSectionProps) => {
       height="full"
       flexDirection="column"
       gap={1}
+      position="relative"
     >
       {SectionHeader}
       <Divider />

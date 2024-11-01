@@ -1,6 +1,6 @@
 import { BiEditAlt } from 'react-icons/bi'
 
-import { Avatar, Box, Button, Icon, IconButton, Text } from '@chakra-ui/react'
+import { Box, Button, Icon, IconButton, Text } from '@chakra-ui/react'
 
 import { MyPageItem } from '@/types'
 

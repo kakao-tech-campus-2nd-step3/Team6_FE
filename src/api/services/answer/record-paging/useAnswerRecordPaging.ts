@@ -1,10 +1,11 @@
 import { useSuspenseInfiniteQuery } from '@tanstack/react-query'
 
 import { DATA_ERROR_MESSAGES } from '@/constants/error-message'
+import { PagingRequestParams } from '@/types'
 
-import { AnswerRecordPagingRequestParams, getAnswerRecordPaging } from './index'
+import { getAnswerRecordPaging } from './index'
 
-interface AnswerRecordPagingProps extends AnswerRecordPagingRequestParams {
+interface AnswerRecordPagingProps extends PagingRequestParams {
   initPageToken?: string
 }
 

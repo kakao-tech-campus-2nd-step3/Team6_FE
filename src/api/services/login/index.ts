@@ -1,22 +1,22 @@
 import { useQuery } from '@tanstack/react-query'
 
 import { fetchInstance } from '@/api/instance'
-import { API_ERROR_MESSAGES } from '@/constants/error-message'
 
 type KakaoLoginParam = {
   code: string
 }
 
-const kakaoLogin = async ({ code }: KakaoLoginParam) => {
-  try {
-    const response = await fetchInstance.get(`/api/user/callback?code=${code}`)
+type KakaoLoginResponse = {
+  userId: number
+}
 
-    const accessToken = response.headers.authorization
+export const kakaoLogin = async ({ code }: KakaoLoginParam) => {
+  const response = await fetchInstance.get<KakaoLoginResponse>(
+    `/api/user/callback?code=${code}`
+  )
+  const accessToken = response.headers.authorization
 
-    return { accessToken }
-  } catch (error) {
-    throw new Error(API_ERROR_MESSAGES.UNKNOWN_ERROR)
-  }
+  return { accessToken, userId: response.data.userId }
 }
 
 export const useKakaoLogin = ({ code }: KakaoLoginParam) => {
