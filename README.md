@@ -33,4 +33,7 @@
 4. CI/CD 구축 및 배포
 
 
-다음주 issue : [Next Week Issue](https://github.com/kakao-tech-campus-2nd-step3/Team6_FE/issues)
+최종 제출 전 issue
+[Next Week Issue](https://github.com/kakao-tech-campus-2nd-step3/Team6_FE/issues)
+- 테스트코드 작성
+- 베타 테스트
