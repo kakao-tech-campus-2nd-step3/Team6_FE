@@ -1,13 +1,17 @@
 import { create } from 'zustand'
 
+import { Group } from '@/types'
+
 interface SelectedGroupProps {
-  groupId?: number
-  setGroupId: (groupId?: number) => void
+  selectedGroup?: Pick<Group, 'groupId' | 'groupName'>
+  setSelectedGroup: (
+    selectedGroup?: Pick<Group, 'groupId' | 'groupName'>
+  ) => void
 }
 
 export const useSelectedGroupStore = create<SelectedGroupProps>((set) => ({
-  groupId: undefined,
-  setGroupId: (groupId) => {
-    set({ groupId })
+  selectedGroup: undefined,
+  setSelectedGroup: (selectedGroup) => {
+    set({ selectedGroup })
   },
 }))

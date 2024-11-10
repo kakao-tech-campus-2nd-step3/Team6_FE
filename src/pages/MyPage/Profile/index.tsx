@@ -21,18 +21,19 @@ import {
   uploadProfileBg,
 } from '@/api/services/profile/my-page.api'
 import { AlertModal } from '@/components/Modal/AlertModal'
+import { PointButton } from '@/components/PointButton'
 import { MyPageItem } from '@/types'
 
 type ProfileProps = {
   profile: MyPageItem
-  pointAmount?: number | null
+  pointAmount?: number
   isMyPage: boolean
   userId: number
 }
 
 export default function Profile({
   profile,
-  pointAmount = null,
+  pointAmount,
   isMyPage,
   userId,
 }: ProfileProps) {
@@ -56,10 +57,7 @@ export default function Profile({
       queryClient.invalidateQueries({ queryKey: ['uploadImage'] })
       window.location.reload()
     },
-    onError: () => {
-      setErrorMessage('이미지 파일은 20MB를 초과할 수 없습니다')
-      errorAlert.onOpen()
-    },
+    onError: () => {},
   })
 
   const { mutate: modifyDescription } = useMutation({
@@ -85,6 +83,7 @@ export default function Profile({
     const selectedFile = event.target.files?.[0]
     if (selectedFile) {
       const validTypes = ['image/jpeg', 'image/jpg', 'image/png']
+      const maxFileSize = 10 * 1024 * 1024
       if (!validTypes.includes(selectedFile.type)) {
         toast({
           title: 'Only JPEG, JPG, or PNG files are allowed.',
@@ -94,7 +93,13 @@ export default function Profile({
         })
         return
       }
+      if (selectedFile.size > maxFileSize) {
+        setErrorMessage('이미지 파일은 10MB를 초과할 수 없습니다')
+        errorAlert.onOpen()
+        return
+      }
       setFile(selectedFile)
+      console.log(file)
       uploadImage({ image: selectedFile })
     }
   }
@@ -162,37 +167,7 @@ export default function Profile({
           <Text fontSize="xl" fontWeight="400">
             {profile.name}
           </Text>
-          {isMyPage && (
-            <Button
-              color="primary_background"
-              bg="#ea780c"
-              display="flex"
-              flexDirection="row"
-              fontSize="xs"
-              alignItems="center"
-              padding="4px 7px"
-              borderRadius="20px"
-              minHeight="5px"
-              height="auto"
-              _hover={{ bg: 'orange.600', boxShadow: 'md' }}
-            >
-              <Text
-                width="13px"
-                height="13px"
-                textAlign="center"
-                lineHeight="1.05"
-                borderRadius="20px"
-                border="1px solid white"
-                marginRight="3px"
-              >
-                P
-              </Text>
-              <Text fontWeight="bold" marginRight="6px">
-                포인트
-              </Text>
-              <Text>{pointAmount}</Text>
-            </Button>
-          )}
+          {pointAmount !== undefined && <PointButton point={pointAmount} />}
         </Box>
         <Box
           display="flex"
@@ -220,7 +195,7 @@ export default function Profile({
               />
             ) : (
               <Text color="text_secondary" fontSize="md">
-                {profile.description}
+                {profileDescription}
               </Text>
             )}
             {isMyPage && (
@@ -274,7 +249,6 @@ export default function Profile({
         isOpen={successAlert.isOpen}
         onClose={() => {
           successAlert.onClose()
-          window.location.reload()
         }}
         icon={<BiCheckCircle />}
         title="한 줄 소개를 수정하였습니다"

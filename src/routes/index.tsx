@@ -5,6 +5,7 @@ import CreateGroupPage from '@/pages/CreateGroupPage'
 import ErrorPage from '@/pages/ErrorPage'
 import GroupMembersPage from '@/pages/GroupMembersPage'
 import GroupPage from '@/pages/GroupPage'
+import { QuestionManagement } from '@/pages/GroupPage/Management/Questions'
 import InvitePage from '@/pages/InvitePage'
 import { CardLayout } from '@/pages/Layout/CardLayout'
 import { GroupMemberLayout } from '@/pages/Layout/GroupMemberLayout'
@@ -17,6 +18,7 @@ import MyPage from '@/pages/MyPage'
 import PointPage from '@/pages/PointPage'
 import PointCancelModal from '@/pages/PointPage/PointCancelModal'
 import PointFailureModal from '@/pages/PointPage/PointFailureModal'
+import PointRedirectPage from '@/pages/PointRedirectPage'
 import ProfileQuestionPage from '@/pages/ProfileQuestionPage'
 
 import { ProtectedRoute } from './ProtectedRoute'
@@ -47,6 +49,10 @@ const router = createBrowserRouter([
             element: <GroupPage />,
           },
           {
+            path: '/group/:groupId/management',
+            element: <QuestionManagement />,
+          },
+          {
             path: '/group/create',
             element: <CreateGroupPage />,
           },
@@ -54,6 +60,10 @@ const router = createBrowserRouter([
             path: '/point',
             element: <PointPage />,
             children: [
+              {
+                path: '/point/redirect',
+                element: <PointRedirectPage />,
+              },
               {
                 path: '/point/failure',
                 element: <PointFailureModal />,

@@ -1,8 +1,17 @@
-import { useQuery, useSuspenseInfiniteQuery } from '@tanstack/react-query'
+import {
+  useQuery,
+  useSuspenseInfiniteQuery,
+  useSuspenseQuery,
+} from '@tanstack/react-query'
 
 import { authorizationInstance, fetchInstance } from '@/api/instance'
 import { appendParamsToUrl } from '@/api/utils/common/appendParamsToUrl'
-import { Group, PagingRequestParams, PagingResponse } from '@/types'
+import {
+  Group,
+  GroupRankingItem,
+  PagingRequestParams,
+  PagingResponse,
+} from '@/types'
 
 const getGroupInfo = async (groupId: number) => {
   const response = await fetchInstance.get<Group>(`/api/group/info/${groupId}`)
@@ -28,6 +37,7 @@ const getGroupPaging = async (params: PagingRequestParams) => {
     groups: data.content,
     nextPageToken:
       data.page !== data.totalPages ? (data.page + 1).toString() : undefined,
+    groupSize: data.size,
   }
 }
 
@@ -58,10 +68,12 @@ export const createGroup = async ({
   groupName,
   groupDescription,
 }: CreateGroupRequestBody) => {
-  await authorizationInstance.post('/api/group', {
+  const response = await authorizationInstance.post<Group>('/api/group', {
     groupName,
     groupDescription,
   })
+
+  return response.data
 }
 
 type GroupInviteCodeRequestParams = {
@@ -110,5 +122,40 @@ export const modifyGroup = async ({
     description,
   })
 
+  return response.data
+}
+
+export type GroupRankingResponse = {
+  ranks: GroupRankingItem[]
+}
+
+const getGroupRanking = async (groupId: number) => {
+  const response = await authorizationInstance.get<GroupRankingResponse>(
+    `/api/ranking/group/${groupId}`
+  )
+
+  return response.data.ranks
+}
+
+export const useGroupRanking = ({ groupId }: { groupId: number }) => {
+  return useSuspenseQuery({
+    queryKey: ['groupRanking', groupId],
+    queryFn: () => getGroupRanking(groupId),
+  })
+}
+
+export const approveGroupQuestion = async (
+  groupId: string,
+  questionId: number,
+  approve: boolean
+) => {
+  const response = await authorizationInstance.patch(
+    `/api/group/question/status`,
+    {
+      groupId,
+      questionId,
+      status: approve ? 'true' : 'false',
+    }
+  )
   return response.data
 }

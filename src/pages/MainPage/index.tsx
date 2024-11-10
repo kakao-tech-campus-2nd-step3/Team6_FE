@@ -1,90 +1,74 @@
-import { Suspense, useState } from 'react'
+import { useEffect, useState } from 'react'
 
-import { Box, Flex } from '@chakra-ui/react'
+import { Flex, Text } from '@chakra-ui/react'
+import { useQuery } from '@tanstack/react-query'
 
-import { useAnswerRandomQuestion } from '@/api/services/answer/question.api'
+import { friendsQueries } from '@/api/services/friend/queries'
 import { Loading } from '@/components/Loading'
+import { useSelectedGroupStore } from '@/stores/selected-group'
 
-import ProfileGrid from './ProfileGrid'
-import Question from './Question'
-import Buttons from './SkipReloadButton'
-import useProfile from './UseProfilehook'
+import { CommonGame } from './GameSection/CommonGame'
+import { GroupGame } from './GameSection/GroupGame'
+import { ReadySection } from './ReadySection'
+import { ReplaySection } from './Replaysection'
 
-const MainPage = () => {
-  const [questionIndex, setquestionIndex] = useState(0)
-  const [questionId, setquestionId] = useState<number | null>(null)
+type GameType = 'READY' | 'REPLAY' | 'PLAY'
 
-  return (
-    <Suspense fallback={<Loading />}>
-      <Box
-        height="100%"
-        display="flex"
-        flexDirection="column"
-        justifyContent="space-between"
-        padding="70px 0"
-      >
-        <Content
-          questionIndex={questionIndex}
-          setquestionIndex={setquestionIndex}
-          questionId={questionId}
-          setquestionId={setquestionId}
-        />
-      </Box>
-    </Suspense>
-  )
-}
+export default function MainPage() {
+  const [play, setPlay] = useState<GameType>('READY')
+  const [score, setScore] = useState(0)
 
-const Content = ({
-  questionIndex,
-  setquestionIndex,
-  questionId,
-  setquestionId,
-}: {
-  questionIndex: number
-  setquestionIndex: React.Dispatch<React.SetStateAction<number>>
-  questionId: number | null
-  setquestionId: React.Dispatch<React.SetStateAction<number | null>>
-}) => {
-  const { all, picked, handleReload } = useProfile()
-  const { mutate: answerQuestion } = useAnswerRandomQuestion()
+  const group = useSelectedGroupStore((state) => state.selectedGroup)
 
-  const handleProfileSelect = (profileId: number) => {
-    if (questionId !== null) {
-      answerQuestion({ questionId, pickedId: profileId })
-      handleReload()
-      setquestionIndex((prevIndex) => (prevIndex + 1) % all.length)
+  const { data: friends, status } = useQuery(friendsQueries.myFriends())
+
+  useEffect(() => {
+    if (play === 'PLAY') {
+      setScore(0)
     }
+  }, [play])
+
+  useEffect(() => {
+    setPlay('READY')
+    setScore(0)
+  }, [group])
+
+  if (status === 'pending') return <Loading />
+  if (!friends) return <Text>친구를 초대해보세요!</Text>
+
+  if (play === 'READY') {
+    return (
+      <ReadySection
+        groupName={group?.groupName}
+        onClickPlay={() => setPlay('PLAY')}
+      />
+    )
   }
 
-  const handleSkip = () => {
-    setquestionIndex((prevIndex) => (prevIndex + 1) % all.length)
+  if (play === 'REPLAY') {
+    return (
+      <ReplaySection
+        onClickEndButton={() => setPlay('READY')}
+        onClickReplayButton={() => setPlay('PLAY')}
+        score={score}
+      />
+    )
   }
 
   return (
-    <Box
-      bg="secondary_background"
-      textAlign="center"
-      height="100%"
-      display="flex"
-      flexDirection="column"
-      justifyContent="space-between"
-    >
-      <Question questionIndex={questionIndex} questionload={setquestionId} />
-      <Box>
-        <Flex direction="column" align="center">
-          <ProfileGrid
-            profiles={picked.slice(0, 3)}
-            onProfileSelect={handleProfileSelect}
-          />
-          <ProfileGrid
-            profiles={picked.slice(3, 5)}
-            onProfileSelect={handleProfileSelect}
-          />
-          <Buttons onReload={handleReload} onSkip={handleSkip} />
-        </Flex>
-      </Box>
-    </Box>
+    <Flex flex={1} height="full" justifyContent="center">
+      {group?.groupId ? (
+        <GroupGame
+          groupId={group.groupId}
+          handleFinishGame={() => setPlay('REPLAY')}
+          handleClickProfile={() => setScore(score + 1)}
+        />
+      ) : (
+        <CommonGame
+          handleFinishGame={() => setPlay('REPLAY')}
+          handleClickProfile={() => setScore(score + 1)}
+        />
+      )}
+    </Flex>
   )
 }
-
-export default MainPage

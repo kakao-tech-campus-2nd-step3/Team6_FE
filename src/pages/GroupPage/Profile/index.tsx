@@ -24,7 +24,7 @@ export default function Profile({ role, gprofile }: GroupProps) {
 
   return (
     <header>
-      <Box position="relative" marginBottom="60px">
+      <Box position="relative" marginBottom="10px">
         <HStack
           alignItems="center"
           spacing="15px"

@@ -4,7 +4,7 @@ import { AnswerRecord } from '@/types'
 
 export type SelectedAnswer = Pick<
   AnswerRecord,
-  'questionContent' | 'createdAt' | 'answerId'
+  'questionContent' | 'createdAt' | 'answerId' | 'hintCount'
 >
 
 interface SelectedAnswerProps {

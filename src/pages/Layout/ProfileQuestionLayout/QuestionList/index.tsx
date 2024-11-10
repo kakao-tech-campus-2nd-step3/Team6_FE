@@ -167,6 +167,7 @@ export const QuestionList = ({ isMyPage }: QuestionListProps) => {
               onClick={() => {
                 setSelectedQuestion(question.profileQuestionId)
                 setQuestionContent(question.profileQuestionContent)
+                setQuestionCreatedAt(question.createdAt)
               }}
             >
               {question.profileQuestionContent}

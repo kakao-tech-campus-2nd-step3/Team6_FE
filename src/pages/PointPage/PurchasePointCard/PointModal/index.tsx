@@ -1,25 +1,32 @@
 import { BiCheckCircle } from 'react-icons/bi'
-import { useNavigate } from 'react-router-dom'
 
 import { Button, useDisclosure } from '@chakra-ui/react'
-import { useMutation } from '@tanstack/react-query'
 
-import { purchasePoint } from '@/api/services/point/purchase.api'
+import { appendParamsToUrl } from '@/api/utils/common/appendParamsToUrl'
 import {
   ConfirmModal,
   ConfirmModalButton,
 } from '@/components/Modal/ConfirmModal'
+import { useAuthTokenStore } from '@/stores/auth-token'
 
 export const PointModal = () => {
-  const navigate = useNavigate()
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const authToken = useAuthTokenStore((state) => state.authToken)
 
-  const { mutate } = useMutation({
-    mutationFn: () => purchasePoint({ point: 100 }),
-    onError: () => {
-      navigate('/point/failure')
-    },
-  })
+  const purchasePoint = () => {
+    fetch(
+      appendParamsToUrl(`${import.meta.env.VITE_BASE_URL}/api/point/purchase`, {
+        point: 100,
+      }),
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${authToken}`,
+        },
+      }
+    )
+  }
 
   return (
     <div>
@@ -35,8 +42,8 @@ export const PointModal = () => {
         confirmButton={
           <ConfirmModalButton
             onClick={() => {
-              mutate()
               onClose()
+              purchasePoint()
             }}
           >
             확인

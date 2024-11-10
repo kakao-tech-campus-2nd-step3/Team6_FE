@@ -7,14 +7,21 @@ import { queryClient } from '@/api/instance'
 import { expelMember } from '@/api/services/group/member.api'
 import { AlertModal } from '@/components/Modal/AlertModal'
 import { ConfirmModal } from '@/components/Modal/ConfirmModal'
+import { GroupRole } from '@/types'
 
 type ExpelBtnProps = {
   groupId: number
   userId: number
   userName: string
+  userRole: GroupRole
 }
 
-export default function ExpelBtn({ groupId, userId, userName }: ExpelBtnProps) {
+export default function ExpelBtn({
+  groupId,
+  userId,
+  userName,
+  userRole,
+}: ExpelBtnProps) {
   const errorAlert = useDisclosure()
   const warningAlert = useDisclosure()
 
@@ -43,6 +50,7 @@ export default function ExpelBtn({ groupId, userId, userName }: ExpelBtnProps) {
         margin="5px 0"
         _hover={{ bg: 'orange' }}
         onClick={warningAlert.onOpen}
+        isDisabled={userRole === 'LEADER'}
       >
         내보내기
       </Button>

@@ -2,7 +2,7 @@ import { BiCircle, BiSolidCheckCircle } from 'react-icons/bi'
 
 import { Box, Flex } from '@chakra-ui/react'
 
-import { AvatarLabelWithNavigate } from '@/components/AvatarLabel'
+import { AvatarLabelWithNavigate } from '@/components/AvatarLabelWithNavigate'
 import { useFriendStore } from '@/stores/friends'
 import { Friend } from '@/types'
 
@@ -24,7 +24,6 @@ export const MemberList = ({ members, isFriend }: MemberListProps) => {
           paddingY={1.5}
         >
           <AvatarLabelWithNavigate
-            isNavigate={false}
             avatarSrc={member.imageUrl}
             label={member.name}
           />

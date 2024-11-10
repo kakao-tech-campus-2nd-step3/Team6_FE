@@ -1,6 +1,9 @@
 import { useParams } from 'react-router-dom'
 
-import { useGetMyPoint, useMyPage } from '@/api/services/profile/my-page.api'
+import { useQuery } from '@tanstack/react-query'
+
+import { useMyPage } from '@/api/services/profile/my-page.api'
+import { pointQuries } from '@/api/services/user/point.api'
 import { Loading } from '@/components/Loading'
 import { useMyUserIdStore } from '@/stores/my-user-id'
 
@@ -21,11 +24,12 @@ export default function MyPage() {
   } = useMyPage(userId || '')
 
   const isMyPage = Number(userId) === myUserId
+
   const {
     data: point,
     isLoading: isLoadingPoints,
     error: pointsError,
-  } = useGetMyPoint()
+  } = useQuery(pointQuries.point())
 
   if (isLoadingProfile || (isMyPage && isLoadingPoints)) return <Loading />
   if (profileError || (isMyPage && pointsError)) return <ErrorPage />
@@ -35,10 +39,10 @@ export default function MyPage() {
   return (
     <div>
       <Navigate />
-      {isMyPage && point ? (
+      {isMyPage && point !== undefined ? (
         <Profile
           profile={profile}
-          pointAmount={point.amount}
+          pointAmount={point}
           isMyPage={isMyPage}
           userId={Number(userId)}
         />

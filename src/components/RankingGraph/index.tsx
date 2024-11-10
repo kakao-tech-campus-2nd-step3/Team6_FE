@@ -7,6 +7,7 @@ import {
   HStack,
   Image,
   Text,
+  Tooltip,
   VStack,
   useTheme,
 } from '@chakra-ui/react'
@@ -38,12 +39,12 @@ export const RankingGraph = ({ rank }: RankingGraphProps) => {
     <HStack
       spacing={12}
       align="flex-start"
-      height="200px"
+      height="170px"
       justifyContent="center"
-      marginTop="40px"
+      marginTop="20px"
     >
       {/* 왼쪽 그래프 */}
-      <HStack align="flex-end" spacing={6} height="100%">
+      <HStack align="flex-end" spacing={6} height="80%" marginTop="30px">
         {sortedRank.map((item) => {
           const percentage = (item.count / maxAmount) * 100
 
@@ -55,42 +56,51 @@ export const RankingGraph = ({ rank }: RankingGraphProps) => {
               justifyContent="flex-end"
               position="relative"
             >
-              <Box
-                width="44px"
-                height={`${percentage}%`}
-                minHeight="75px"
-                bg="orange.200"
-                transition="height 0.3s ease-in-out"
-                borderRadius="md"
-                position="relative"
+              <Tooltip
+                hasArrow
+                label={item.count}
+                placement="top"
+                bg="brown.600"
+                fontWeight={600}
+                marginBottom={7}
               >
-                <Center position="relative" width="44px" height="44px">
-                  {item.imageSrc && (
-                    <Image
-                      src={`${item.imageSrc}`}
-                      boxSize="40px"
-                      objectFit="cover"
-                      borderRadius="full"
+                <Box
+                  width="44px"
+                  height={`${percentage}%`}
+                  minHeight="75px"
+                  bg="orange.200"
+                  transition="height 0.3s ease-in-out"
+                  borderRadius="md"
+                  position="relative"
+                >
+                  <Center position="relative" width="44px" height="44px">
+                    {item.imageSrc && (
+                      <Image
+                        src={`${item.imageSrc}`}
+                        boxSize="40px"
+                        objectFit="cover"
+                        borderRadius="full"
+                        position="absolute"
+                        top="-27px"
+                        left="50%"
+                        transform="translateX(-50%)"
+                        bg="white"
+                        padding="5px"
+                        border={`1px solid ${borderColor}`}
+                      />
+                    )}
+                    <Box
+                      as={rankIcons[item.rank as 1 | 2 | 3]}
+                      width="30px"
+                      height="30px"
                       position="absolute"
-                      top="-27px"
+                      top={item.imageSrc ? '30px' : '10px'}
                       left="50%"
                       transform="translateX(-50%)"
-                      bg="white"
-                      padding="5px"
-                      border={`1px solid ${borderColor}`}
                     />
-                  )}
-                  <Box
-                    as={rankIcons[item.rank as 1 | 2 | 3]}
-                    width="30px"
-                    height="30px"
-                    position="absolute"
-                    top={item.imageSrc ? '30px' : '10px'}
-                    left="50%"
-                    transform="translateX(-50%)"
-                  />
-                </Center>
-              </Box>
+                  </Center>
+                </Box>
+              </Tooltip>
             </VStack>
           )
         })}
@@ -111,9 +121,8 @@ export const RankingGraph = ({ rank }: RankingGraphProps) => {
               />
             )}
             {!item.imageSrc && <div style={{ width: '60px' }} />}
-            <VStack align="flex-start" spacing={0} height="60px" width="250px">
+            <VStack align="flex-start" spacing={0} height="50px" width="250px">
               {' '}
-              {/* 이미지 높이에 맞춰 텍스트 위아래 정렬 */}
               <Text fontWeight="400" isTruncated width="100%">
                 {item.title}
               </Text>

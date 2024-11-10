@@ -11,8 +11,6 @@ import {
 } from '@/components/Form'
 import { CreateGroupFields } from '@/schema/create-group'
 
-import { ImageInput } from './ImageInput'
-
 interface CreateGroupFormProps {
   form: UseFormReturn<CreateGroupFields>
   onClickSumbitButton: () => void
@@ -57,7 +55,6 @@ export const CreateGroupForm = ({
               </FormItem>
             )}
           />
-          <ImageInput />
           <FormField
             control={form.control}
             name="groupDescription"

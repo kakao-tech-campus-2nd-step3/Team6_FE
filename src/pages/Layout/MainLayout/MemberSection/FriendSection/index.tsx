@@ -2,7 +2,7 @@ import { Box, Center, Flex, Text } from '@chakra-ui/react'
 import { useSuspenseQuery } from '@tanstack/react-query'
 
 import { friendsQueries } from '@/api/services/friend/queries'
-import { AvatarLabelWithNavigate } from '@/components/AvatarLabel'
+import { AvatarLabelWithNavigate } from '@/components/AvatarLabelWithNavigate'
 import { PageLayout } from '@/components/PageLayout'
 
 import { FriendHeader, FriendHeaderSkeleton } from './FriendHeader'
@@ -17,13 +17,17 @@ export const FriendSection = () => {
       </Text>
       <Flex flexDirection="column" width="full" maxHeight="30rem">
         {friends.map((friend) => (
-          <Box key={friend.friendId} paddingY={1} paddingX={2} width="full">
+          <Box
+            key={friend.friendId}
+            paddingY={1}
+            paddingX={2}
+            width="full"
+            _hover={{ cursor: 'pointer', background: 'brown.50' }}
+          >
             <AvatarLabelWithNavigate
-              isNavigate
               avatarSrc={friend.imageUrl}
               label={friend.name}
               linkTo={`/mypage/${friend.friendId}`}
-              tooltipLabel={`${friend.name} 페이지`}
             />
           </Box>
         ))}

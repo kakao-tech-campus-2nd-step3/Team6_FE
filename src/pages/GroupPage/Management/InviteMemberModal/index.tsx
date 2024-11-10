@@ -16,7 +16,7 @@ export const InviteMemberModal = ({ groupId }: InviteMemberModalProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { onCopy, setValue, value, hasCopied } = useClipboard('')
 
-  const { data: inviteCode, refetch } = useGroupInviteCode({ groupId: 13 })
+  const { data: inviteCode, refetch } = useGroupInviteCode({ groupId })
 
   useEffect(() => {
     if (inviteCode) {

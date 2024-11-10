@@ -20,7 +20,7 @@ import {
 export const MemberSection = () => {
   const memberType = useMemberTypeStore((state) => state.memberType)
   const isLoggedIn = useAuthTokenStore((state) => state.isLoggedIn())
-  const groupId = useSelectedGroupStore((state) => state.groupId)
+  const selectedGroup = useSelectedGroupStore((state) => state.selectedGroup)
 
   if (!isLoggedIn)
     return (
@@ -41,11 +41,11 @@ export const MemberSection = () => {
     )
   }
 
-  if (memberType === 'GROUP' && groupId) {
+  if (memberType === 'GROUP' && selectedGroup?.groupId) {
     return (
       <ErrorBoundary FallbackComponent={MemberErrorFallback}>
         <Suspense fallback={<GroupMemberSkeleton />}>
-          <GroupMemberSection groupId={groupId} />
+          <GroupMemberSection groupId={selectedGroup.groupId} />
         </Suspense>
       </ErrorBoundary>
     )

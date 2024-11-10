@@ -26,6 +26,7 @@ export default function Question() {
         direction: 'left',
         createdAt: formatDate(questionCreatedAt as string),
         content: questionContent,
+        deleteBtn: false,
       })
     } else {
       setQuestion(null)

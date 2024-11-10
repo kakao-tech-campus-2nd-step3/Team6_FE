@@ -2,7 +2,7 @@ import { useLocation } from 'react-router-dom'
 
 import { PointRedirectSection } from './PointRedirectSection'
 
-export default function LoginRedirectPage() {
+export default function PointRedirectPage() {
   const location = useLocation()
   const pgToken = new URLSearchParams(location.search).get('pg_token')
 

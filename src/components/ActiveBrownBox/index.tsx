@@ -19,7 +19,7 @@ export const ActiveBrownBox = ({
   return (
     <Box
       paddingY={1.5}
-      paddingX={2}
+      paddingX={1.5}
       width="full"
       css={dynamicStyle(isActive)}
       borderRight={isActive ? 3 : 0}

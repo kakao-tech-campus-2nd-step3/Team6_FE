@@ -1,5 +1,5 @@
 import { BiListUl, BiSolidMessageRounded } from 'react-icons/bi'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import { Box, Flex, Text } from '@chakra-ui/react'
 
@@ -53,13 +53,15 @@ export default function OvenMenu({ userId, isMyPage }: OvenMenuProps) {
           />
         )}
         {isMyPage && (
-          <CardButton
-            variant="white"
-            orientation="vertical"
-            label="쿠키 로그"
-            description="지목된 질문을 확인해보세요"
-            Icon={BiListUl}
-          />
+          <Link to="/cookie-record">
+            <CardButton
+              variant="white"
+              orientation="vertical"
+              label="쿠키 로그"
+              description="지목된 질문을 확인해보세요"
+              Icon={BiListUl}
+            />
+          </Link>
         )}
       </Flex>
     </Box>

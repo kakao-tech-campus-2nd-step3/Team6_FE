@@ -1,7 +1,9 @@
 import {
   queryOptions,
+  useInfiniteQuery,
   useQuery,
   useSuspenseInfiniteQuery,
+  useSuspenseQuery,
 } from '@tanstack/react-query'
 
 import { authorizationInstance } from '@/api/instance'
@@ -66,13 +68,28 @@ interface GroupRecordPaigngProps extends PagingRequestParams {
   groupId: number
 }
 
-export const useGrupMemberPaging = ({
+export const useGrupMemberPagingSuspense = ({
   size = 10,
   sort,
   initPageToken,
   groupId,
 }: GroupRecordPaigngProps) => {
   return useSuspenseInfiniteQuery({
+    queryKey: ['group', 'member', groupId],
+    queryFn: ({ pageParam = initPageToken }) =>
+      getGrupMemberPaging({ page: pageParam, size, sort, groupId }),
+    initialPageParam: initPageToken,
+    getNextPageParam: (lastPage) => lastPage.nextPageToken,
+  })
+}
+
+export const useGrupMemberPaging = ({
+  size = 10,
+  sort,
+  initPageToken,
+  groupId,
+}: GroupRecordPaigngProps) => {
+  return useInfiniteQuery({
     queryKey: ['group', 'member', groupId],
     queryFn: ({ pageParam = initPageToken }) =>
       getGrupMemberPaging({ page: pageParam, size, sort, groupId }),
@@ -113,7 +130,7 @@ const getGroupRole = async (groupId: number) => {
 }
 
 export const useGroupRole = (groupId: number) => {
-  return useQuery({
+  return useSuspenseQuery({
     queryKey: ['group', 'role', groupId],
     queryFn: () => getGroupRole(groupId),
   })
@@ -128,5 +145,50 @@ export const expelMember = async ({ groupId, userId }: ExpelMemberRequest) => {
   await authorizationInstance.post('/api/group/expel', {
     groupId,
     userId,
+  })
+}
+
+type GroupMemberListRequestParams = {
+  groupId: number
+}
+
+type GroupMemberListResponse = {
+  members: Member[]
+}
+
+const getGroupMemberList = async ({
+  groupId,
+}: GroupMemberListRequestParams) => {
+  const response = await authorizationInstance.get<GroupMemberListResponse>(
+    `/api/group/${groupId}/member/list`
+  )
+
+  return response.data.members
+}
+
+export const useGroupMemberList = ({
+  groupId,
+}: GroupMemberListRequestParams) => {
+  return useQuery({
+    queryKey: ['group', 'member', 'list', groupId],
+    queryFn: () => getGroupMemberList({ groupId }),
+  })
+}
+
+export type ChangeLeaderRequest = {
+  groupId: number
+  pastLeaderId: number
+  newLeaderId: number
+}
+
+export const changeLeader = async ({
+  groupId,
+  pastLeaderId,
+  newLeaderId,
+}: ChangeLeaderRequest) => {
+  await authorizationInstance.patch('/api/group/leader', {
+    groupId,
+    pastLeaderId,
+    newLeaderId,
   })
 }

@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 import { BiCheckCircle, BiError } from 'react-icons/bi'
 import { useNavigate } from 'react-router-dom'
 
-import { Flex, useDisclosure } from '@chakra-ui/react'
+import { Flex, Image, useDisclosure } from '@chakra-ui/react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation } from '@tanstack/react-query'
 
@@ -12,8 +12,10 @@ import {
   CreateGroupRequestBody,
   createGroup,
 } from '@/api/services/group/group.api'
+import cookies from '@/assets/cookies.svg'
 import { AlertModal } from '@/components/Modal/AlertModal'
 import { CreateGroupFields, CreateGroupSchema } from '@/schema/create-group'
+import { Group } from '@/types'
 
 import { CreateGroupForm } from './CreateGroupForm'
 
@@ -28,6 +30,7 @@ export default function CreateGroupPage() {
   })
 
   const [errorMessage, setErrorMessage] = useState('')
+  const [createGroupId, setCreateGroupId] = useState<number>()
   const errorAlert = useDisclosure()
   const successAlert = useDisclosure()
 
@@ -36,8 +39,9 @@ export default function CreateGroupPage() {
   const { mutate } = useMutation({
     mutationFn: ({ groupName, groupDescription }: CreateGroupRequestBody) =>
       createGroup({ groupName, groupDescription }),
-    onSuccess: () => {
+    onSuccess: ({ groupId }: Group) => {
       successAlert.onOpen()
+      setCreateGroupId(groupId)
       queryClient.invalidateQueries({ queryKey: ['groups'] })
     },
   })
@@ -60,6 +64,7 @@ export default function CreateGroupPage() {
       justifyContent="center"
       height="full"
     >
+      <Image src={cookies} marginBottom={18} width="200px" />
       <CreateGroupForm form={form} onClickSumbitButton={onClickSumbitButton} />
       <AlertModal
         isOpen={errorAlert.isOpen}
@@ -72,7 +77,7 @@ export default function CreateGroupPage() {
         isOpen={successAlert.isOpen}
         onClose={() => {
           successAlert.onClose()
-          navigate('/')
+          navigate(`/group/${createGroupId}`)
         }}
         icon={<BiCheckCircle />}
         title={`${form.getValues('groupName')} 그룹을 생성했습니다!`}

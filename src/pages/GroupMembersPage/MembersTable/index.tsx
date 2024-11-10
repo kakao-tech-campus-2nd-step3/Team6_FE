@@ -1,63 +1,88 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
-import {
-  Box,
-  Image,
-  Table,
-  Tbody,
-  Td,
-  Th,
-  Thead,
-  Tr,
-  useTheme,
-} from '@chakra-ui/react'
+import { Box, Image, useTheme } from '@chakra-ui/react'
 import { useQuery } from '@tanstack/react-query'
-import {
-  ColumnDef,
-  flexRender,
-  getCoreRowModel,
-  useReactTable,
-} from '@tanstack/react-table'
+import { ColumnDef } from '@tanstack/react-table'
 
 import { membersManageQuries } from '@/api/services/group/member.api'
+import { useMyPage } from '@/api/services/profile/my-page.api'
 import { Loading } from '@/components/Loading'
 import ErrorPage from '@/pages/ErrorPage'
+import { Member, MemberTable } from '@/types'
 
 import ExpelBtn from '../ExpelBtn'
+import LeaderChangeBtn from '../LeaderChangeBtn'
 import Pagination from '../Pagination'
 import Title from '../Title'
+import TableComponent from './TableComponent'
 
 type MembersTableProps = {
   groupId: number
+  myUserId: number
   groupName: string
-}
-
-type MemberTable = {
-  id: number
-  memberImageUrl: string
-  userName: string
-  joinedAt: string
-  isExpel?: string
-  userId: number
 }
 
 export default function MembersTable({
   groupId,
+  myUserId,
   groupName,
 }: MembersTableProps) {
   const theme = useTheme()
   const borderColor = theme.colors.black[300]
   const [page, setPage] = useState<number>(0)
+  const [leaderChangeBtn, setLeaderChangeBtn] = useState(false)
+  const [selectBtn, setSelectBtn] = useState<number | null>(null)
+  const [changeSelectId, setChangeSelectId] = useState<number | null>(null)
+  const [changeSelectName, setChangeSelectName] = useState<string>('')
+  const [tableList, setTableList] = useState<MemberTable[]>()
 
-  const { data, status, isLoading, isError } = useQuery(
-    membersManageQuries.groupMembers(groupId, page)
-  )
+  const {
+    data: profile,
+    status: profileStatus,
+    isError: isProfileError,
+  } = useMyPage(myUserId.toString())
 
-  const members = data?.members
-  const totalPages = data?.totalPages
-  const totalElements = data?.totalElements
+  const {
+    data: memberList,
+    status: memberStatus,
+    isError: isMemberError,
+  } = useQuery(membersManageQuries.groupMembers(groupId, page))
 
-  const clms: ColumnDef<MemberTable>[] = [
+  const members = memberList?.members
+  const totalPages = memberList?.totalPages
+  const totalElements = memberList?.totalElements
+
+  useEffect(() => {
+    if (members && members.length > 0) {
+      const transformedData = transformMembersToMemberTable(members, page)
+      setTableList(transformedData)
+    }
+  }, [members, page, setTableList])
+
+  const transformMembersToMemberTable = (
+    membersData: Member[],
+    pageData: number
+  ): MemberTable[] => {
+    return membersData.map((member, index) => ({
+      id: index + 1 + pageData * 5,
+      memberImageUrl: member.memberImageUrl || '',
+      userName: member.userName,
+      joinedAt: member.joinedAt,
+      isExpel: '내보내기',
+      userId: member.userId,
+      role: member.role,
+    }))
+  }
+
+  if (memberStatus === 'pending' || profileStatus === 'pending')
+    return <Loading />
+  if (isProfileError || isMemberError) return <ErrorPage />
+  if (!profile) return <ErrorPage />
+  if (!members || !totalPages) return '멤버가 없어요!'
+
+  const userName = profile.name
+
+  const columns: ColumnDef<MemberTable>[] = [
     {
       header: '',
       accessorKey: 'id',
@@ -106,84 +131,36 @@ export default function MembersTable({
           groupId={groupId}
           userId={row.original.userId}
           userName={row.original.userName}
+          userRole={row.original.role}
         />
       ),
     },
   ]
 
-  let table = useReactTable({
-    data: members,
-    columns: clms,
-    getCoreRowModel: getCoreRowModel(),
-  })
-
-  if (status === 'pending') return <Loading />
-  if (isLoading) return <Loading />
-  if (isError) return <ErrorPage />
-  if (!members || !totalPages) return '멤버가 없어요!'
-
   return (
     <Box>
       <Title groupName={groupName} totalElements={totalElements} />
       <Box padding="0 40px">
-        <Box width="full">
-          <Table
-            borderRadius="20px"
-            borderStyle="hidden"
-            boxShadow={`0 0 0 1px ${borderColor}`}
-            bg="white"
-          >
-            <Thead top={0}>
-              {table.getHeaderGroups().map((headerGroup) => (
-                <Tr borderTop="1px solid gray" key={headerGroup.id}>
-                  {headerGroup.headers.map((header) => {
-                    return (
-                      <Th
-                        borderBottom={`1px solid ${borderColor}`}
-                        key={header.id}
-                        colSpan={header.colSpan}
-                        fontSize="large"
-                        textAlign="center"
-                      >
-                        {header.isPlaceholder ? null : (
-                          <Box>
-                            {flexRender(
-                              header.column.columnDef.header,
-                              header.getContext()
-                            )}
-                          </Box>
-                        )}
-                      </Th>
-                    )
-                  })}
-                </Tr>
-              ))}
-            </Thead>
-            <Tbody>
-              {table.getRowModel().rows.map((row) => {
-                return (
-                  <Tr key={row.id}>
-                    {row.getVisibleCells().map((cell) => {
-                      return (
-                        <Td
-                          textAlign="center"
-                          borderBottom={`1px solid ${borderColor}`}
-                          padding="0"
-                          key={cell.id}
-                        >
-                          {flexRender(
-                            cell.column.columnDef.cell,
-                            cell.getContext()
-                          )}
-                        </Td>
-                      )
-                    })}
-                  </Tr>
-                )
-              })}
-            </Tbody>
-          </Table>
-        </Box>
+        <LeaderChangeBtn
+          groupId={groupId}
+          leaderChangeBtn={leaderChangeBtn}
+          setLeaderChangeBtn={setLeaderChangeBtn}
+          leader={{ userId: myUserId, userName }}
+          changeSelectId={changeSelectId}
+          changeSelectName={changeSelectName}
+        />
+        {members && tableList && (
+          <TableComponent
+            members={tableList}
+            columns={columns}
+            borderColor={borderColor}
+            leaderChangeBtn={leaderChangeBtn}
+            selectBtn={selectBtn}
+            setSelectBtn={setSelectBtn}
+            setChangeSelectId={setChangeSelectId}
+            setChangeSelectName={setChangeSelectName}
+          />
+        )}
         <Pagination page={page} totalPages={totalPages} setPage={setPage} />
       </Box>
     </Box>
