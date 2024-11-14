@@ -4,11 +4,13 @@ import { Link } from 'react-router-dom'
 import { Box, Flex } from '@chakra-ui/react'
 
 import { useAuthTokenStore } from '@/stores/auth-token'
+import { useInviteUrl } from '@/stores/invite-url'
 import { useUserInfoStore } from '@/stores/user-info'
 
 export const SideNavigation = () => {
   const clearAuthToken = useAuthTokenStore((state) => state.clearAuthToken)
   const isLoggedIn = useAuthTokenStore((state) => state.isLoggedIn())
+  const clearInviteUrl = useInviteUrl((state) => state.clearInviteUrl)
 
   const clearUserInfo = useUserInfoStore((state) => state.clearUserInfo)
   const userId = useUserInfoStore((state) => state.userInfo?.userId)
@@ -51,6 +53,7 @@ export const SideNavigation = () => {
         onClick={() => {
           clearAuthToken()
           clearUserInfo()
+          clearInviteUrl()
         }}
       >
         <BiLogOut size={26} />

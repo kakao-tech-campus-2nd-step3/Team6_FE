@@ -27,11 +27,14 @@ import {
 } from '@/components/Form'
 import { RegisterUserFields, RegisterUserSchema } from '@/schema/user'
 import { useAuthTokenStore } from '@/stores/auth-token'
+import { useInviteUrl } from '@/stores/invite-url'
 import { useUserInfoStore } from '@/stores/user-info'
 
 export default function RegisterPage() {
   const navigate = useNavigate()
   const role = useUserInfoStore((state) => state.userInfo?.role)
+  const inviteUrl = useInviteUrl((state) => state.inviteUrl)
+  const clearInviteUrl = useInviteUrl((state) => state.clearInviteUrl)
 
   const form = useForm<RegisterUserFields>({
     resolver: zodResolver(RegisterUserSchema),
@@ -51,7 +54,8 @@ export default function RegisterPage() {
     onSuccess: (data) => {
       setAuthToken(data.accessToken)
       setUserInfo(data.userInfo)
-      navigate('/')
+      window.location.href = `${inviteUrl}`
+      clearInviteUrl()
     },
   })
 

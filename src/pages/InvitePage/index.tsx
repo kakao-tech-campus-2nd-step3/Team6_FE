@@ -1,9 +1,11 @@
+import { useEffect } from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
 import { useParams, useSearchParams } from 'react-router-dom'
 
 import { Flex, Heading } from '@chakra-ui/react'
 
 import ErrorPage from '@/pages/ErrorPage'
+import { useInviteUrl } from '@/stores/invite-url'
 
 import { InviteCard } from './InviteCard'
 import { InviteErrorFallback } from './InviteErrorFallback'
@@ -12,7 +14,15 @@ export default function InvitePage() {
   const { groupId } = useParams<{ groupId: string }>()
   const [searchParams] = useSearchParams()
 
+  const setInviteUrl = useInviteUrl((state) => state.setInviteUrl)
   const inviteCode = searchParams.get('invite-code')
+
+  useEffect(() => {
+    if (inviteCode) {
+      setInviteUrl(window.location.href)
+    }
+  }, [inviteCode, setInviteUrl])
+
   if (!inviteCode) return <ErrorPage />
 
   return (
